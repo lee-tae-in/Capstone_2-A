@@ -16,10 +16,13 @@
     }
 
     body {
+      
+
+      
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 
   /* ✏️ 한지 베이지 배경 */
-  background-color: #f5f0e8;
+  background-color: #f5f0e8;;
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
   background-repeat: repeat;
@@ -107,13 +110,13 @@
        ============================================= */
     .banner-section {
       /* ✏️ [수정] 배너 위아래 여백 */
-      margin: 32px 0 40px;
+      margin: 64px 0 40px;
       position: relative;
       overflow: hidden;
       /* ✏️ [수정] 배너 모서리 둥글기 */
       border-radius: 16px;
       /* ✏️ [수정] 배너 높이 */
-      height: 420px;
+      height: 640px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
@@ -150,14 +153,20 @@
        ✏️ [수정] 슬라이드 2번 배경색 & 텍스트
        ============================================= */
     .slide:nth-child(2) {
-      background: linear-gradient(135deg, #0f3460 0%, #533483 60%, #e94560 100%);
+      background-image: url('술지게미.jpg');
+      background-size: cover;       /* ✏️ [수정] 이미지 채우기 방식: cover(꽉채움) / contain(전체보이기) */
+      background-position: center;  /* ✏️ [수정] 이미지 위치: center / top / bottom */
+      background-repeat: no-repeat;
     }
 
     /* =============================================
        ✏️ [수정] 슬라이드 3번 배경색 & 텍스트
        ============================================= */
     .slide:nth-child(3) {
-      background: linear-gradient(135deg, #533483 0%, #1a1a2e 60%, #e94560 100%);
+      background-size: cover;       /* ✏️ [수정] 이미지 채우기 방식: cover(꽉채움) / contain(전체보이기) */
+      background-position: center;  /* ✏️ [수정] 이미지 위치: center / top / bottom */
+      background-repeat: no-repeat;
+      background-image: url('업사이클링.jpg');
     }
 
     /* ✏️ [수정] 슬라이드 제목 텍스트 */
@@ -297,8 +306,8 @@
     .content-card {
       background: #ffffff;
       border-radius: 12px;
-      padding: 32px;
-      margin-top: 24px;
+      padding: 64px;
+      margin-top: 48px;
       border: 1px solid #e8e8e8;
     }
 
@@ -365,23 +374,165 @@
   </style>
 </head>
 <body>
+<!-- =============================================
+     로딩 화면 - 붓글씨 스타일
+     ✏️ [수정] 배경색: #f5edd8 부분
+     ✏️ [수정] 글자색: #4A2C17 부분
+     ✏️ [수정] 로딩 텍스트: '빚음 쌀' 부분
+     ============================================= -->
+<div id="loader">
+  <div class="loader-inner">
 
+    <!-- ✏️ [수정] 브랜드명 텍스트 -->
+    <div class="brush-text">
+      <span class="char char-1">빚</span>
+      <span class="char char-2">음</span>
+      <span class="char char-3">&nbsp;</span>
+      <span class="char char-4">쌀</span>
+    </div>
+
+    <!-- ✏️ [수정] 서브 텍스트 -->
+    <p class="loader-sub">전통의 가치를 담은 업사이클링 푸드</p>
+
+  </div>
+</div>
+
+<style>
+  /* =============================================
+     ✏️ [수정] 로딩 배경색
+     ============================================= */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background-color: #f5edd8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    /* ✏️ [수정] 페이드아웃 전환 시간 */
+    transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+  }
+
+  #loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* =============================================
+     ✏️ [수정] 브랜드명 글자 스타일
+     ============================================= */
+  .brush-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .char {
+    /* ✏️ [수정] 궁서체 폰트 */
+    font-family: 'GungSeo', '궁서체', '궁서', 'Gungsuh', serif;
+    /* ✏️ [수정] 글자 크기 */
+    font-size: 5rem;
+    /* ✏️ [수정] 글자색 */
+    color: #4A2C17;
+    opacity: 0;
+    display: inline-block;
+    transform: translateY(-10px);
+    /* ✏️ [수정] 글자 등장 애니메이션 시간 */
+    animation: brushAppear 0.25s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 2px 6px rgba(74,44,23,0.15);
+  }
+
+  /* =============================================
+     ✏️ [수정] 글자별 등장 딜레이 - 0.3s 간격
+     ============================================= */
+  .char-1 { animation-delay: 0.1s; }   /* 빚 - 첫번째 */
+  .char-2 { animation-delay: 0.4s; }   /* 음 - 0.3s 후 */
+  .char-3 { animation-delay: 0s; }     /* 공백 */
+  .char-4 { animation-delay: 0.7s; }   /* 쌀 - 0.3s 후 */
+
+  @keyframes brushAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scaleY(0.88);
+      filter: blur(3px);
+    }
+    70% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scaleY(1);
+      filter: blur(0px);
+    }
+  }
+
+  /* =============================================
+     ✏️ [수정] 서브 텍스트 - 천천히 위로 올라오는 효과
+     ============================================= */
+  .loader-sub {
+    font-family: 'Noto Sans KR', sans-serif;
+    /* ✏️ [수정] 서브 텍스트 크기 */
+    font-size: 0.85rem;
+    /* ✏️ [수정] 서브 텍스트 색 */
+    color: rgba(74, 44, 23, 0.6);
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transform: translateY(16px);
+    /* ✏️ [수정] 서브텍스트 등장 딜레이: 마지막 글자(0.7s) 이후 */
+    /* ✏️ [수정] 서브텍스트 올라오는 시간: 0.6s */
+    animation: subRiseUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards 1.0s;
+  }
+
+  /* 천천히 위로 올라오는 키프레임 */
+  @keyframes subRiseUp {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0px); }
+  }
+</style>
+
+<script>
+  window.addEventListener('load', () => {
+    /* ✏️ [수정] 페이드아웃 시작 시간
+       글자: 빚(0.1s) → 음(0.4s) → 쌀(0.7s+0.25s) = 약 0.95s 완료
+       서브텍스트: 1.0s ~ 1.6s 완료
+       여유 0.4s 후 페이드아웃 → 총 약 2초
+    */
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('fade-out');
+        /* ✏️ [수정] 페이드아웃 끝난 후 완전 제거 대기시간 (ms) */
+        setTimeout(() => loader.remove(), 400);
+      }
+    }, 2000);
+  });
+</script>
   <!-- =============================================
        상단 헤더 & 탭 네비게이션
        ✏️ [수정] 로고명, 탭 이름은 아래에서 변경
        ============================================= -->
   <header>
     <!-- ✏️ [수정] 로고 텍스트 -->
-    <a class="logo" href="#" onclick="showTab('home')">LOGO</a>
+    <a class="logo" href="#" onclick="showTab('home')">빚음 쌀</a>
 
     <nav>
       <ul>
         <!-- ✏️ [수정] 탭 이름 변경: "탭1" 부분을 원하는 이름으로 -->
         <li><a href="#" class="tab-link active" data-tab="home">홈</a></li>
-        <li><a href="#" class="tab-link" data-tab="tab1">탭1</a></li>
-        <li><a href="#" class="tab-link" data-tab="tab2">탭2</a></li>
-        <li><a href="#" class="tab-link" data-tab="tab3">탭3</a></li>
-        <li><a href="#" class="tab-link" data-tab="tab4">탭4</a></li>
+        <li><a href="#" class="tab-link" data-tab="tab1">우리의 이야기</a></li>
+        <li><a href="#" class="tab-link" data-tab="tab2">여긴 뭐 넣지?</a></li>
+        <li><a href="#" class="tab-link" data-tab="tab3">공정 과정 "레시피"</a></li>
+        <li><a href="#" class="tab-link" data-tab="tab4">구매 페이지</a></li>
       </ul>
     </nav>
   </header>
@@ -529,119 +680,145 @@
        JavaScript
        ============================================= -->
   <script>
-    /* =============================================
-       ✏️ [수정] 배너 자동 슬라이드 간격 (ms 단위, 1000 = 1초)
-       기본값: 4000 (4초마다 자동으로 다음 슬라이드)
-       자동 슬라이드를 끄려면 아래 startAutoPlay() 호출 줄을 주석 처리
-       ============================================= */
-    const AUTO_PLAY_INTERVAL = 4000;
+      /* =============================================
+        ✏️ [수정] 배너 자동 슬라이드 간격 (ms 단위, 1000 = 1초)
+        ============================================= */
+      const AUTO_PLAY_INTERVAL = 4000;
 
-    /* --------------------------------------------------
-       슬라이더 초기화
-    -------------------------------------------------- */
-    const track       = document.getElementById('sliderTrack');
-    const slides      = track.querySelectorAll('.slide');
-    const dotsWrapper = document.getElementById('sliderDots');
-    const prevBtn     = document.getElementById('prevBtn');
-    const nextBtn     = document.getElementById('nextBtn');
+      const track       = document.getElementById('sliderTrack');
+      const slides      = Array.from(track.querySelectorAll('.slide'));
+      const dotsWrapper = document.getElementById('sliderDots');
+      const prevBtn     = document.getElementById('prevBtn');
+      const nextBtn     = document.getElementById('nextBtn');
 
-    let currentIndex = 0;
-    let autoTimer    = null;
+      const total = slides.length;
+      let currentIndex = 1; /* 복제 포함 시작 인덱스 */
+      let autoTimer = null;
+      let isTransitioning = false;
 
-    /* ✏️ [수정] 슬라이드 개수는 HTML의 .slide 블록 수에 따라 자동 계산됨 */
-    const totalSlides = slides.length;
+      /* 앞뒤에 복제 슬라이드 추가 (무한루프 트릭) */
+      const firstClone = slides[0].cloneNode(true);
+      const lastClone  = slides[total - 1].cloneNode(true);
+      track.appendChild(firstClone);   /* 맨 뒤에 첫번째 복제 */
+      track.insertBefore(lastClone, track.firstChild); /* 맨 앞에 마지막 복제 */
 
-    /* 도트 인디케이터 자동 생성 */
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.classList.add('dot');
-      dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsWrapper.appendChild(dot);
-    });
+      const allSlides = track.querySelectorAll('.slide');
 
-    /* 특정 슬라이드로 이동 */
-    function goToSlide(index) {
-      currentIndex = (index + totalSlides) % totalSlides;
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      /* 도트 업데이트 */
-      dotsWrapper.querySelectorAll('.dot').forEach((d, i) => {
-        d.classList.toggle('active', i === currentIndex);
-      });
-    }
-
-    /* 이전 / 다음 슬라이드 */
-    prevBtn.addEventListener('click', () => {
-      goToSlide(currentIndex - 1);
-      resetAutoPlay();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      goToSlide(currentIndex + 1);
-      resetAutoPlay();
-    });
-
-    /* 자동 재생 */
-    function startAutoPlay() {
-      autoTimer = setInterval(() => goToSlide(currentIndex + 1), AUTO_PLAY_INTERVAL);
-    }
-
-    function resetAutoPlay() {
-      clearInterval(autoTimer);
-      startAutoPlay();
-    }
-
-    /* 페이지 로드 시 자동 재생 시작 */
-    startAutoPlay();
-
-    /* 키보드 접근성: 화살표 키로 슬라이드 조작 */
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft')  { goToSlide(currentIndex - 1); resetAutoPlay(); }
-      if (e.key === 'ArrowRight') { goToSlide(currentIndex + 1); resetAutoPlay(); }
-    });
-
-    /* 터치 스와이프 지원 (모바일) */
-    let touchStartX = 0;
-    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-    track.addEventListener('touchend',   (e) => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        diff > 0 ? goToSlide(currentIndex + 1) : goToSlide(currentIndex - 1);
-        resetAutoPlay();
+      /* 트랜지션 없이 위치 이동 */
+      function setPositionSilent(index) {
+        track.style.transition = 'none';
+        track.style.transform  = `translateX(-${index * 100}%)`;
       }
-    });
 
-    /* =============================================
-       탭 전환 기능
-       ✏️ [수정] 탭 ID는 HTML의 data-tab 속성과 맞춰야 함
-       ============================================= */
-    const tabLinks    = document.querySelectorAll('.tab-link');
-    const tabContents = document.querySelectorAll('.tab-content');
+      /* 트랜지션과 함께 위치 이동 */
+      function goToSlide(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex = index;
+        /* ✏️ [수정] 슬라이드 전환 속도 (0.5s 등) */
+        track.style.transition = 'transform 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
+        track.style.transform  = `translateX(-${currentIndex * 100}%)`;
+        updateDots();
+      }
 
-    function showTab(tabId) {
-      /* 모든 탭 콘텐츠 숨기기 */
-      tabContents.forEach(el => el.classList.remove('active'));
-      /* 모든 탭 링크 비활성화 */
-      tabLinks.forEach(el => el.classList.remove('active'));
-
-      /* 선택한 탭 활성화 */
-      const target = document.getElementById(tabId);
-      if (target) target.classList.add('active');
-
-      /* 선택한 탭 링크 활성화 */
-      const activeLink = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
-      if (activeLink) activeLink.classList.add('active');
-    }
-
-    /* 탭 클릭 이벤트 등록 */
-    tabLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        showTab(link.dataset.tab);
+      /* 트랜지션 끝난 후 무한루프 점프 처리 */
+      track.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        /* 마지막 복제(index 0)에 도달했으면 → 진짜 마지막으로 점프 */
+        if (currentIndex === 0) {
+          setPositionSilent(total);
+          currentIndex = total;
+        }
+        /* 첫번째 복제(index total+1)에 도달했으면 → 진짜 첫번째로 점프 */
+        if (currentIndex === total + 1) {
+          setPositionSilent(1);
+          currentIndex = 1;
+        }
       });
-    });
 
-  </script>
+      /* 도트 업데이트 (복제 제외한 실제 인덱스 기준) */
+      function updateDots() {
+        const realIndex = (currentIndex - 1 + total) % total;
+        dotsWrapper.querySelectorAll('.dot').forEach((d, i) => {
+          d.classList.toggle('active', i === realIndex);
+        });
+      }
+
+      /* 도트 생성 */
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('dot');
+        dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToSlide(i + 1);
+          resetAutoPlay();
+        });
+        dotsWrapper.appendChild(dot);
+      });
+
+      /* 시작 위치 설정 (복제 고려해서 index 1부터) */
+      setPositionSilent(1);
+
+      /* 이전 / 다음 버튼 */
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+        resetAutoPlay();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+        resetAutoPlay();
+      });
+
+      /* 자동 재생 */
+      function startAutoPlay() {
+        autoTimer = setInterval(() => goToSlide(currentIndex + 1), AUTO_PLAY_INTERVAL);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoTimer);
+        startAutoPlay();
+      }
+
+      startAutoPlay();
+
+      /* 키보드 접근성 */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { goToSlide(currentIndex - 1); resetAutoPlay(); }
+        if (e.key === 'ArrowRight') { goToSlide(currentIndex + 1); resetAutoPlay(); }
+      });
+
+      /* 터치 스와이프 */
+      let touchStartX = 0;
+      track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+      track.addEventListener('touchend',   (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          diff > 0 ? goToSlide(currentIndex + 1) : goToSlide(currentIndex - 1);
+          resetAutoPlay();
+        }
+      });
+
+      /* 탭 전환 */
+      const tabLinks    = document.querySelectorAll('.tab-link');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      function showTab(tabId) {
+        tabContents.forEach(el => el.classList.remove('active'));
+        tabLinks.forEach(el => el.classList.remove('active'));
+        const target = document.getElementById(tabId);
+        if (target) target.classList.add('active');
+        const activeLink = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+
+      tabLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showTab(link.dataset.tab);
+        });
+      });
+    </script>
 </body>
 </html>
