@@ -766,6 +766,92 @@ body::before {
 
     .pay-popup-close:hover { background-color: #6B3A2A; }
 
+    /* =============================================
+       이메일 팝업
+       ============================================= */
+    .email-popup-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 99998;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .email-popup-bg.show { display: flex; }
+
+    .email-popup {
+      background: #fff;
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      position: relative;
+      animation: popupIn 0.3s cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .email-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: 1.5px solid #4A2C17;
+      color: #4A2C17;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .email-popup-close:hover {
+      background-color: #4A2C17;
+      color: #fff;
+    }
+
+    .email-popup-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* ✏️ [수정] 이메일 팝업 제목 */
+    .email-popup-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #4A2C17;
+      margin-bottom: 10px;
+    }
+
+    /* ✏️ [수정] 이메일 팝업 설명 */
+    .email-popup-desc {
+      font-size: 0.9rem;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    /* ✏️ [수정] 보내기 버튼 */
+    .email-send-btn {
+      display: inline-block;
+      padding: 12px 40px;
+      background-color: #4A2C17;
+      color: #fff;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .email-send-btn:hover {
+      background-color: #6B3A2A;
+      transform: translateY(-2px);
+    }
+
     /* 탭4 닫기 버튼 */
     .tab4-close {
       position: absolute;
@@ -1542,38 +1628,51 @@ body::before {
     <!-- ✏️ [수정] 좌측 SNS 버튼 영역 -->
     <div class="footer-sns">
 
-      <!-- ✏️ [수정] 인스타그램 링크: href="" 안에 URL 입력 -->
-      <a href="" class="sns-btn" target="_blank" aria-label="인스타그램">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- ✏️ [수정] 인스타그램 링크 -->
+      <a href="https://www.instagram.com/_ssuyy?stkn=ZmQ1YnNnZXAxZGxk&utm_source=qr" class="sns-btn" target="_blank" aria-label="인스타그램">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
         </svg>
       </a>
 
-      <!-- ✏️ [수정] 유튜브 링크: href="" 안에 URL 입력 -->
-      <a href="" class="sns-btn" target="_blank" aria-label="유튜브">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <!-- ✏️ [수정] 유튜브 링크 -->
+      <a href="https://youtube.com/channel/UCwW2ToMdEMfHeH4Qc8YTQKg?si=C-C5Ye847jHo9rNs" class="sns-btn" target="_blank" aria-label="유튜브">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.6 2.8 12 2.8 12 2.8s-4.6 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.8 9.2.8 11.4v2.1C.8 15.7 1 18 1 18s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.6 22.1 12 22.1 12 22.1s4.6 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.2-2.2.2-4.5v-2.1C23.2 9.2 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/>
         </svg>
       </a>
 
-      <!-- ✏️ [수정] 이메일 링크: href="mailto:" 뒤에 이메일 주소 입력 -->
-      <a href="mailto:" class="sns-btn" aria-label="이메일">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- ✏️ [수정] 이메일 버튼 - 클릭하면 팝업 -->
+      <button class="sns-btn" onclick="openEmailPopup()" aria-label="이메일">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
           <polyline points="2,4 12,13 22,4"/>
         </svg>
-      </a>
+      </button>
 
     </div>
 
     <!-- ✏️ [수정] 카피라이트 텍스트 -->
     <p class="footer-copy">&copy; 2025 <span>빚음 쌀</span>. All rights reserved.</p>
 
-    <!-- 우측 균형 맞추기용 빈 공간 -->
-    <div class="footer-sns" style="visibility: hidden;"></div>
   </footer>
+
+  <!-- =============================================
+       이메일 팝업
+       ✏️ [수정] 수신 이메일 주소: emailTo 변수
+       ============================================= -->
+  <div id="emailPopup" class="email-popup-bg">
+    <div class="email-popup">
+      <button class="email-popup-close" onclick="closeEmailPopup()">✕</button>
+      <div class="email-popup-icon">✉️</div>
+      <h2 class="email-popup-title">이메일 보내기</h2>
+      <p class="email-popup-desc">빚음 쌀에 문의사항이 있으신가요?<br>아래 버튼을 눌러 메일을 보내주세요.</p>
+      <!-- ✏️ [수정] 수신 이메일 주소 -->
+      <a href="mailto:bizumesal@gmail.com" class="email-send-btn">보내기</a>
+    </div>
+  </div>
 
 
   <!-- =============================================
@@ -1839,6 +1938,24 @@ body::before {
         if (e.target === e.currentTarget) {
           e.currentTarget.classList.remove('show');
         }
+      });
+
+      /* =============================================
+         이메일 팝업 JS
+         ============================================= */
+      function openEmailPopup() {
+        document.getElementById('emailPopup').classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeEmailPopup() {
+        document.getElementById('emailPopup').classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      /* 배경 클릭시 닫기 */
+      document.getElementById('emailPopup').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('emailPopup')) closeEmailPopup();
       });
 
       /* =============================================
