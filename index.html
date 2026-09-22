@@ -91,8 +91,8 @@ body::before {
       color: #e94560;
     }
 
-    /* ✏️ [수정] 현재 활성화된 탭 스타일 */
-    nav ul li a.active {
+    /* 햄버거 버튼 - 데스크톱에선 숨김 */
+    .nav-toggle { display: none; }
       background-color: #e94560;
       color: #ffffff;
     }
@@ -1442,31 +1442,373 @@ body::before {
        반응형 (태블릿 / 모바일)
        ============================================= */
     @media (max-width: 768px) {
+      /* =============================================
+         헤더 & 네비게이션
+         ============================================= */
       header {
-        /* ✏️ [수정] 모바일 헤더 여백 */
+        padding: 0 12px;
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        gap: 0;
+        position: sticky;
+        top: 0;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        padding: 12px 0;
+      }
+
+      /* 햄버거 버튼 */
+      .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        padding: 4px;
+      }
+
+      .nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #C8A97E;
+        transition: all 0.3s;
+        border-radius: 2px;
+      }
+
+      .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .nav-toggle.open span:nth-child(2) { opacity: 0; }
+      .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      /* 모바일 nav 드롭다운 */
+      nav {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+        background: #4A2C17;
+      }
+
+      nav.open {
+        max-height: 400px;
+        border-top: 1px solid rgba(200,169,126,0.3);
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0;
+      }
+
+      nav ul li a {
+        display: block;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(200,169,126,0.1);
+      }
+
+      nav ul li:last-child a {
+        border-bottom: none;
+      }
+
+      /* =============================================
+         메인 콘텐츠
+         ============================================= */
+      main {
+        padding: 0 14px;
+      }
+
+      body {
+        padding-bottom: 60px;
+      }
+
+      /* =============================================
+         배너 슬라이더
+         ============================================= */
+      .banner-section {
+        height: 220px;
+        margin: 16px 0 24px;
+        border-radius: 10px;
+      }
+
+      .slide-title {
+        font-size: 1.3rem;
         padding: 0 16px;
       }
 
-      /* ✏️ [수정] 모바일 탭 글자 크기 */
-      nav ul li a {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+      .slide-sub {
+        font-size: 0.82rem;
+        padding: 0 20px;
       }
 
-      /* ✏️ [수정] 모바일 배너 높이 */
-      .banner-section {
-        height: 280px;
-        margin: 20px 0 28px;
+      .slide-btn {
+        padding: 8px 20px;
+        font-size: 0.82rem;
+        margin-top: 16px;
       }
 
-      /* ✏️ [수정] 모바일 슬라이드 제목 크기 */
-      .slide-title {
+      .slider-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+
+      /* =============================================
+         콘텐츠 카드
+         ============================================= */
+      .content-card {
+        padding: 24px 20px;
+        margin-top: 24px;
+        border-radius: 10px;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+      }
+
+      .section-body {
+        font-size: 0.88rem;
+      }
+
+      /* =============================================
+         탭 간격
+         ============================================= */
+      .tab-content + .tab-content {
+        margin-top: 48px;
+      }
+
+      /* =============================================
+         메달 그리드 (브랜드 스토리)
+         ============================================= */
+      .medal-grid {
+        gap: 16px;
+        padding: 4px 0 12px;
+      }
+
+      .medal-card {
+        width: 110px;
+        height: 110px;
+      }
+
+      .medal-num {
         font-size: 1.5rem;
       }
 
-      main {
-        padding: 0 16px;
+      .medal-label {
+        font-size: 0.7rem;
+        padding: 10px;
       }
+
+      /* =============================================
+         ESG 카운터
+         ============================================= */
+      .esg-counter-wrap {
+        padding: 24px 14px;
+      }
+
+      .esg-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .esg-card {
+        padding: 20px 16px;
+      }
+
+      .esg-num {
+        font-size: 1.8rem !important;
+      }
+
+      .esg-highlight .esg-num {
+        font-size: 2.2rem !important;
+      }
+
+      .esg-bowl {
+        padding: 20px 16px;
+        gap: 16px;
+      }
+
+      .esg-bowl-bars {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .esg-toast-wrap {
+        right: 12px;
+        bottom: 70px;
+        left: 12px;
+      }
+
+      .esg-toast {
+        min-width: unset;
+      }
+
+      /* ESG 설명 3열 → 1열 */
+      #tab2 .content-card > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+
+      /* =============================================
+         제품 소개 2분할 (intro-row/split)
+         ============================================= */
+      .intro-row,
+      .intro-split {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .intro-img-wrap {
+        width: 100% !important;
+        height: 200px !important;
+      }
+
+      /* =============================================
+         공정 과정 로드맵
+         ============================================= */
+      .roadmap-wrap {
+        padding: 0 8px;
+      }
+
+      .roadmap-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .roadmap-arrow {
+        transform: rotate(90deg);
+        font-size: 1.4rem;
+      }
+
+      .roadmap-step {
+        width: 160px;
+      }
+
+      .step-img-wrap {
+        width: 140px !important;
+        height: 140px !important;
+      }
+
+      .roadmap-curve-right,
+      .roadmap-curve-left {
+        display: none;
+      }
+
+      /* =============================================
+         탭4 제품 페이지
+         ============================================= */
+      #tab4 {
+        padding: 48px 14px 80px;
+      }
+
+      .shop-wrap {
+        padding: 24px 0 60px;
+      }
+
+      /* 제품 그리드 2열 → 1열 */
+      .product-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+
+      .product-img-wrap {
+        height: 200px;
+      }
+
+      .product-info {
+        padding: 16px 18px 18px;
+      }
+
+      /* 상세 페이지 */
+      .detail-overlay {
+        padding: 28px 20px;
+      }
+
+      .detail-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .detail-img-wrap {
+        width: 100% !important;
+        height: 220px !important;
+      }
+
+      /* 장바구니 */
+      .cart-section {
+        padding: 20px 16px;
+      }
+
+      /* =============================================
+         푸터
+         ============================================= */
+      footer {
+        padding: 0 16px;
+        gap: 12px;
+        height: 56px;
+      }
+
+      .footer-copy {
+        font-size: 0.72rem;
+      }
+
+      .sns-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      /* =============================================
+         이메일 팝업
+         ============================================= */
+      .email-popup {
+        padding: 36px 24px;
+      }
+
+      /* =============================================
+         결제 팝업
+         ============================================= */
+      .pay-popup {
+        padding: 36px 24px;
+      }
+
+      /* =============================================
+         스토리 팝업
+         ============================================= */
+      .story-popup-box {
+        padding: 36px 24px;
+        max-height: 90vh;
+      }
+
+      .story-popup-title {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* 아주 작은 화면 (320px~) */
+    @media (max-width: 380px) {
+      .medal-card {
+        width: 90px;
+        height: 90px;
+      }
+
+      .medal-num { font-size: 1.3rem; }
+
+      .esg-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .slide-title { font-size: 1.1rem; }
+
+      .banner-section { height: 180px; }
     }
   </style>
 </head>
@@ -1594,7 +1936,12 @@ body::before {
     <!-- ✏️ [수정] 로고 텍스트 -->
     <a class="logo" href="#home">빚음 쌀</a>
 
-    <nav>
+    <!-- 모바일 햄버거 버튼 -->
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="mainNav">
       <ul>
         <!-- ✏️ [수정] 탭 이름 변경: 텍스트 부분만 수정 -->
         <li><a href="#home"  class="tab-link active" data-target="home">홈</a></li>
@@ -2733,6 +3080,27 @@ body::before {
       document.getElementById('emailPopup').addEventListener('click', (e) => {
         if (e.target === document.getElementById('emailPopup')) closeEmailPopup();
       });
+
+      /* =============================================
+         모바일 햄버거 메뉴
+         ============================================= */
+      const navToggle = document.getElementById('navToggle');
+      const mainNav   = document.getElementById('mainNav');
+
+      if (navToggle && mainNav) {
+        navToggle.addEventListener('click', () => {
+          navToggle.classList.toggle('open');
+          mainNav.classList.toggle('open');
+        });
+
+        /* 탭 클릭시 메뉴 닫기 */
+        mainNav.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            navToggle.classList.remove('open');
+            mainNav.classList.remove('open');
+          });
+        });
+      }
 
       /* =============================================
          네비게이션 - 스크롤 이동 방식 (탭4는 오버레이 전환)
