@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- ✏️ display=swap: 폰트 로딩 중에도 텍스트 바로 표시 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- ✏️ [수정] 브라우저 탭에 표시될 페이지 제목 -->
   <title>My Website</title>
@@ -2264,6 +2266,7 @@ body::before {
     src: url('YeongwolTTF.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap; /* 폰트 로딩 중 fallback 폰트 먼저 표시 */
   }
 
   /* ✏️ [수정] 로딩 배경색 */
@@ -2341,16 +2344,28 @@ body::before {
 </style>
 
 <script>
-  window.addEventListener('load', () => {
-    /* ✏️ [수정] 페이드아웃 시작 시간 (ms) */
+  /* =============================================
+     로딩 화면 제거
+     - DOMContentLoaded 기준으로 빠르게 숨김
+     - 최대 1500ms 안전장치 (이미지/폰트 실패해도 무한 대기 없음)
+     ============================================= */
+  function hideLoader() {
+    const loader = document.getElementById('loader');
+    if (!loader || loader._removed) return;
+    loader._removed = true;
+    loader.classList.add('fade-out');
     setTimeout(() => {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.classList.add('fade-out');
-        setTimeout(() => loader.remove(), 600);
-      }
-    }, 2800);
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 600);
+  }
+
+  /* DOM 준비되면 바로 숨기기 시작 (0.8초 후) */
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(hideLoader, 800);
   });
+
+  /* 안전장치: 최대 1.5초 후 강제 제거 */
+  setTimeout(hideLoader, 1500);
 </script>
   <!-- =============================================
        상단 헤더  <!-- =============================================
@@ -2702,7 +2717,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">01</div>
             <div class="step-img-wrap">
-              <img src="공정1.png" alt="계량" class="step-img"/>
+              <img src="공정1.png" loading="lazy" decoding="async" alt="계량" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">계량</p>
@@ -2714,7 +2729,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">02</div>
             <div class="step-img-wrap">
-              <img src="공정2.png" alt="건조" class="step-img"/>
+              <img src="공정2.png" loading="lazy" decoding="async" alt="건조" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">건조</p>
@@ -2726,7 +2741,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">03</div>
             <div class="step-img-wrap">
-              <img src="공정3.png" alt="분쇄" class="step-img"/>
+              <img src="공정3.png" loading="lazy" decoding="async" alt="분쇄" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">분쇄</p>
@@ -2748,7 +2763,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">06</div>
             <div class="step-img-wrap">
-              <img src="공정6.png" alt="코팅" class="step-img"/>
+              <img src="공정6.png" loading="lazy" decoding="async" alt="코팅" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">코팅</p>
@@ -2760,7 +2775,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">05</div>
             <div class="step-img-wrap">
-              <img src="공정5.png" alt="시럽" class="step-img"/>
+              <img src="공정5.png" loading="lazy" decoding="async" alt="시럽" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">시럽</p>
@@ -2772,7 +2787,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">04</div>
             <div class="step-img-wrap">
-              <img src="공정4.png" alt="혼합" class="step-img"/>
+              <img src="공정4.png" loading="lazy" decoding="async" alt="혼합" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">혼합</p>
@@ -2794,7 +2809,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">07</div>
             <div class="step-img-wrap">
-              <img src="공정7.png" alt="굽기" class="step-img"/>
+              <img src="공정7.png" loading="lazy" decoding="async" alt="굽기" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">굽기</p>
@@ -2806,7 +2821,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">08</div>
             <div class="step-img-wrap">
-              <img src="공정8.png" alt="토핑" class="step-img"/>
+              <img src="공정8.png" loading="lazy" decoding="async" alt="토핑" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">토핑</p>
@@ -2818,7 +2833,7 @@ body::before {
           <div class="roadmap-step">
             <div class="step-num">09</div>
             <div class="step-img-wrap">
-              <img src="공정9.png" alt="완성" class="step-img"/>
+              <img src="공정9.png" loading="lazy" decoding="async" alt="완성" class="step-img"/>
               <div class="step-img-placeholder">📷</div>
             </div>
             <p class="step-label">🎉 완성</p>
@@ -2864,13 +2879,13 @@ body::before {
 
             <!-- ✏️ [수정] 사진 1 - 그래놀라 이미지 파일명 -->
             <div class="intro-img-wrap">
-              <img src="그래놀라.jpeg" alt="그래놀라" class="intro-img" />
+              <img src="그래놀라.jpeg" alt="그래놀라" class="intro-img" loading="lazy" decoding="async" />
               <div class="intro-img-placeholder">📷 이미지</div>
             </div>
 
             <!-- ✏️ [수정] 사진 2 - 에너지바 이미지 파일명 -->
             <div class="intro-img-wrap">
-              <img src="에너지바.jpg" alt="에너지바" class="intro-img" />
+              <img src="에너지바.jpg" alt="에너지바" class="intro-img" loading="lazy" decoding="async" />
               <div class="intro-img-placeholder">📷 이미지</div>
             </div>
 
@@ -2896,7 +2911,7 @@ body::before {
                ============================================= -->
           <div class="product-card" data-id="1" data-name="그래놀라" data-price="12000" data-img="그래놀라.jpeg" data-desc="술지게미로 만든 건강한 그래놀라입니다. 전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다." onclick="openDetail(this)">
             <div class="product-img-wrap">
-              <img src="그래놀라.jpeg" alt="그래놀라" class="product-img" />
+              <img src="그래놀라.jpeg" alt="그래놀라" class="product-img" loading="lazy" decoding="async" />
               <div class="product-img-placeholder">📷 상품 이미지</div>
             </div>
             <div class="product-info">
@@ -2912,7 +2927,7 @@ body::before {
                ============================================= -->
           <div class="product-card" data-id="2" data-name="커스텀 그래놀라" data-price="15000" data-img="그래놀라.jpeg" data-desc="나만의 재료로 만드는 커스텀 그래놀라입니다. 원하는 토핑과 시럽을 선택해 특별한 그래놀라를 완성해보세요." onclick="openDetail(this)">
             <div class="product-img-wrap">
-              <img src="그래놀라.jpeg" alt="커스텀 그래놀라" class="product-img" />
+              <img src="그래놀라.jpeg" alt="커스텀 그래놀라" class="product-img" loading="lazy" decoding="async" />
               <div class="product-img-placeholder">📷 상품 이미지</div>
             </div>
             <div class="product-info">
@@ -2928,7 +2943,7 @@ body::before {
                ============================================= -->
           <div class="product-card" data-id="3" data-name="에너지바" data-price="9000" data-img="에너지바.png" data-desc="곡물 업사이클링으로 탄생한 에너지바입니다. 간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다." onclick="openDetail(this)">
             <div class="product-img-wrap">
-              <img src="에너지바.png" alt="에너지바" class="product-img" />
+              <img src="에너지바.png" alt="에너지바" class="product-img" loading="lazy" decoding="async" />
               <div class="product-img-placeholder">📷 상품 이미지</div>
             </div>
             <div class="product-info">
@@ -2944,7 +2959,7 @@ body::before {
                ============================================= -->
           <div class="product-card" data-id="4" data-name="커스텀 에너지바" data-price="13000" data-img="에너지바.png" data-desc="나만의 재료로 만드는 커스텀 에너지바입니다. 원하는 견과류와 시럽을 선택해 특별한 에너지바를 완성해보세요." onclick="openDetail(this)">
             <div class="product-img-wrap">
-              <img src="에너지바.png" alt="커스텀 에너지바" class="product-img" />
+              <img src="에너지바.png" alt="커스텀 에너지바" class="product-img" loading="lazy" decoding="async" />
               <div class="product-img-placeholder">📷 상품 이미지</div>
             </div>
             <div class="product-info">
