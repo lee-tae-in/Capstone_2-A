@@ -2,6 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- ✏️ [수정] 브라우저 탭에 표시될 페이지 제목 -->
   <title>My Website</title>
@@ -17,8 +20,8 @@
 /*커밋 오류나서 한줄 쓸게요*/
  body {
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  background-color: #f5edd8;
-  color: #222;
+  background-color: #F7F3ED;
+  color: #2A1F17;
   padding-bottom: 60px;
 } /* ← 여기서 body 닫기 */
 
@@ -42,24 +45,24 @@ body::before {
       top: 0;
       z-index: 100;
       /* ✏️ [수정] 헤더 배경색 */
-      background-color: #4A2C17;
-      /* ✏️ [수정] 헤더 하단 테두리 색 */
-      border-bottom: 2px solid #C8A97E;
+      background-color: #2A1F17;
+      border-bottom: 1px solid rgba(200,169,126,0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
       /* ✏️ [수정] 헤더 좌우 내부 여백 */
       padding: 0 40px;
       /* ✏️ [수정] 헤더 높이 */
-      height: 64px;
+      height: 72px;
     }
 
     /* ✏️ [수정] 로고 텍스트 스타일 */
     .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.5px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #F7F3ED;
+      letter-spacing: 0.08em;
+      font-family: 'Noto Serif KR', serif;
       text-decoration: none;
       cursor: pointer;
     }
@@ -78,23 +81,26 @@ body::before {
       padding: 8px 20px;
       border-radius: 6px;
       /* ✏️ [수정] 탭 글자색 */
-      color: #ccc;
+      color: rgba(247,243,237,0.6);
       text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       transition: background 0.2s, color 0.2s;
     }
 
     nav ul li a:hover {
       /* ✏️ [수정] 탭 호버 배경색 */
-      background-color: rgba(233, 69, 96, 0.15);
-      color: #e94560;
+      background-color: rgba(200,169,126,0.12);
+      color: #C8A97E;
     }
 
     /* 햄버거 버튼 - 데스크톱에선 숨김 */
-    .nav-toggle { display: none; }
-      background-color: #e94560;
-      color: #ffffff;
+    .nav-toggle {
+      display: none; 
+      background-color: rgba(200,169,126,0.2);
+      color: #C8A97E;
+      font-weight: 600;
     }
 
     /* =============================================
@@ -198,18 +204,19 @@ body::before {
     .slide-btn {
       margin-top: 28px;
       padding: 12px 32px;
-      background-color: #e94560;
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      background-color: rgba(200,169,126,0.15);
+      color: #C8A97E;
+      border: 1px solid rgba(200,169,126,0.5);
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
     }
 
     .slide-btn:hover {
-      background-color: #c73652;
+      background-color: rgba(200,169,126,0.25);
       transform: translateY(-2px);
     }
 
@@ -268,7 +275,7 @@ body::before {
     }
 
     .dot.active {
-      background-color: #e94560;
+      background-color: #C8A97E;
       transform: scale(1.3);
     }
 
@@ -291,7 +298,7 @@ body::before {
       display: none;
       position: fixed;
       inset: 64px 0 60px 0; /* 헤더/푸터 제외한 전체 영역 */
-      background-color: #f5edd8;
+      background-color: #F7F3ED;
       z-index: 50;
       overflow-y: auto;
       padding: 60px 24px;
@@ -402,16 +409,17 @@ body::before {
 
     /* ✏️ [수정] 상품 카드 */
     .product-card {
-      background: #ffffff;
-      border-radius: 16px;
-      border: 1px solid #e8ddd0;
+      background: #FDFAF6;
+      border-radius: 12px;
+      border: 1px solid rgba(200,169,126,0.15);
       overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .product-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(74,44,23,0.12);
+      box-shadow: 0 16px 40px rgba(42,31,23,0.1);
+      border-color: rgba(200,169,126,0.3);
     }
 
     /* ✏️ [수정] 상품 이미지 높이 */
@@ -475,17 +483,18 @@ body::before {
     .add-cart-btn {
       width: 100%;
       padding: 10px 0;
-      background-color: #4A2C17;
-      color: #fff;
+      background-color: #2A1F17;
+      color: #F7F3ED;
       border: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
       cursor: pointer;
       transition: background 0.2s;
     }
 
-    .add-cart-btn:hover { background-color: #6B3A2A; }
+    .add-cart-btn:hover { background-color: #4A2C17; }
     .add-cart-btn.added { background-color: #C8A97E; color: #4A2C17; }
 
     /* 장바구니 영역 */
@@ -549,8 +558,8 @@ body::before {
     .cart-total {
       text-align: right;
       font-size: 1rem;
-      font-weight: 700;
-      color: #4A2C17;
+      font-weight: 600;
+      color: #2A1F17;
       margin-bottom: 20px;
     }
 
@@ -558,19 +567,20 @@ body::before {
     .checkout-btn {
       width: 100%;
       padding: 16px 0;
-      background-color: #4A2C17;
-      color: #fff;
+      background-color: #2A1F17;
+      color: #F7F3ED;
       border: none;
-      border-radius: 10px;
-      font-size: 1.05rem;
-      font-weight: 700;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       cursor: pointer;
       letter-spacing: 0.05em;
       transition: background 0.2s, transform 0.15s;
     }
 
     .checkout-btn:hover {
-      background-color: #6B3A2A;
+      background-color: #4A2C17;
       transform: translateY(-2px);
     }
 
@@ -1015,8 +1025,8 @@ body::before {
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      border: 3px solid #C8A97E;
-      box-shadow: 0 6px 24px rgba(74,44,23,0.15);
+      border: 2px solid rgba(200,169,126,0.5);
+      box-shadow: 0 8px 28px rgba(42,31,23,0.12);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       flex-shrink: 0;
     }
@@ -1372,11 +1382,426 @@ body::before {
       .esg-toast-wrap { right: 16px; bottom: 72px; }
     }
 
+    /* =============================================
+       모던 헤리티지 글로벌 디자인 토큰
+       ============================================= */
+    :root {
+      --color-bg:       #F7F3ED;
+      --color-surface:  #FDFAF6;
+      --color-dark:     #2A1F17;
+      --color-mid:      #6B5744;
+      --color-gold:     #C8A97E;
+      --color-gold-lt:  rgba(200,169,126,0.15);
+      --font-serif:     'Noto Serif KR', serif;
+      --font-sans:      'Noto Sans KR', sans-serif;
+      --radius-sm:      4px;
+      --radius-md:      12px;
+      --radius-lg:      20px;
+      --shadow-sm:      0 2px 12px rgba(42,31,23,0.06);
+      --shadow-md:      0 8px 32px rgba(42,31,23,0.10);
+      --shadow-lg:      0 20px 60px rgba(42,31,23,0.14);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='hanji'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='6' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.3'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23hanji)' opacity='0.04'/%3E%3C/svg%3E");
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 배너 슬라이더 */
+    .banner-section {
+      border-radius: 20px;
+      height: 440px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .slide-title {
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .slide-sub {
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      line-height: 1.7;
+    }
+
+    /* 도트 */
+    .dot { background-color: rgba(255,255,255,0.35); border-radius: 2px; width: 20px; height: 3px; }
+    .dot.active { background-color: #C8A97E; width: 32px; }
+
+    /* 콘텐츠 카드 전체 */
+    .content-card {
+      background: var(--color-surface);
+      border: 1px solid rgba(200,169,126,0.18);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s;
+    }
+
+    .content-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    /* 섹션 구분선 */
+    .section-divider {
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, #C8A97E, rgba(200,169,126,0.3));
+    }
+
+    /* 상품 가격 */
+    .product-price {
+      font-family: var(--font-serif);
+      color: var(--color-dark);
+    }
+
+    /* 상품명 */
+    .product-name {
+      font-family: var(--font-serif);
+      letter-spacing: -0.01em;
+    }
+
+    /* 장바구니 타이틀 */
+    .cart-title {
+      font-family: var(--font-serif);
+    }
+
+    /* 팝업 박스 */
+    .pay-popup,
+    .email-popup,
+    .story-popup-box,
+    .detail-overlay {
+      background: var(--color-surface);
+      border: 1px solid rgba(200,169,126,0.2);
+    }
+
+    /* 팝업 제목 */
+    .pay-popup-title,
+    .email-popup-title,
+    .story-popup-title,
+    .detail-name {
+      font-family: var(--font-serif);
+    }
+
+    /* 로드맵 step label */
+    .step-label {
+      font-family: var(--font-serif);
+      letter-spacing: 0.02em;
+    }
+
+    /* step 번호 */
+    .step-num {
+      background: var(--color-dark);
+      font-family: var(--font-sans);
+      letter-spacing: 0.05em;
+    }
+
+    /* step img 테두리 */
+    .step-img-wrap {
+      border: 2px solid rgba(200,169,126,0.4);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* 탭4 닫기 버튼 */
+    .tab4-close,
+    .detail-close,
+    .story-popup-close,
+    .email-popup-close,
+    .pay-popup-close {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      border-radius: var(--radius-sm);
+    }
+
+    .tab4-close:hover,
+    .detail-close:hover,
+    .story-popup-close:hover,
+    .email-popup-close:hover,
+    .pay-popup-close:hover {
+      background: var(--color-dark);
+      color: #F7F3ED;
+      border-color: var(--color-dark);
+    }
+
+    /* 보내기/확인 버튼 */
+    .email-send-btn,
+    .pay-popup-close {
+      background: var(--color-dark);
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.08em;
+    }
+
+    /* 이전/다음 버튼 */
+    .story-popup-nav-btn,
+    .popup-nav-btn {
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.05em;
+    }
+
+    /* ESG 설명 아이콘 텍스트 */
+    #tab2 .content-card p[style*="font-size:1.2rem"] {
+      font-family: var(--font-serif);
+      font-size: 1rem !important;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 10px !important;
+    }
+
+    /* 홈 콘텐츠 영역 */
+    #home .content-card .section-title {
+      font-size: 1.4rem;
+    }
+
+    /* 상품 상세 페이지 */
+    .detail-overlay {
+      border-radius: var(--radius-lg);
+    }
+
+    /* shop intro */
+    .shop-title {
+      font-family: var(--font-serif);
+      letter-spacing: 0.02em;
+    }
+
+    /* intro 박스 */
+    .product-intro-card {
+      overflow: hidden;
+    }
+
+    .intro-img {
+      transition: transform 0.5s ease;
+    }
+
+    .product-intro-card:hover .intro-img {
+      transform: scale(1.04);
+    }
+
+    /* 화살표 버튼 */
+    .slider-btn {
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(8px);
+    }
+
+    /* SNS 버튼 */
+    .sns-btn {
+      border-radius: var(--radius-sm);
+      border-color: rgba(200,169,126,0.3);
+    }
+
+    /* footer copy */
+    .footer-copy span {
+      color: #C8A97E;
+    }
+
+    /* =============================================
+       스크롤바 스타일 (웹킷)
+       ============================================= */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(200,169,126,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(200,169,126,0.5); }
+
+    /* =============================================
+       선택 영역 색
+       ============================================= */
+    ::selection {
+      background: rgba(200,169,126,0.25);
+      color: #2A1F17;
+    }
+
+    /* =============================================
+       홈 브랜드 키워드 3개
+       ============================================= */
+    .home-keywords {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 48px 0;
+      border-bottom: 1px solid rgba(200,169,126,0.15);
+    }
+
+    .keyword-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 32px;
+    }
+
+    .keyword-icon {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .keyword-label {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2A1F17;
+      margin-bottom: 8px;
+    }
+
+    .keyword-desc {
+      font-size: 0.82rem;
+      color: #6B5744;
+      line-height: 1.7;
+    }
+
+    .keyword-divider {
+      width: 1px;
+      height: 64px;
+      background: rgba(200,169,126,0.3);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       홈 브랜드 카피 섹션
+       ============================================= */
+    .home-copy-section {
+      padding: 80px 0 60px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .home-copy-sub {
+      font-size: 0.78rem;
+      color: #C8A97E;
+      letter-spacing: 0.2em;
+      margin-bottom: 20px;
+    }
+
+    .home-copy-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 600;
+      color: #2A1F17;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .home-copy-desc {
+      font-size: 0.95rem;
+      color: #6B5744;
+      line-height: 1.9;
+      margin-bottom: 36px;
+    }
+
+    .home-copy-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      border: 1px solid #2A1F17;
+      color: #2A1F17;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .home-copy-btn:hover {
+      background: #2A1F17;
+      color: #F7F3ED;
+    }
+
+    /* =============================================
+       섹션 인트로 (탭1, 탭2, 탭3 상단)
+       ============================================= */
+    .section-intro {
+      padding: 64px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid rgba(200,169,126,0.15);
+      margin-bottom: 0;
+    }
+
+    .section-intro-dark {
+      background: #2A1F17;
+      padding: 64px 24px 48px;
+      margin-left: -24px;
+      margin-right: -24px;
+      border-bottom: none;
+    }
+
+    .section-intro-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #C8A97E;
+      letter-spacing: 0.25em;
+      margin-bottom: 16px;
+    }
+
+    .section-intro-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: #2A1F17;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .section-intro-desc {
+      font-size: 0.92rem;
+      color: #6B5744;
+      line-height: 1.9;
+    }
+
+    /* =============================================
+       탭 간격 조정
+       ============================================= */
+    .tab-content + .tab-content {
+      margin-top: 120px;
+    }
+
+    /* =============================================
+       모바일 홈 키워드/카피
+       ============================================= */
+    @media (max-width: 768px) {
+      .home-keywords {
+        flex-direction: column;
+        padding: 32px 0;
+        gap: 24px;
+      }
+
+      .keyword-divider {
+        width: 40px;
+        height: 1px;
+      }
+
+      .keyword-item { padding: 0 16px; }
+
+      .home-copy-section {
+        padding: 48px 8px 40px;
+      }
+
+      .section-intro {
+        padding: 40px 0 32px;
+      }
+
+      .section-intro-dark {
+        padding: 40px 20px 32px;
+        margin-left: -14px;
+        margin-right: -14px;
+      }
+
+      .tab-content + .tab-content {
+        margin-top: 64px;
+      }
+    }
+
     /* ✏️ [수정] 섹션 제목 */
     .section-title {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      color: #1a1a2e;
+      color: #2A1F17;
+      font-family: 'Noto Serif KR', serif;
+      letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
 
@@ -1384,26 +1809,26 @@ body::before {
       width: 40px;
       height: 3px;
       /* ✏️ [수정] 섹션 구분선 색 */
-      background-color: #e94560;
-      margin-bottom: 20px;
-      border-radius: 2px;
+      background-color: #C8A97E;
+      margin-bottom: 24px;
+      border-radius: 0;
     }
 
     /* ✏️ [수정] 섹션 본문 설명 텍스트 */
     .section-body {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #555;
+      font-size: 0.95rem;
+      line-height: 2;
+      color: #6B5744;
       max-width: 680px;
     }
 
     .content-card {
-  background: #ffffff;
-  border-radius: 12px;
-  /* ✏️ [수정] 패딩 두배로 (내부 여백이 커져서 박스 크기 증가) */
-  padding: 128px;
+  background: #FDFAF6;
+  border-radius: 16px;
+  padding: 56px 64px;
   margin-top: 48px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid rgba(200,169,126,0.2);
+  box-shadow: 0 2px 20px rgba(42,31,23,0.04);
   /* ✏️ [수정] 최소 높이 설정 */
   min-height: 400px;
 }
@@ -1417,8 +1842,8 @@ body::before {
       left: 0;
       width: 100%;
       height: 60px;
-      background-color: #4A2C17;
-      border-top: 2px solid #C8A97E;
+      background-color: #2A1F17;
+      border-top: 1px solid rgba(200,169,126,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1434,8 +1859,8 @@ body::before {
 
     /* ✏️ [수정] 카피라이트 강조 텍스트 색 */
     footer p span {
-      color: #e94560;
-      font-weight: 600;
+      color: #C8A97E;
+      font-weight: 500;
     }
 
     /* =============================================
@@ -1845,7 +2270,7 @@ body::before {
   #loader {
     position: fixed;
     inset: 0;
-    background-color: #f5edd8;
+    background-color: #F7F3ED;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1963,54 +2388,65 @@ body::before {
          ============================================= -->
     <div id="home" class="tab-content active">
 
-      <!-- =============================================
-           배너 슬라이더
-           ✏️ [수정] 슬라이드 내용(제목/설명/버튼)은 아래에서 변경
-           슬라이드 추가: .slide 블록을 복사해서 붙여넣기
-           ============================================= -->
+      <!-- 배너 슬라이더 -->
       <section class="banner-section">
         <div class="slider-track" id="sliderTrack">
 
-          <!-- ✏️ [수정] 슬라이드 1 -->
           <div class="slide">
             <h2 class="slide-title">슬라이드 제목 1</h2>
             <p class="slide-sub">여기에 슬라이드 1의 설명 텍스트를 입력하세요.<br>두 줄로 나눌 수도 있습니다.</p>
             <button class="slide-btn">자세히 보기</button>
           </div>
 
-          <!-- ✏️ [수정] 슬라이드 2 -->
           <div class="slide">
             <h2 class="slide-title">슬라이드 제목 2</h2>
             <p class="slide-sub">여기에 슬라이드 2의 설명 텍스트를 입력하세요.<br>프로모션이나 이벤트 내용을 넣어보세요.</p>
             <button class="slide-btn">이벤트 보기</button>
           </div>
 
-          <!-- ✏️ [수정] 슬라이드 3 -->
           <div class="slide">
             <h2 class="slide-title">슬라이드 제목 3</h2>
             <p class="slide-sub">여기에 슬라이드 3의 설명 텍스트를 입력하세요.<br>신규 소식이나 공지를 알릴 수 있어요.</p>
             <button class="slide-btn">공지 확인</button>
           </div>
 
-        </div><!-- /slider-track -->
+        </div>
 
-        <!-- 이전/다음 화살표 버튼 -->
         <button class="slider-btn prev" id="prevBtn" aria-label="이전 슬라이드">&#8592;</button>
         <button class="slider-btn next" id="nextBtn" aria-label="다음 슬라이드">&#8594;</button>
-
-        <!-- 하단 도트 인디케이터 -->
         <div class="slider-dots" id="sliderDots"></div>
+      </section>
 
-      </section><!-- /banner-section -->
+      <!-- 브랜드 키워드 3개 -->
+      <div class="home-keywords">
+        <div class="keyword-item">
+          <span class="keyword-icon">♻️</span>
+          <p class="keyword-label">푸드 업사이클링</p>
+          <p class="keyword-desc">버려지는 쌀발효박을<br>그래놀라로 재탄생</p>
+        </div>
+        <div class="keyword-divider"></div>
+        <div class="keyword-item">
+          <span class="keyword-icon">🌾</span>
+          <p class="keyword-label">전통 발효 과학</p>
+          <p class="keyword-desc">수백년 전통 발효의<br>영양을 그대로</p>
+        </div>
+        <div class="keyword-divider"></div>
+        <div class="keyword-item">
+          <span class="keyword-icon">🌍</span>
+          <p class="keyword-label">지속 가능한 식탁</p>
+          <p class="keyword-desc">한 그릇이 만드는<br>작은 지구의 변화</p>
+        </div>
+      </div>
 
-      <!-- ✏️ [수정] 홈 아래 추가 콘텐츠 영역 -->
-      <div class="content-card">
-        <h2 class="section-title">홈 콘텐츠 영역</h2>
-        <div class="section-divider"></div>
-        <p class="section-body">
-          홈 화면 배너 아래에 표시되는 콘텐츠 영역입니다.<br>
-          이곳에 소개 문구, 카드, 이미지 등 원하는 내용을 추가할 수 있어요.
+      <!-- 브랜드 한 줄 카피 -->
+      <div class="home-copy-section">
+        <p class="home-copy-sub">빚음 쌀이 묻습니다</p>
+        <h2 class="home-copy-title">버려지는 것들에서<br>가장 건강한 한 그릇을</h2>
+        <p class="home-copy-desc">
+          전통주 양조 후 매일 수 톤씩 버려지는 쌀발효박.<br>
+          빚음 쌀은 이 귀한 발효의 결정체를 그래놀라의 핵심 원료로 되살립니다.
         </p>
+        <a href="#tab1" class="home-copy-btn" onclick="event.preventDefault(); document.getElementById('tab1').scrollIntoView({behavior:'smooth'})">우리의 이야기 →</a>
       </div>
 
     </div><!-- /home -->
@@ -2021,46 +2457,49 @@ body::before {
          ✏️ [수정] 탭1 내용 이곳에 작성
          ============================================= -->
     <div id="tab1" class="tab-content">
-      <div class="content-card">
-        <h2 class="section-title">우리의 이야기</h2>
-        <div class="section-divider"></div>
+
+      <!-- 섹션 인트로 -->
+      <div class="section-intro">
+        <p class="section-intro-tag">OUR STORY</p>
+        <h2 class="section-intro-title">우리의 이야기</h2>
+        <p class="section-intro-desc">
+          버려지는 것들을 다시 바라보며 시작된 브랜드.<br>
+          다섯 개의 장(章)으로 빚음 쌀의 탄생을 만나보세요.
+        </p>
+      </div>
+
+      <!-- 메달 그리드 -->
+      <div class="content-card" style="padding: 48px 56px;">
         <p class="story-sub-txt">메달을 클릭해 이야기를 펼쳐보세요</p>
-
-        <!-- 메달 그리드 -->
         <div class="medal-grid">
-
           <div class="medal-card" onclick="openPopup(0)">
             <div class="medal-bg"></div>
             <div class="medal-num">01</div>
             <div class="medal-label">프롤로그<br>탄생 스토리</div>
           </div>
-
           <div class="medal-card" onclick="openPopup(1)">
             <div class="medal-bg"></div>
             <div class="medal-num">02</div>
             <div class="medal-label">발견<br>발효의 정수</div>
           </div>
-
           <div class="medal-card" onclick="openPopup(2)">
             <div class="medal-bg"></div>
             <div class="medal-num">03</div>
             <div class="medal-label">의문<br>왜 없을까?</div>
           </div>
-
           <div class="medal-card" onclick="openPopup(3)">
             <div class="medal-bg"></div>
             <div class="medal-num">04</div>
             <div class="medal-label">도전<br>식탁을 바꾸다</div>
           </div>
-
           <div class="medal-card" onclick="openPopup(4)">
             <div class="medal-bg"></div>
             <div class="medal-num">05</div>
             <div class="medal-label">에필로그<br>새로운 가치</div>
           </div>
-
-        </div><!-- /medal-grid -->
+        </div>
       </div>
+
     </div><!-- /tab1 -->
 
     <!-- 브랜드 스토리 팝업 -->
@@ -2084,14 +2523,13 @@ body::before {
          ============================================= -->
     <div id="tab2" class="tab-content">
 
-      <!-- ESG 섹션 헤더 -->
-      <div class="content-card" style="margin-bottom: 0; border-bottom: none; border-radius: 16px 16px 0 0;">
-        <h2 class="section-title">ESG적 가치</h2>
-        <div class="section-divider"></div>
-        <p class="section-body">
-          빚음 쌀은 전통주 양조 과정에서 버려지는 쌀발효박(주박)을 업사이클링해
-          환경 부담을 줄이고 지속 가능한 식탁을 만들어갑니다.<br>
-          한 그릇의 그래놀라가 만들어내는 작지만 진실한 변화, 숫자로 확인해보세요.
+      <!-- 섹션 인트로 -->
+      <div class="section-intro section-intro-dark">
+        <p class="section-intro-tag">ESG VALUE</p>
+        <h2 class="section-intro-title" style="color:#F7F3ED;">ESG적 가치</h2>
+        <p class="section-intro-desc" style="color:rgba(247,243,237,0.6);">
+          빚음 쌀이 만들어내는 숫자들.<br>
+          한 그릇의 선택이 지구에 남기는 진짜 발자국입니다.
         </p>
       </div>
 
@@ -2236,6 +2674,17 @@ body::before {
          ✏️ [수정] 각 스텝 사진/설명 아래에서 수정
          ============================================= -->
     <div id="tab3" class="tab-content">
+
+      <!-- 섹션 인트로 -->
+      <div class="section-intro">
+        <p class="section-intro-tag">PROCESS</p>
+        <h2 class="section-intro-title">공정 과정 · 레시피</h2>
+        <p class="section-intro-desc">
+          버려진 쌀발효박이 바삭한 그래놀라가 되기까지.<br>
+          9단계의 정성스러운 여정을 담았습니다.
+        </p>
+      </div>
+
       <div class="content-card">
         <h2 class="section-title">공정 과정 · 레시피</h2>
         <div class="section-divider"></div>
