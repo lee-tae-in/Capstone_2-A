@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- ✏️ [수정] 브라우저 탭 제목 / 검색·공유 시 설명 -->
-  <title>빚음 쌀 | 쌀발효박 업사이클링 그래놀라</title>
-  <meta name="description" content="전통주를 빚고 남은 쌀발효박을 그래놀라로 되살리는 업사이클링 푸드 브랜드, 빚음 쌀." />
-  <meta property="og:title" content="빚음 쌀 | 쌀발효박 업사이클링 그래놀라" />
+  <title>빚음 쌀 | 쌀발효곡물 업사이클링 그래놀라</title>
+  <meta name="description" content="전통주를 빚고 남은 쌀발효곡물을 그래놀라로 되살리는 업사이클링 푸드 브랜드, 빚음 쌀." />
+  <meta property="og:title" content="빚음 쌀 | 쌀발효곡물 업사이클링 그래놀라" />
   <meta property="og:description" content="버려지는 것들에서 가장 건강한 한 그릇을." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E" />
 
@@ -637,6 +637,7 @@
     .esg-highlight .esg-num { font-size: clamp(2.4rem, 3.5vw, 3rem); color: var(--color-gold); }
 
     .esg-unit { font-size: 0.9rem; color: rgba(247,243,237,0.55); }
+    .esg-num.esg-num-text { font-size: clamp(1.5rem, 2.4vw, 1.9rem); letter-spacing: 0; color: rgba(247,243,237,0.8); }
     .esg-card-label { font-size: 0.9rem; font-weight: 600; color: var(--color-cream); margin-bottom: 6px; }
     .esg-card-sub { font-size: 0.78rem; color: rgba(247,243,237,0.5); line-height: 1.6; }
 
@@ -780,9 +781,35 @@
     /* =============================================
        탭3 - 공정 과정 (3×3 그리드)
        ============================================= */
+    .process-subtitle {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      margin: 56px 0 20px;
+    }
+
+    .safety-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .safety-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+    }
+
+    .safety-icon { font-size: 1.4rem; display: block; margin-bottom: 10px; }
+    .safety-label { font-family: var(--font-serif); font-weight: 600; font-size: 1rem; margin-bottom: 6px; }
+    .safety-desc { font-size: 0.85rem; line-height: 1.7; color: var(--color-mid); word-break: keep-all; }
+
     .roadmap {
       list-style: none;
-      margin: 56px 0 0;
+      margin: 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 48px 28px;
@@ -904,6 +931,7 @@
     .product-intro { padding: 48px 56px; margin: 0 0 48px; }
 
     .intro-row { display: flex; align-items: center; gap: 48px; }
+    .intro-spec { margin-top: 16px; font-family: var(--font-serif); font-weight: 700; color: var(--color-brown); }
     .intro-row + .intro-row { margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(200,169,126,0.15); }
     .intro-row.reverse { flex-direction: row-reverse; }
 
@@ -930,7 +958,7 @@
     /* 2×2 상품 그리드 */
     .product-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 28px;
       margin-bottom: 60px;
     }
@@ -950,7 +978,7 @@
       border-color: rgba(200,169,126,0.35);
     }
 
-    .product-img-wrap { width: 100%; height: 240px; background-color: #f0e8d8; position: relative; overflow: hidden; }
+    .product-img-wrap { width: 100%; height: 200px; background-color: #f0e8d8; position: relative; overflow: hidden; }
 
     .product-img {
       width: 100%;
@@ -1013,6 +1041,34 @@
     .add-cart-btn.outline:hover { background: var(--color-dark); color: var(--color-cream); }
 
     /* 장바구니 */
+    /* 자주 묻는 질문 */
+    .faq {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+
+    .faq details { border-top: 1px solid rgba(200,169,126,0.2); }
+    .faq details:first-of-type { border-top: none; }
+
+    .faq summary {
+      cursor: pointer;
+      padding: 14px 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; color: var(--color-gold); font-size: 1.2rem; line-height: 1; }
+    .faq details[open] summary::after { content: '−'; }
+    .faq details p { padding: 0 0 16px; font-size: 0.9rem; line-height: 1.8; color: var(--color-mid); word-break: keep-all; }
+
     .cart-section {
       background: #fff;
       border-radius: var(--radius-lg);
@@ -1451,6 +1507,8 @@
       .intro-img-wrap { flex: none; width: 100%; height: 220px; }  /* 세로 배치에서 높이가 사라지는 문제 해결 */
 
       .product-grid { grid-template-columns: 1fr; gap: 16px; }
+      .safety-list { grid-template-columns: 1fr; }
+      .faq { padding: 20px 18px; }
       .product-img-wrap { height: 200px; }
       .product-info { padding: 16px 18px 18px; }
       .cart-section { padding: 22px 16px; }
@@ -1560,7 +1618,7 @@
 
         <div class="slide" style="background-image:url('img/granola.jpg')">
           <h2 class="slide-title">버려지는 쌀에서,<br>가장 건강한 한 그릇</h2>
-          <p class="slide-sub">전통주를 빚고 남은 쌀발효박으로 만든 업사이클링 그래놀라</p>
+          <p class="slide-sub">전통주를 빚고 남은 쌀발효곡물로 만든 업사이클링 그래놀라</p>
           <button class="slide-btn" data-goto="tab4">제품 보기</button>
         </div>
 
@@ -1572,7 +1630,7 @@
 
         <div class="slide" style="background-image:url('img/banner-package.jpg')">
           <h2 class="slide-title">한 봉지가 남기는<br>작은 변화</h2>
-          <p class="slide-sub">쌀발효박 순환부터 탄소 감축까지, 숫자로 확인해 보세요</p>
+          <p class="slide-sub">한 봉지에 담긴 쌀발효곡물과 우리가 지키는 기준을 확인해 보세요</p>
           <button class="slide-btn" data-goto="tab2">ESG 가치 보기</button>
         </div>
 
@@ -1588,7 +1646,7 @@
       <div class="keyword-item">
         <span class="keyword-icon" aria-hidden="true">♻️</span>
         <p class="keyword-label">푸드 업사이클링</p>
-        <p class="keyword-desc">버려지는 쌀발효박을<br>그래놀라로 재탄생</p>
+        <p class="keyword-desc">버려지던 쌀발효곡물을<br>그래놀라로 재탄생</p>
       </div>
       <div class="keyword-divider"></div>
       <div class="keyword-item">
@@ -1609,8 +1667,9 @@
       <p class="home-copy-sub">빚음 쌀이 묻습니다</p>
       <h2 class="home-copy-title">버려지는 것들에서<br>가장 건강한 한 그릇을</h2>
       <p class="home-copy-desc">
-        전통주 양조 후 매일 수 톤씩 버려지는 쌀발효박.<br>
-        빚음 쌀은 이 귀한 발효의 결정체를 그래놀라의 핵심 원료로 되살립니다.
+        전통주를 빚고 나면 남는 쌀발효곡물(술지게미).<br>
+        사료나 폐기물로 처리되던 이 발효 곡물을
+        빚음 쌀은 그래놀라의 핵심 원료로 되살립니다.
       </p>
       <a href="#tab1" class="home-copy-btn" data-goto="tab1">우리의 이야기 보기</a>
     </div>
@@ -1658,55 +1717,55 @@
         <p class="section-intro-tag">ESG VALUE</p>
         <h2 class="section-intro-title">ESG 가치</h2>
         <p class="section-intro-desc">
-          빚음 쌀이 만들어내는 숫자들.<br>
-          한 그릇의 선택이 지구에 남기는 진짜 발자국입니다.
+          확인된 숫자만 보여드립니다.<br>
+          한 봉지에 담긴 것과 아직 계산 중인 것을 투명하게 공개합니다.
         </p>
       </div>
 
       <div class="esg-counter-wrap" id="esgSection">
 
+        <!-- ✏️ [수정] 출처가 확인된 숫자만 넣으세요. data-target이 있으면 숫자가 올라가는 효과가 적용됩니다 -->
         <div class="esg-grid">
 
           <div class="esg-card" style="transition-delay:0s">
             <span class="esg-card-icon" aria-hidden="true">🌾</span>
             <div class="esg-num-wrap">
-              <span class="esg-num" data-target="14280" data-decimal="0" data-increment="0.8">0</span>
-              <span class="esg-unit">kg</span>
+              <span class="esg-num" data-target="30" data-decimal="0">0</span>
+              <span class="esg-unit">%</span>
             </div>
-            <p class="esg-card-label">구해낸 쌀발효박</p>
-            <p class="esg-card-sub">매립·소각 위기에서 순환된<br>발효 원료</p>
+            <p class="esg-card-label">한 봉지 속 쌀발효곡물</p>
+            <p class="esg-card-sub">250g 중 75g<br>(건조 기준)</p>
           </div>
 
           <div class="esg-card esg-highlight" style="transition-delay:0.1s">
-            <span class="esg-highlight-badge">핵심 지표</span>
-            <span class="esg-card-icon" aria-hidden="true">🌳</span>
+            <span class="esg-highlight-badge">안전 기준</span>
+            <span class="esg-card-icon" aria-hidden="true">🧪</span>
             <div class="esg-num-wrap">
-              <span class="esg-num" data-target="18.6" data-decimal="1" data-increment="0.02">0</span>
-              <span class="esg-unit">t CO₂eq</span>
+              <span class="esg-num">1</span>
+              <span class="esg-unit">% 미만</span>
             </div>
-            <p class="esg-card-label">저감한 탄소 배출량</p>
-            <p class="esg-card-sub">30년생 소나무 식재 효과</p>
-            <div class="esg-tree-row">🌲 소나무 약<strong>2,818</strong>그루에 해당</div>
+            <p class="esg-card-label">잔류 알코올</p>
+            <p class="esg-card-sub">판매 전 검사로<br>일반 식품 기준을 확인합니다</p>
           </div>
 
           <div class="esg-card" style="transition-delay:0.2s">
             <span class="esg-card-icon" aria-hidden="true">🍶</span>
             <div class="esg-num-wrap">
-              <span class="esg-num" data-target="12" data-decimal="0" data-increment="0">0</span>
+              <span class="esg-num">1</span>
               <span class="esg-unit">곳</span>
             </div>
-            <p class="esg-card-label">함께하는 로컬 양조장</p>
-            <p class="esg-card-sub">폐기물 감축 상생 협약<br>파트너</p>
+            <!-- ✏️ 양조장 이름 공개 허락을 받으면 아래에 실명을 넣으세요 -->
+            <p class="esg-card-label">첫 협력 양조장</p>
+            <p class="esg-card-sub">원료 수거와 인터뷰를<br>함께 진행하고 있습니다</p>
           </div>
 
           <div class="esg-card" style="transition-delay:0.3s">
-            <span class="esg-card-icon" aria-hidden="true">🥕</span>
+            <span class="esg-card-icon" aria-hidden="true">🌍</span>
             <div class="esg-num-wrap">
-              <span class="esg-num" data-target="3450" data-decimal="0" data-increment="0.5">0</span>
-              <span class="esg-unit">kg</span>
+              <span class="esg-num esg-num-text">산정 중</span>
             </div>
-            <p class="esg-card-label">구출한 못난이 농산물</p>
-            <p class="esg-card-sub">토핑으로 재탄생한<br>과채류</p>
+            <p class="esg-card-label">탄소 감축량</p>
+            <p class="esg-card-sub">양조장 실측 데이터로 계산해<br>계산식과 함께 공개합니다</p>
           </div>
 
         </div><!-- /esg-grid -->
@@ -1731,29 +1790,22 @@
           <div class="esg-bowl-content">
             <p class="esg-bowl-title">내 한 그릇의 가치</p>
             <p class="esg-bowl-text">
-              그래놀라 1봉(300g)을 선택하면?<br>
-              <strong>쌀발효박 450g 순환</strong> + <strong>탄소 1.2kg 감축</strong>
-              <span class="esg-muted">(소나무 약 0.2그루)</span>
+              그래놀라 1봉(250g)을 고르면?<br>
+              <strong>쌀발효곡물 75g</strong>이 사료나 폐기물 대신 <strong>식탁으로</strong> 돌아옵니다.
             </p>
           </div>
 
           <div class="esg-bowl-bars">
             <div>
-              <div class="esg-bar-label"><span>쌀발효박 순환</span><span>450g</span></div>
-              <div class="esg-bar-track"><div class="esg-bar-fill" data-width="72"></div></div>
-            </div>
-            <div>
-              <div class="esg-bar-label"><span>탄소 감축</span><span>1.2kg</span></div>
-              <div class="esg-bar-track"><div class="esg-bar-fill esg-bar-red" data-width="48"></div></div>
+              <div class="esg-bar-label"><span>한 봉지 속 쌀발효곡물</span><span>30%</span></div>
+              <div class="esg-bar-track"><div class="esg-bar-fill" data-width="30"></div></div>
             </div>
           </div>
         </div><!-- /esg-bowl -->
 
-        <!-- ✏️ [수정] 수치 산출 근거 - 실제 기준에 맞게 꼭 확인/수정하세요 -->
         <p class="esg-note">
-          ※ 위 수치는 사업 계획을 바탕으로 한 연간 목표 시뮬레이션입니다.
-          탄소 환산은 30년생 소나무 1그루의 연간 CO₂ 흡수량 6.6kg(국립산림과학원) 기준이며,
-          쌀발효박 순환량은 건조 전 중량 기준입니다.
+          ※ 탄소 감축량은 출처가 확인된 계산 방식과 양조장 실측 데이터로 산정한 뒤 계산식과 함께 공개합니다.
+          근거가 확인되지 않은 수치는 표시하지 않는 것이 빚음 쌀의 원칙입니다.
         </p>
 
       </div><!-- /esg-counter-wrap -->
@@ -1762,22 +1814,22 @@
         <div>
           <p class="esg-desc-title">♻️ 푸드 업사이클링</p>
           <p class="section-body">
-            전통주 양조 후 버려지는 쌀발효박을 그래놀라의 핵심 원료로 재탄생시킵니다.
-            단순한 토핑이 아닌 제품의 주원료로 활용해 더 많은 폐기물을 줄입니다.
+            전통주를 빚고 남은 쌀발효곡물을 그래놀라의 핵심 원료로 씁니다.
+            토핑처럼 조금 섞는 것이 아니라 한 봉지의 30%를 채워, 더 많은 원료를 식탁으로 되돌립니다.
           </p>
         </div>
         <div>
-          <p class="esg-desc-title">🤝 상생 협약</p>
+          <p class="esg-desc-title">🤝 양조장과 상생</p>
           <p class="section-body">
-            전국 12개 로컬 양조장과 폐기물 감축 협약을 맺고, 버려질 주박을
-            정기적으로 수거해 순환 경제의 선순환 구조를 만들어갑니다.
+            양조장은 처리 비용을 줄이고, 우리는 좋은 원료를 얻습니다.
+            첫 협력 양조장과 함께 위생적인 수거 방식을 설계하고 있습니다.
           </p>
         </div>
         <div>
-          <p class="esg-desc-title">🌍 탄소 저감</p>
+          <p class="esg-desc-title">📐 투명한 계산</p>
           <p class="section-body">
-            주박의 매립·소각을 줄여 메탄 발생을 억제하고,
-            못난이 농산물 활용으로 푸드 마일리지까지 낮춥니다.
+            탄소 감축량은 계산 방식과 출처를 함께 공개합니다.
+            확인되지 않은 숫자로 환경 효과를 부풀리지 않습니다.
           </p>
         </div>
       </div>
@@ -1796,38 +1848,59 @@
       <p class="section-intro-tag">PROCESS</p>
       <h2 class="section-intro-title">공정 과정 · 레시피</h2>
       <p class="section-intro-desc">
-        버려진 쌀발효박이 바삭한 그래놀라가 되기까지.<br>
-        9단계의 정성스러운 여정을 담았습니다.
+        버려지던 쌀발효곡물이 바삭한 그래놀라가 되기까지.<br>
+        원료 안전 관리 3단계와 레시피 9단계를 공개합니다.
       </p>
     </div>
 
+    <!-- ✏️ [수정] 원료 안전 관리 단계 (실제 공정에 맞게 확정하세요) -->
+    <h3 class="process-subtitle">먼저, 원료 안전 관리</h3>
+    <ol class="safety-list">
+      <li class="safety-item">
+        <span class="safety-icon" aria-hidden="true">❄️</span>
+        <p class="safety-label">냉장 수거</p>
+        <p class="safety-desc">양조장에서 나온 직후 냉장 상태로 수거해 식품 원료로 관리합니다.</p>
+      </li>
+      <li class="safety-item">
+        <span class="safety-icon" aria-hidden="true">🫧</span>
+        <p class="safety-label">세척·살균</p>
+        <p class="safety-desc">이물질을 걸러내고 살균해 식품 위생 기준을 맞춥니다.</p>
+      </li>
+      <li class="safety-item">
+        <span class="safety-icon" aria-hidden="true">🧪</span>
+        <p class="safety-label">잔류 알코올 검사</p>
+        <p class="safety-desc">완제품의 잔류 알코올이 1% 미만인지 검사한 뒤 판매합니다.</p>
+      </li>
+    </ol>
+
+    <h3 class="process-subtitle">그리고, 레시피 9단계</h3>
     <ol class="roadmap">
       <li class="roadmap-step">
         <div class="step-img-wrap"><img src="img/process-1.jpg" alt="계량 과정 일러스트" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
         <div class="step-text">
           <div class="step-head"><span class="step-num">01</span><p class="step-label">계량</p></div>
-          <p class="step-desc">쌀발효박과 곡물, 견과류를 배합비에 맞춰 계량합니다.</p>
+          <p class="step-desc">쌀발효곡물과 곡물, 견과류를 배합비에 맞춰 계량합니다.</p>
         </div>
       </li>
       <li class="roadmap-step">
         <div class="step-img-wrap"><img src="img/process-2.jpg" alt="저온 건조 과정 일러스트" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
         <div class="step-text">
           <div class="step-head"><span class="step-num">02</span><p class="step-label">저온 건조</p></div>
-          <p class="step-desc">쌀발효박을 낮은 온도에서 천천히 말려 수분을 날립니다.</p>
+          <p class="step-desc">쌀발효곡물을 낮은 온도에서 천천히 말려 수분을 날립니다.</p>
         </div>
       </li>
       <li class="roadmap-step">
         <div class="step-img-wrap"><img src="img/process-3.jpg" alt="분쇄 과정 일러스트" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
         <div class="step-text">
           <div class="step-head"><span class="step-num">03</span><p class="step-label">분쇄</p></div>
-          <p class="step-desc">건조한 쌀발효박을 맷돌로 곱게 갈아 냅니다.</p>
+          <p class="step-desc">건조한 쌀발효곡물을 맷돌로 곱게 갈아 냅니다.</p>
         </div>
       </li>
       <li class="roadmap-step">
         <div class="step-img-wrap"><img src="img/process-4.jpg" alt="혼합 과정 일러스트" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
         <div class="step-text">
           <div class="step-head"><span class="step-num">04</span><p class="step-label">혼합</p></div>
-          <p class="step-desc">갈아 낸 쌀발효박에 견과류와 곡물을 넣고 고르게 섞습니다.</p>
+          <p class="step-desc">갈아 낸 쌀발효곡물에 견과류와 곡물을 넣고 고르게 섞습니다.</p>
         </div>
       </li>
       <li class="roadmap-step">
@@ -1883,103 +1956,111 @@
     <h2 class="shop-title">빚음 쌀 제품</h2>
     <div class="shop-divider"></div>
 
-    <!-- 제품 소개 (제품당 한 줄, 지그재그) -->
+    <!-- 제품 소개 -->
     <div class="content-card product-intro">
       <div class="intro-row">
         <div class="intro-text">
-          <h3 class="section-title">그래놀라 오리지널</h3>
+          <h3 class="section-title">빚음 쌀 그래놀라</h3>
           <div class="section-divider"></div>
           <p class="section-body">
-            술지게미로 만든 건강한 그래놀라입니다.
-            전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다.
+            한 봉지의 30%를 쌀발효곡물로 채운 그래놀라입니다.
+            전통주를 빚고 남은 쌀을 깨끗이 말리고 갈아, 견과류·건과일과 함께 바삭하게 구웠습니다.
           </p>
+          <p class="intro-spec">250g · 8,900원</p>
         </div>
         <div class="intro-img-wrap">
-          <img src="img/granola.jpg" alt="그래놀라 오리지널" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="img/granola.jpg" alt="빚음 쌀 그래놀라" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
           <div class="intro-img-placeholder">📷 이미지</div>
         </div>
       </div>
 
       <div class="intro-row reverse">
         <div class="intro-text">
-          <h3 class="section-title">에너지바 2종 세트</h3>
+          <h3 class="section-title">쌀발효곡물이란?</h3>
           <div class="section-divider"></div>
           <p class="section-body">
-            곡물 업사이클링으로 탄생한 에너지바입니다.
-            간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다.
+            막걸리를 거르고 남은 쌀, 흔히 '술지게미'라고 부르던 원료입니다.
+            빚음 쌀은 이를 냉장 수거하고 세척·살균·저온 건조해 식품 원료로 다시 씁니다.
           </p>
         </div>
         <div class="intro-img-wrap">
-          <!-- ✏️ 에너지바 이미지 파일명을 .png 하나로 통일했습니다. 실제 파일 확장자에 맞춰주세요 -->
-          <img src="img/energybar.jpg" alt="에너지바 2종 세트" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="img/suljigemi.jpg" alt="쌀발효곡물" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
           <div class="intro-img-placeholder">📷 이미지</div>
         </div>
       </div>
     </div>
 
-    <!-- 2×2 상품 그리드
-         ✏️ data-custom="granola" 또는 "bar"가 있으면 상세 창에서 옵션을 고를 수 있어요 (옵션 목록은 JS의 CUSTOM_OPTIONS) -->
+    <!-- 상품 목록
+         ✏️ [수정] data-name(장바구니에 표시될 이름), data-price(숫자만), data-desc(상세 설명) -->
     <div class="product-grid">
 
-      <div class="product-card" tabindex="0" data-id="1" data-name="그래놀라" data-price="12000" data-img="img/granola.jpg"
-           data-desc="술지게미로 만든 건강한 그래놀라입니다. 전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다.">
+      <div class="product-card" tabindex="0" data-id="1" data-name="그래놀라 1봉 (250g)" data-price="8900" data-img="img/granola.jpg"
+           data-desc="한 봉지의 30%를 쌀발효곡물로 채운 그래놀라입니다. 견과류·건과일과 함께 바삭하게 구웠습니다.">
         <div class="product-img-wrap">
-          <img src="img/granola.jpg" alt="그래놀라" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="img/granola.jpg" alt="그래놀라 1봉" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
           <div class="product-img-placeholder">📷 상품 이미지</div>
         </div>
         <div class="product-info">
-          <h3 class="product-name">그래놀라</h3>
-          <p class="product-desc">술지게미로 만든 건강한 그래놀라</p>
-          <p class="product-price">12,000원</p>
+          <h3 class="product-name">그래놀라 1봉</h3>
+          <p class="product-desc">250g · 처음 맛보기 좋은 한 봉지</p>
+          <p class="product-price">8,900원</p>
           <button class="add-cart-btn" data-action="add">장바구니 담기</button>
         </div>
       </div>
 
-      <div class="product-card" tabindex="0" data-id="2" data-name="커스텀 그래놀라" data-price="15000" data-img="img/granola.jpg" data-custom="granola"
-           data-desc="원하는 토핑과 시럽을 골라 나만의 그래놀라를 완성해 보세요. 버려질 뻔한 못난이 과채류로 만든 토핑을 담았습니다.">
+      <div class="product-card" tabindex="0" data-id="2" data-name="그래놀라 2봉 세트 (500g)" data-price="16900" data-img="img/banner-package.jpg"
+           data-desc="그래놀라 두 봉을 함께 담은 세트입니다. 나눠 먹거나 선물하기 좋습니다.">
         <div class="product-img-wrap">
-          <span class="product-tag">옵션 선택</span>
-          <img src="img/granola.jpg" alt="커스텀 그래놀라" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <span class="product-tag">세트</span>
+          <img src="img/banner-package.jpg" alt="그래놀라 2봉 세트" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
           <div class="product-img-placeholder">📷 상품 이미지</div>
         </div>
         <div class="product-info">
-          <h3 class="product-name">커스텀 그래놀라</h3>
-          <p class="product-desc">토핑과 시럽을 골라 만드는 나만의 그래놀라</p>
-          <p class="product-price">15,000원</p>
-          <button class="add-cart-btn outline" data-action="detail">옵션 고르기</button>
-        </div>
-      </div>
-
-      <div class="product-card" tabindex="0" data-id="3" data-name="에너지바" data-price="9000" data-img="img/energybar.jpg"
-           data-desc="곡물 업사이클링으로 탄생한 에너지바입니다. 간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다.">
-        <div class="product-img-wrap">
-          <img src="img/energybar.jpg" alt="에너지바" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
-          <div class="product-img-placeholder">📷 상품 이미지</div>
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">에너지바</h3>
-          <p class="product-desc">곡물 업사이클링으로 탄생한 에너지바</p>
-          <p class="product-price">9,000원</p>
+          <h3 class="product-name">그래놀라 2봉 세트</h3>
+          <p class="product-desc">500g · 1봉씩 살 때보다 900원 할인</p>
+          <p class="product-price">16,900원</p>
           <button class="add-cart-btn" data-action="add">장바구니 담기</button>
         </div>
       </div>
 
-      <div class="product-card" tabindex="0" data-id="4" data-name="커스텀 에너지바" data-price="13000" data-img="img/energybar.jpg" data-custom="bar"
-           data-desc="원하는 견과류와 시럽을 골라 나만의 에너지바를 완성해 보세요.">
+      <div class="product-card" tabindex="0" data-id="3" data-name="정기구독 (매달 2봉)" data-price="15900" data-img="img/granola.jpg"
+           data-desc="매달 그래놀라 2봉(500g)을 정해진 날에 보내드리는 구독 상품입니다. 시연용 페이지에서는 첫 달 결제만 표시됩니다.">
         <div class="product-img-wrap">
-          <span class="product-tag">옵션 선택</span>
-          <img src="img/energybar.jpg" alt="커스텀 에너지바" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <span class="product-tag">정기구독</span>
+          <img src="img/granola.jpg" alt="정기구독" class="product-img" loading="lazy" decoding="async" onerror="this.remove()" style="object-position: center 85%;">
           <div class="product-img-placeholder">📷 상품 이미지</div>
         </div>
         <div class="product-info">
-          <h3 class="product-name">커스텀 에너지바</h3>
-          <p class="product-desc">견과류와 시럽을 골라 만드는 나만의 에너지바</p>
-          <p class="product-price">13,000원</p>
-          <button class="add-cart-btn outline" data-action="detail">옵션 고르기</button>
+          <h3 class="product-name">정기구독</h3>
+          <p class="product-desc">매달 2봉 · 세트보다 1,000원 더 할인</p>
+          <p class="product-price">월 15,900원</p>
+          <button class="add-cart-btn" data-action="add">구독 담기</button>
         </div>
       </div>
 
     </div><!-- /product-grid -->
+
+    <!-- 자주 묻는 질문
+         ✏️ [수정] 답변은 실제 공정·검사 결과가 나오면 구체적으로 바꾸세요 -->
+    <div class="faq">
+      <h3 class="cart-title">자주 묻는 질문</h3>
+      <details>
+        <summary>알코올이 남아 있나요?</summary>
+        <p>건조와 굽기 과정에서 알코올은 대부분 날아갑니다. 판매 전에는 잔류 알코올 검사를 거쳐 일반 식품 기준(1% 미만)을 지키는지 확인합니다.</p>
+      </details>
+      <details>
+        <summary>술을 못 마시는 사람이나 아이도 먹어도 되나요?</summary>
+        <p>판매 제품은 일반 식품 기준을 충족해야 합니다. 다만 알코올에 특히 민감하거나 아이가 먹는 경우에는 성분표를 먼저 확인하고, 걱정되면 전문가와 상의하세요.</p>
+      </details>
+      <details>
+        <summary>원재료에는 무엇이 들어가나요?</summary>
+        <p>쌀발효곡물(쌀, 누룩)에 귀리, 견과류, 건과일, 시럽 등이 들어갑니다. 정확한 원재료와 알레르기 정보는 제품 포장의 표시 사항을 확인해 주세요.</p>
+      </details>
+      <details>
+        <summary>왜 이 가격인가요?</summary>
+        <p>버려지던 원료를 써서 원료비를 낮추고, 그만큼 부재료와 위생 공정에 투자했습니다. 원가 구성은 정리되는 대로 공개할 예정입니다.</p>
+      </details>
+    </div>
 
     <!-- 장바구니 -->
     <div class="cart-section">
@@ -2055,8 +2136,6 @@
   </div>
 </div>
 
-<!-- ESG 알림 (ESG 섹션이 화면에 보일 때만 표시) -->
-<div class="esg-toast-wrap" id="toastWrap" aria-hidden="true"></div>
 
 
 <!-- =============================================
@@ -2293,22 +2372,22 @@
     {
       episode: "EPISODE 01 · 프롤로그",
       title: "맑은 술 뒤에 남겨진 귀한 숨결",
-      body: `전 세계가 K-컬처에 열광하며 우리의 맛과 멋을 주목할 때, 우리의 시선은 한국의 가장 깊은 발효 문화인 '전통주(막걸리)'에 닿았습니다.\n\n한 방울의 맑은 술을 빚기 위해 장인은 백일 정성을 다하고, 쌀은 오랜 발효를 거치며 영양을 응축합니다.\n\n하지만 술이 걸러지고 난 뒤 남겨지는 수많은 '술지게미(주박)'는 어디로 가고 있을까요?\n\n화려한 축배의 뒷자리에서, 정작 쌀의 본래 영양을 고스란히 품은 부산물은 단순한 폐기물로 취급받으며 매일 수 톤씩 버려지고 있었습니다.`
+      body: `전 세계가 K-컬처에 열광하며 우리의 맛과 멋을 주목할 때, 우리의 시선은 한국의 가장 깊은 발효 문화인 '전통주(막걸리)'에 닿았습니다.\n\n한 방울의 맑은 술을 빚기 위해 장인은 백일 정성을 다하고, 쌀은 오랜 발효를 거치며 영양을 응축합니다.\n\n하지만 술이 걸러지고 난 뒤 남겨지는 수많은 '술지게미(주박)'는 어디로 가고 있을까요?\n\n화려한 축배의 뒷자리에서, 정작 쌀의 본래 영양을 고스란히 품은 부산물은 단순한 폐기물로 취급받으며 버려지거나 사료로 처리되고 있었습니다.`
     },
     {
       episode: "EPISODE 02 · 발견",
       title: "찌꺼기가 아닌, 시간과 발효가 빚어낸 정수",
-      body: `버려지는 주박을 들여다보았을 때 마주한 것은 쓸모없는 잔여물이 아니었습니다.\n\n미생물과 누룩이 쌀을 품어내며 피워낸 풍부한 단백질, 장을 건강하게 채워줄 발효 식이섬유, 그리고 필수 아미노산의 보고였습니다.\n\n"이렇게 귀한 영양의 결정체가 왜 단지 '술을 빚고 남았다'는 이유로 버려져야만 할까?"\n\n오랜 시간 자연과 사람의 손길로 빚어낸 곡물을 남김없이 온전히 쓰던 우리 선조들의 지혜처럼, 이 발효의 결을 다시 식탁 위로 되돌려놓고 싶었습니다.`
+      body: `버려지는 주박을 들여다보았을 때 마주한 것은 쓸모없는 잔여물이 아니었습니다.\n\n미생물과 누룩이 쌀을 품어내며 남긴 단백질과 식이섬유, 그리고 발효의 풍미가 고스란히 담긴 곡물이었습니다.\n\n"이렇게 귀한 곡물이 왜 단지 '술을 빚고 남았다'는 이유로 버려져야만 할까?"\n\n오랜 시간 자연과 사람의 손길로 빚어낸 곡물을 남김없이 온전히 쓰던 우리 선조들의 지혜처럼, 이 발효의 결을 다시 식탁 위로 되돌려놓고 싶었습니다.`
     },
     {
       episode: "EPISODE 03 · 의문",
       title: "해외엔 있는데, 왜 우리 전통주에는 없을까?",
-      body: `세계를 둘러보니 맥주를 만들고 남은 맥아박은 이미 훌륭한 대체 식품과 그래놀라로 거듭나 지구를 구하고 있었습니다.\n\n하지만 정작 수천 년 발효 역사를 지닌 대한민국의 전통주 부산물은 철저히 사각지대에 놓여 있었습니다.\n\n가장 한국적이면서도 영양학적으로 뛰어난 우리 고유의 자원이 외면받고 있는 현실 속에서 확신이 섰습니다.\n\n맥주박이 해냈다면, 깊은 발효 과학이 깃든 우리의 쌀발효박은 더 건강하고 지속 가능한 대안이 될 수 있다는 것을요.`
+      body: `세계를 둘러보니 맥주를 만들고 남은 맥아박은 이미 훌륭한 대체 식품과 그래놀라로 거듭나 지구를 구하고 있었습니다.\n\n하지만 정작 수천 년 발효 역사를 지닌 대한민국의 전통주 부산물은 철저히 사각지대에 놓여 있었습니다.\n\n가장 한국적이면서도 발효의 풍미를 품은 우리 고유의 자원이 외면받고 있는 현실 속에서 확신이 섰습니다.\n\n맥주박이 해냈다면, 깊은 발효 과학이 깃든 우리의 쌀발효곡물은 더 맛있고 지속 가능한 대안이 될 수 있다는 것을요.`
     },
     {
       episode: "EPISODE 04 · 도전",
       title: "가장 넉넉한 한 그릇으로 식탁과 지구를 바꾸다",
-      body: `우리는 제품의 본질을 바꿀 핵심 베이스로 '그래놀라'를 선택했습니다.\n\n향신료나 토핑처럼 조금 섞는 것이 아니라, 제품의 가장 묵직한 베이스를 쌀발효박으로 채웠습니다.\n\n주원료가 되는 만큼 더 많은 양조장 폐기물을 획기적으로 줄여낼 수 있었고, 원재료비의 거품을 걷어내 '착한 가격의 지속 가능한 식단'을 완성할 수 있었습니다.\n\n여기에 버려질 위기에 놓인 못난이 과채류를 내 입맛대로 골라 담는 한 그릇.\n\n우리가 제안하는 그래놀라는 거창한 환경 운동이 아니라, 누구나 아침마다 부담 없이 즐기는 가장 정갈하고 맛있는 순환의 식탁입니다.`
+      body: `우리는 제품의 본질을 바꿀 핵심 베이스로 '그래놀라'를 선택했습니다.\n\n향신료나 토핑처럼 조금 섞는 것이 아니라, 제품의 가장 묵직한 베이스를 쌀발효곡물로 채웠습니다.\n\n주원료가 되는 만큼 더 많은 양조장 폐기물을 획기적으로 줄여낼 수 있었고, 원재료비의 거품을 걷어내 '착한 가격의 지속 가능한 식단'을 완성할 수 있었습니다.\n\n여기에 버려질 위기에 놓인 못난이 과채류를 토핑으로 더한 한 그릇.\n\n우리가 제안하는 그래놀라는 거창한 환경 운동이 아니라, 누구나 아침마다 부담 없이 즐기는 가장 정갈하고 맛있는 순환의 식탁입니다.`
     },
     {
       episode: "EPISODE 05 · 에필로그",
@@ -2341,22 +2420,20 @@
   }
 
   /* =============================================
-     ESG 카운터
+     ESG 카운터 (data-target이 있는 숫자만 올라가는 효과)
      ============================================= */
   (function () {
     const esgSection = document.getElementById('esgSection');
-    const esgNums = document.querySelectorAll('.esg-num');
-    const targets    = Array.from(esgNums).map(el => parseFloat(el.dataset.target));
-    const decimals   = Array.from(esgNums).map(el => parseInt(el.dataset.decimal));
-    const increments = Array.from(esgNums).map(el => parseFloat(el.dataset.increment));
+    const countEls = document.querySelectorAll('.esg-num[data-target]');
 
     const format = (v, d) => d > 0 ? v.toFixed(d) : Math.floor(v).toLocaleString('ko-KR');
-
     function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
 
-    function countUp(el, target, decimal) {
+    function countUp(el) {
+      const target = parseFloat(el.dataset.target);
+      const decimal = parseInt(el.dataset.decimal || '0');
       if (prefersReducedMotion) { el.textContent = format(target, decimal); return; }
-      const duration = 2200;
+      const duration = 1800;
       const start = performance.now();
       (function update(now) {
         const p = Math.min((now - start) / duration, 1);
@@ -2365,70 +2442,14 @@
       })(start);
     }
 
-    /* ✏️ [수정] 알림 문구 (시뮬레이션임을 표시) */
-    const toastMsgs = [
-      { icon: '🌾', text: '그래놀라 1봉을 고르면', sub: '쌀발효박 450g이 순환돼요' },
-      { icon: '🌳', text: '1봉당 탄소 1.2kg 감축', sub: '소나무 약 0.2그루의 1년 흡수량' },
-      { icon: '🥕', text: '못난이 농산물 토핑', sub: '버려질 과채류가 한 그릇으로' },
-      { icon: '🍶', text: '12곳의 로컬 양조장', sub: '주박을 정기적으로 수거해요' },
-    ];
-
-    let inView = false;
-    let started = false;
-    let toastTimer = null;
-    let liveTimer = null;
-
-    function showToast() {
-      if (!inView) return;
-      /* 구매 페이지가 열려 있으면 알림은 건너뛰고 다음 차례를 기다림 */
-      if (tab4El.classList.contains('tab4-active')) { toastTimer = setTimeout(showToast, 4000); return; }
-      const wrap = document.getElementById('toastWrap');
-      const msg = toastMsgs[Math.floor(Math.random() * toastMsgs.length)];
-      const toast = document.createElement('div');
-      toast.className = 'esg-toast';
-      toast.innerHTML = `
-        <span>${msg.icon}</span>
-        <div style="flex:1">
-          <div style="font-weight:600;margin-bottom:2px">${msg.text}</div>
-          <div class="esg-toast-sub">${msg.sub}</div>
-        </div>
-        <span class="esg-toast-badge">시뮬레이션</span>`;
-      wrap.appendChild(toast);
-      requestAnimationFrame(() => toast.classList.add('show'));
-      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 350); }, 2800);
-      toastTimer = setTimeout(showToast, 4500 + Math.random() * 3000);
-    }
-
-    function liveUpdate() {
-      if (!inView) return;
-      esgNums.forEach((el, i) => {
-        if (!increments[i]) return;
-        targets[i] += increments[i];
-        el.textContent = format(targets[i], decimals[i]);
-      });
-      liveTimer = setTimeout(liveUpdate, 3000 + Math.random() * 2000);
-    }
-
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        inView = entry.isIntersecting && !tab4El.classList.contains('tab4-active');
-
-        if (inView && !started) {
-          started = true;
-          document.querySelectorAll('.esg-card').forEach(c => c.classList.add('esg-visible'));
-          document.getElementById('esgBowl').classList.add('esg-visible');
-          esgNums.forEach((el, i) => setTimeout(() => countUp(el, targets[i], decimals[i]), i * 180));
-          document.querySelectorAll('.esg-bar-fill').forEach(bar => {
-            setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 600);
-          });
-          setTimeout(() => { liveUpdate(); showToast(); }, 2800);
-          return;
-        }
-
-        /* 섹션을 벗어나면 멈추고, 다시 보이면 재개 */
-        clearTimeout(toastTimer);
-        clearTimeout(liveTimer);
-        if (inView && started) { liveTimer = setTimeout(liveUpdate, 2000); toastTimer = setTimeout(showToast, 2000); }
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      document.querySelectorAll('.esg-card').forEach(c => c.classList.add('esg-visible'));
+      document.getElementById('esgBowl').classList.add('esg-visible');
+      countEls.forEach(countUp);
+      document.querySelectorAll('.esg-bar-fill').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 600);
       });
     }, { threshold: 0.2 });
 
@@ -2437,7 +2458,7 @@
 
   /* =============================================
      장바구니 & 상품 상세
-     ✏️ [수정] 커스텀 상품 옵션 목록 (max: 최대 선택 개수)
+     커스텀 상품 옵션 목록 (지금은 사용 안 함. 커스텀 상품을 출시하면 상품 카드에 data-custom=\"granola\"를 넣어 연결)
      ============================================= */
   const CUSTOM_OPTIONS = {
     granola: [
@@ -2451,7 +2472,7 @@
   };
 
   /* 장바구니는 브라우저에 저장되어 새로고침해도 유지됨 */
-  const CART_KEY = 'bieumsal-cart';
+  const CART_KEY = 'bieumsal-cart-v2';  /* 상품 구성이 바뀌어 예전 장바구니와 분리 */
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
 
@@ -2647,7 +2668,6 @@
 
   function openTab4() {
     tab4El.classList.add('tab4-active');
-    document.getElementById('toastWrap').innerHTML = '';
     tab4El.scrollTop = 0;
     syncScrollLock();
     setActiveLink('tab4');
