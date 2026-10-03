@@ -1583,6 +1583,22 @@
     #loader .loader-char, #loader .loader-sub { font-weight: 400 !important; }
 
     /* 움직임 줄이기 설정을 켠 사용자 배려 */
+    /* 세로로 긴 화면(휴대폰·태블릿 세로): 화면 전체 대신 4:5 비율로, 글은 아래쪽에 배치 */
+    @media (orientation: portrait) and (max-width: 1024px) {
+      .banner-section {
+        height: min(125vw, 72svh);
+        min-height: 400px;
+      }
+      .slide {
+        justify-content: flex-end;
+        padding-bottom: 72px;
+      }
+      .slide::before {
+        background: linear-gradient(180deg, rgba(30,22,16,0.10) 0%, rgba(30,22,16,0.35) 45%, rgba(30,22,16,0.82) 100%);
+      }
+      .slider-dots { bottom: 28px; }
+    }
+
     @media (max-height: 500px) {
       .banner-section { min-height: 300px; }
       .slide-title { font-size: 1.6rem; }
