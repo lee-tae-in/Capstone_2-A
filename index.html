@@ -95,6 +95,7 @@
       pointer-events: none;
     }
 
+    html, body { overflow-x: clip; }  /* 꽉 찬 배너로 생기는 가로 스크롤 방지 */
     body.no-scroll { overflow: hidden; }
 
     img { max-width: 100%; }
@@ -293,28 +294,38 @@
     /* =============================================
        홈 - 배너 슬라이더
        ============================================= */
+    /* 본문 폭(1200px)을 벗어나 화면 양옆까지 꽉 채움 */
     .banner-section {
-      margin: 64px 0 40px;
       position: relative;
       overflow: hidden;
-      border-radius: 20px;
-      /* ✏️ [수정] 배너 높이 */
-      height: 480px;
-      box-shadow: var(--shadow-lg);
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-bottom: 40px;
+      /* ✏️ [수정] 배너 높이: 헤더를 뺀 화면 높이 전체 */
+      height: calc(100vh - var(--header-h));
+      height: calc(100svh - var(--header-h));  /* 모바일 주소창을 고려한 높이 */
+      min-height: 480px;
+      max-height: 1000px;
       background: var(--color-dark);
     }
 
-    .slider-track { display: flex; height: 100%; }
+    .slider-track { position: relative; height: 100%; }
 
     /* ✏️ 슬라이드 배경 이미지는 HTML의 각 .slide style 속성에서 변경 */
+    /* 슬라이드를 겹쳐 두고 투명도로 전환 (페이드 인·아웃) */
     .slide {
-      min-width: 100%;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1;
+      /* 나가는 슬라이드는 새 슬라이드가 다 나타날 때까지 그대로 있다가 사라짐 → 어두워지는 깜빡임 없음 */
+      transition: opacity 0s linear 1.2s, visibility 0s linear 1.2s;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       overflow: hidden;
       padding: 0 80px;
       background-color: var(--color-brown);
@@ -324,6 +335,13 @@
     }
 
     /* 사진 위 글씨가 잘 읽히도록 어두운 오버레이 */
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+      transition: opacity 1.2s ease, visibility 0s;
+    }
+
     .slide::before {
       content: '';
       position: absolute;
@@ -340,7 +358,7 @@
 
     .slide-title {
       font-family: var(--font-serif);
-      font-size: 2.6rem;
+      font-size: clamp(1.9rem, 4.2vw, 3.6rem);
       font-weight: 600;
       color: #fff;
       text-align: center;
@@ -351,10 +369,10 @@
     }
 
     .slide-sub {
-      font-size: 1rem;
+      font-size: clamp(0.95rem, 1.4vw, 1.2rem);
       color: rgba(255,255,255,0.85);
       text-align: center;
-      max-width: 520px;
+      max-width: 560px;
       line-height: 1.7;
       word-break: keep-all;
     }
@@ -397,12 +415,12 @@
     }
 
     .slider-btn:hover { background-color: rgba(255,255,255,0.3); }
-    .slider-btn.prev { left: 16px; }
-    .slider-btn.next { right: 16px; }
+    .slider-btn.prev { left: 32px; }
+    .slider-btn.next { right: 32px; }
 
     .slider-dots {
       position: absolute;
-      bottom: 18px;
+      bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -1474,10 +1492,10 @@
       main { padding: 0 14px 80px; }
       .tab-content + .tab-content { margin-top: 64px; }
 
-      .banner-section { height: 320px; margin: 16px 0 24px; border-radius: 12px; }
+      .banner-section { margin-left: -14px; width: calc(100% + 28px); min-height: 420px; margin-bottom: 24px; }
       .slide { padding: 0 24px; }
-      .slide-title { font-size: 1.5rem; }
-      .slide-sub { font-size: 0.85rem; }
+      .slide-title { font-size: clamp(1.6rem, 7vw, 2.1rem); }
+      .slide-sub { font-size: 0.92rem; }
       .slide-btn { padding: 10px 22px; margin-top: 20px; }
       .slider-btn { display: none; }  /* 모바일은 스와이프로 넘김 */
 
@@ -1547,8 +1565,7 @@
     }
 
     @media (max-width: 380px) {
-      .banner-section { height: 280px; }
-      .slide-title { font-size: 1.3rem; }
+      .slide-title { font-size: 1.5rem; }
       .medal { width: 92px; }
       .medal-circle { width: 84px; height: 84px; }
       .esg-grid { grid-template-columns: 1fr; }
@@ -1566,6 +1583,12 @@
     #loader .loader-char, #loader .loader-sub { font-weight: 400 !important; }
 
     /* 움직임 줄이기 설정을 켠 사용자 배려 */
+    @media (max-height: 500px) {
+      .banner-section { min-height: 300px; }
+      .slide-title { font-size: 1.6rem; }
+      .slide-btn { margin-top: 16px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -1644,7 +1667,7 @@
     <section class="banner-section" id="banner" tabindex="0" aria-roledescription="carousel" aria-label="빚음 쌀 소개 배너 (좌우 방향키로 넘기기)">
       <div class="slider-track" id="sliderTrack">
 
-        <div class="slide" style="background-image:url('img/granola.jpg')">
+        <div class="slide active" style="background-image:url('img/granola.jpg')">
           <h2 class="slide-title">버려지는 쌀에서,<br>가장 건강한 한 그릇</h2>
           <p class="slide-sub">전통주를 빚고 남은 쌀발효곡물로 만든 업사이클링 그래놀라</p>
           <button class="slide-btn" data-goto="tab4">제품 보기</button>
@@ -2303,59 +2326,33 @@
   const dotsWrapper = document.getElementById('sliderDots');
   const total       = slides.length;
 
-  let currentIndex = 1;
+  let currentIndex = 0;
   let autoTimer = null;
-  let isTransitioning = false;
 
-  /* 무한 루프용 복제 (배경은 style 속성이라 복제본에도 그대로 따라감) */
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone  = slides[total - 1].cloneNode(true);
-  [firstClone, lastClone].forEach(c => {
-    c.setAttribute('aria-hidden', 'true');
-    c.querySelectorAll('button').forEach(b => b.tabIndex = -1);
-  });
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, track.firstChild);
-
-  function setPositionSilent(index) {
-    track.style.transition = 'none';
-    track.style.transform  = `translateX(-${index * 100}%)`;
-  }
-
+  /* index번 슬라이드만 보이게 (끝에서 넘기면 처음으로) */
   function goToSlide(index) {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    currentIndex = index;
-    track.style.transition = 'transform 0.6s cubic-bezier(0.77, 0, 0.175, 1)';
-    track.style.transform  = `translateX(-${currentIndex * 100}%)`;
-    updateDots();
-    if (prefersReducedMotion) track.dispatchEvent(new Event('transitionend'));
-  }
-
-  track.addEventListener('transitionend', (e) => {
-    if (e.target !== track) return;  /* 버튼 hover 등 자식 요소의 transition은 무시 */
-    isTransitioning = false;
-    if (currentIndex === 0)         { setPositionSilent(total); currentIndex = total; }
-    if (currentIndex === total + 1) { setPositionSilent(1);     currentIndex = 1; }
-  });
-
-  function updateDots() {
-    const realIndex = (currentIndex - 1 + total) % total;
+    currentIndex = (index + total) % total;
+    slides.forEach((sl, i) => {
+      const on = i === currentIndex;
+      sl.classList.toggle('active', on);
+      sl.setAttribute('aria-hidden', on ? 'false' : 'true');
+      sl.querySelectorAll('button').forEach(btn => btn.tabIndex = on ? 0 : -1);
+    });
     dotsWrapper.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === realIndex);
-      d.setAttribute('aria-current', i === realIndex ? 'true' : 'false');
+      d.classList.toggle('active', i === currentIndex);
+      d.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
     });
   }
 
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.className = 'dot';
     dot.setAttribute('aria-label', `${i + 1}번 슬라이드`);
-    dot.addEventListener('click', () => { goToSlide(i + 1); resetAutoPlay(); });
+    dot.addEventListener('click', () => { goToSlide(i); resetAutoPlay(); });
     dotsWrapper.appendChild(dot);
   });
 
-  setPositionSilent(1);
+  goToSlide(0);
 
   document.getElementById('sliderPrev').addEventListener('click', () => { goToSlide(currentIndex - 1); resetAutoPlay(); });
   document.getElementById('sliderNext').addEventListener('click', () => { goToSlide(currentIndex + 1); resetAutoPlay(); });
@@ -2368,10 +2365,9 @@
   function stopAutoPlay() { clearInterval(autoTimer); }
   function resetAutoPlay() { startAutoPlay(); }
 
-  /* 마우스를 올리거나 포커스가 있으면 일시정지 */
-  banner.addEventListener('mouseenter', stopAutoPlay);
-  banner.addEventListener('mouseleave', startAutoPlay);
-  banner.addEventListener('focusin', stopAutoPlay);
+  /* 배너가 화면 전체를 덮어서 마우스는 늘 배너 위에 있음 → 마우스 올림으로는 멈추지 않음.
+     키보드(Tab)로 배너 안을 탐색할 때만 일시정지 */
+  banner.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) stopAutoPlay(); });
   banner.addEventListener('focusout', startAutoPlay);
   document.addEventListener('visibilitychange', () => document.hidden ? stopAutoPlay() : startAutoPlay());
 
