@@ -10,14 +10,31 @@
   <meta property="og:description" content="버려지는 것들에서 가장 건강한 한 그릇을." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- display=swap: 폰트 로딩 중에도 텍스트 바로 표시 -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
   <style>
-    /* 영월 폰트 (로딩 화면용) - 파일이 같은 폴더에 있어야 함 */
+    /* =============================================
+       ✏️ [수정] 페이퍼로지 폰트 (img 폴더의 ttf 파일 사용)
+       ============================================= */
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('img/Paperlogy-4Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('img/Paperlogy-5Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('img/Paperlogy-6SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    /* 영월 폰트 (로딩 화면용) */
     @font-face {
       font-family: 'Yeongwol';
       src: url('img/yeongwol-loader.woff2') format('woff2');  /* '빚음 쌀' 세 글자만 담은 경량 폰트 */
@@ -41,8 +58,8 @@
       --color-red:       #B83A2E;  /* 낙관 도장 */
       --color-line:      rgba(200,169,126,0.2);
 
-      --font-serif: 'Noto Serif KR', serif;
-      --font-sans:  'Noto Sans KR', sans-serif;
+      --font-serif: 'Paperlogy', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      --font-sans:  'Paperlogy', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 
       --radius-sm: 4px;
       --radius-md: 12px;
@@ -1536,6 +1553,17 @@
       .medal-circle { width: 84px; height: 84px; }
       .esg-grid { grid-template-columns: 1fr; }
     }
+
+    /* =============================================
+       ✏️ [수정] 폰트 굵기 규칙
+       상단바 = Regular(400) / 배너 = SemiBold(600) / 나머지 = Medium(500)
+       (로딩 화면의 영월체는 제외)
+       ============================================= */
+    body { font-synthesis: none; }  /* 없는 굵기를 브라우저가 억지로 두껍게 만들지 않도록 */
+    body * { font-weight: 500 !important; }
+    header, header * { font-weight: 400 !important; }
+    .banner-section, .banner-section * { font-weight: 600 !important; }
+    #loader .loader-char, #loader .loader-sub { font-weight: 400 !important; }
 
     /* 움직임 줄이기 설정을 켠 사용자 배려 */
     @media (prefers-reduced-motion: reduce) {
