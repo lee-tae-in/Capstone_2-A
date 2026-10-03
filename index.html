@@ -7,7 +7,7 @@
   <title>빚음 쌀 | 쌀발효곡물 업사이클링 그래놀라</title>
   <meta name="description" content="전통주를 빚고 남은 쌀발효곡물을 그래놀라로 되살리는 업사이클링 푸드 브랜드, 빚음 쌀." />
   <meta property="og:title" content="빚음 쌀 | 쌀발효곡물 업사이클링 그래놀라" />
-  <meta property="og:description" content="버려지는 것들에서 가장 건강한 한 그릇을." />
+  <meta property="og:description" content="버려지는 것들에게 새로운 가치를 더하다." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E" />
 
 
@@ -31,6 +31,12 @@
       font-family: 'Paperlogy';
       src: url('img/Paperlogy-6SemiBold.ttf') format('truetype');
       font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('img/Paperlogy-7Bold.ttf') format('truetype');
+      font-weight: 700;
       font-display: swap;
     }
 
@@ -491,6 +497,17 @@
       line-height: 1.4;
       letter-spacing: -0.02em;
       margin-bottom: 24px;
+    }
+
+    .highlight-text {
+      font-weight: 700 !important; 
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: #4F6F3A;
     }
 
     .home-copy-desc {
@@ -1581,6 +1598,7 @@
     header, header * { font-weight: 400 !important; }
     .banner-section, .banner-section * { font-weight: 600 !important; }
     #loader .loader-char, #loader .loader-sub { font-weight: 400 !important; }
+    .home-copy-title .copy-strong { font-weight: 700 !important; }  /* 홈 카피 강조: Bold */
 
     /* 움직임 줄이기 설정을 켠 사용자 배려 */
     /* 세로로 긴 화면(휴대폰·태블릿 세로): 화면 전체 대신 4:5 비율로, 글은 아래쪽에 배치 */
@@ -1732,7 +1750,12 @@
     <!-- 브랜드 카피 -->
     <div class="home-copy-section">
       <p class="home-copy-sub">빚음 쌀이 묻습니다</p>
-      <h2 class="home-copy-title">버려지는 것들에서<br>가장 건강한 한 그릇을</h2>
+      <h2 class="home-copy-title">
+  버려지는 것들에게<br>
+  <strong class="copy-strong">
+    <span class="highlight-text">새로운 가치를</span> 더하다.
+  </strong>
+</h2>
       <p class="home-copy-desc">
         전통주를 빚고 나면 남는 쌀발효곡물(술지게미).<br>
         사료나 폐기물로 처리되던 이 발효 곡물을
