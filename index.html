@@ -2,142 +2,294 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ✏️ [수정] 브라우저 탭 제목 / 검색·공유 시 설명 -->
+  <title>빚음 쌀 | 쌀발효박 업사이클링 그래놀라</title>
+  <meta name="description" content="전통주를 빚고 남은 쌀발효박을 그래놀라로 되살리는 업사이클링 푸드 브랜드, 빚음 쌀." />
+  <meta property="og:title" content="빚음 쌀 | 쌀발효박 업사이클링 그래놀라" />
+  <meta property="og:description" content="버려지는 것들에서 가장 건강한 한 그릇을." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- ✏️ display=swap: 폰트 로딩 중에도 텍스트 바로 표시 -->
+  <!-- display=swap: 폰트 로딩 중에도 텍스트 바로 표시 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ✏️ [수정] 브라우저 탭에 표시될 페이지 제목 -->
-  <title>My Website</title>
+
   <style>
-    /* =============================================
-       ✏️ [수정] 전체 공통 설정 (폰트, 여백 초기화)
-       ============================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* 영월 폰트 (로딩 화면용) - 파일이 같은 폴더에 있어야 함 */
+    @font-face {
+      font-family: 'Yeongwol';
+      src: url('YeongwolTTF.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
     }
-/*커밋 오류나서 한줄 쓸게요*/
- body {
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  background-color: #F7F3ED;
-  color: #2A1F17;
-  padding-bottom: 60px;
-} /* ← 여기서 body 닫기 */
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url('배경 질감.jpg');
-  background-repeat: repeat;
-  background-size: 400px 400px;
-  opacity: 0.7;
-  z-index: -1;
-  pointer-events: none;
-}
 
     /* =============================================
-       ✏️ [수정] 상단 헤더 & 네비게이션 탭 영역
+       ✏️ [수정] 디자인 토큰 - 색/폰트/간격은 여기서 한 번에 변경
        ============================================= */
-       header {
+    :root {
+      --color-bg:        #F7F3ED;  /* 페이지 배경 */
+      --color-surface:   #FDFAF6;  /* 카드 배경 */
+      --color-dark:      #2A1F17;  /* 헤더·푸터·ESG 배경 */
+      --color-dark-2:    #231A13;  /* ESG 카드 배경 (한 단계 더 어둡게) */
+      --color-brown:     #4A2C17;  /* 강조 갈색 */
+      --color-mid:       #6B5744;  /* 본문 보조 텍스트 */
+      --color-gold:      #C8A97E;  /* 포인트 금색 */
+      --color-cream:     #F7F3ED;  /* 어두운 배경 위 텍스트 */
+      --color-red:       #B83A2E;  /* 낙관 도장 */
+      --color-line:      rgba(200,169,126,0.2);
+
+      --font-serif: 'Noto Serif KR', serif;
+      --font-sans:  'Noto Sans KR', sans-serif;
+
+      --radius-sm: 4px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 16px rgba(42,31,23,0.05);
+      --shadow-md: 0 8px 32px rgba(42,31,23,0.10);
+      --shadow-lg: 0 20px 60px rgba(42,31,23,0.14);
+
+      --header-h: 72px;  /* ✏️ [수정] 헤더 높이 */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-dark);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 한지 질감 배경 (배경 질감.jpg가 없으면 단색으로 표시) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('배경 질감.jpg');
+      background-repeat: repeat;
+      background-size: 400px 400px;
+      opacity: 0.7;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body.no-scroll { overflow: hidden; }
+
+    img { max-width: 100%; }
+
+    :focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 3px;
+    }
+
+    ::selection { background: rgba(200,169,126,0.25); color: var(--color-dark); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(200,169,126,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(200,169,126,0.5); }
+
+    /* =============================================
+       로딩 화면
+       ============================================= */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+    }
+
+    #loader.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .loader-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .loader-text-wrap { display: flex; align-items: baseline; gap: 4px; }
+
+    .loader-char {
+      font-family: 'Yeongwol', var(--font-serif);
+      font-size: 5rem;
+      color: var(--color-brown);
+      opacity: 0;
+      display: inline-block;
+      transform: translateY(-10px);
+      animation: charAppear 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      text-shadow: 1px 2px 8px rgba(74,44,23,0.15);
+    }
+
+    .lc-1 { animation-delay: 0.2s; }
+    .lc-2 { animation-delay: 0.5s; }
+    .lc-space { opacity: 1; transform: none; animation: none; font-size: 2rem; }
+    .lc-3 { animation-delay: 0.8s; }
+
+    @keyframes charAppear {
+      0%   { opacity: 0; transform: translateY(-10px); filter: blur(4px); }
+      60%  { opacity: 1; filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .loader-sub {
+      font-size: 0.85rem;
+      color: rgba(74,44,23,0.55);
+      letter-spacing: 0.2em;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: subRise 0.6s ease forwards 1.3s;
+    }
+
+    @keyframes subRise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       헤더 & 네비게이션
+       ============================================= */
+    header {
       position: sticky;
       top: 0;
       z-index: 100;
-      /* ✏️ [수정] 헤더 배경색 */
-      background-color: #2A1F17;
+      height: var(--header-h);
+      padding: 0 40px;
+      background-color: var(--color-dark);
       border-bottom: 1px solid rgba(200,169,126,0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* ✏️ [수정] 헤더 좌우 내부 여백 */
-      padding: 0 40px;
-      /* ✏️ [수정] 헤더 높이 */
-      height: 72px;
     }
 
-    /* ✏️ [수정] 로고 텍스트 스타일 */
     .logo {
+      font-family: var(--font-serif);
       font-size: 1.3rem;
       font-weight: 600;
-      color: #F7F3ED;
+      color: var(--color-cream);
       letter-spacing: 0.08em;
-      font-family: 'Noto Serif KR', serif;
       text-decoration: none;
-      cursor: pointer;
     }
 
-    /* ✏️ [수정] 탭 목록 (nav ul) */
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 4px;
-    }
+    nav ul { list-style: none; display: flex; gap: 4px; }
 
-    /* ✏️ [수정] 개별 탭 스타일 */
     nav ul li a {
       display: inline-block;
-      /* ✏️ [수정] 탭 내부 여백 */
       padding: 8px 20px;
       border-radius: 6px;
-      /* ✏️ [수정] 탭 글자색 */
-      color: rgba(247,243,237,0.6);
+      color: rgba(247,243,237,0.65);
       text-decoration: none;
       font-size: 0.88rem;
-      font-weight: 400;
       letter-spacing: 0.02em;
       transition: background 0.2s, color 0.2s;
     }
 
-    nav ul li a:hover {
-      /* ✏️ [수정] 탭 호버 배경색 */
+    nav ul li a:hover,
+    nav ul li a.active {
       background-color: rgba(200,169,126,0.12);
-      color: #C8A97E;
+      color: var(--color-gold);
     }
 
-    /* 햄버거 버튼 - 데스크톱에선 숨김 */
-    .nav-toggle {
-      display: none; 
-      background-color: rgba(200,169,126,0.2);
-      color: #C8A97E;
-      font-weight: 600;
-    }
+    nav ul li a.active { font-weight: 500; }
+
+    .nav-toggle { display: none; }
 
     /* =============================================
-       ✏️ [수정] 메인 콘텐츠 영역 전체
+       메인 & 공통 섹션
        ============================================= */
     main {
-      /* ✏️ [수정] 메인 최대 너비 (0으로 하면 전체폭) */
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 24px 120px;
+    }
+
+    .tab-content { scroll-margin-top: calc(var(--header-h) + 24px); }
+    .tab-content + .tab-content { margin-top: 120px; }
+
+    .section-intro {
+      padding: 64px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid rgba(200,169,126,0.15);
+    }
+
+    .section-intro-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      letter-spacing: 0.25em;
+      margin-bottom: 16px;
+    }
+
+    .section-intro-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: var(--color-dark);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .section-intro-desc {
+      font-size: 0.92rem;
+      color: var(--color-mid);
+      line-height: 1.9;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 3px;
+      background-color: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-mid);
+      max-width: 680px;
+      word-break: keep-all;
+    }
+
+    .content-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 56px 64px;
+      margin-top: 48px;
     }
 
     /* =============================================
-       ✏️ [수정] 배너 슬라이더 영역
+       홈 - 배너 슬라이더
        ============================================= */
     .banner-section {
-      /* ✏️ [수정] 배너 위아래 여백 */
       margin: 64px 0 40px;
       position: relative;
       overflow: hidden;
-      /* ✏️ [수정] 배너 모서리 둥글기 */
-      border-radius: 16px;
+      border-radius: 20px;
       /* ✏️ [수정] 배너 높이 */
-      height: 640px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      height: 480px;
+      box-shadow: var(--shadow-lg);
+      background: var(--color-dark);
     }
 
-    /* 슬라이드 트랙 (슬라이드들이 가로로 나열됨) */
-    .slider-track {
-      display: flex;
-      height: 100%;
-      transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
-    }
+    .slider-track { display: flex; height: 100%; }
 
-    /* ✏️ [수정] 개별 슬라이드 카드 */
+    /* ✏️ 슬라이드 배경 이미지는 HTML의 각 .slide style 속성에서 변경 */
     .slide {
       min-width: 100%;
       height: 100%;
@@ -147,114 +299,85 @@ body::before {
       justify-content: center;
       position: relative;
       overflow: hidden;
+      padding: 0 80px;
+      background-color: var(--color-brown);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    /* 복제본 포함 순서: [3번복제] [1번] [2번] [3번] [1번복제] */
+    /* 사진 위 글씨가 잘 읽히도록 어두운 오버레이 */
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42,31,23,0.30) 0%, rgba(42,31,23,0.62) 100%);
+    }
 
-/* ✏️ [수정] 슬라이드 1번 - 그래놀라 (2번째 자식) */
-.slide:nth-child(2) {
-  background-image: url('그래놀라.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    .slide > * { position: relative; z-index: 1; }
 
-/* ✏️ [수정] 슬라이드 2번 - 술지게미 (3번째 자식) */
-.slide:nth-child(3) {
-  background-image: url('술지게미.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* ✏️ [수정] 슬라이드 3번 - 업사이클링 (4번째 자식) */
-.slide:nth-child(4) {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url('업사이클링.jpg');
-}
-
-/* 복제본 (1번째, 5번째)은 JS가 자동으로 처리 */
-.slide:nth-child(1),
-.slide:nth-child(5) {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-    /* ✏️ [수정] 슬라이드 제목 텍스트 */
     .slide-title {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #fff;
       text-align: center;
-      margin-bottom: 12px;
-      line-height: 1.2;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      word-break: keep-all;
     }
 
-    /* ✏️ [수정] 슬라이드 부제목 텍스트 */
     .slide-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
       text-align: center;
-      max-width: 480px;
-      line-height: 1.6;
+      max-width: 520px;
+      line-height: 1.7;
+      word-break: keep-all;
     }
 
-    /* ✏️ [수정] 슬라이드 버튼 */
     .slide-btn {
       margin-top: 28px;
       padding: 12px 32px;
-      background-color: rgba(200,169,126,0.15);
-      color: #C8A97E;
-      border: 1px solid rgba(200,169,126,0.5);
-      border-radius: 4px;
-      font-size: 0.82rem;
+      background-color: rgba(42,31,23,0.35);
+      color: var(--color-gold);
+      border: 1px solid rgba(200,169,126,0.7);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.85rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .slide-btn:hover {
-      background-color: rgba(200,169,126,0.25);
-      transform: translateY(-2px);
-    }
+    .slide-btn:hover { background-color: var(--color-gold); color: var(--color-dark); }
 
-    /* 슬라이더 이전/다음 화살표 버튼 */
     .slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      /* ✏️ [수정] 화살표 버튼 배경 */
-      background-color: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
       width: 44px;
       height: 44px;
-      border-radius: 50%;
+      border-radius: var(--radius-sm);
+      background-color: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
       font-size: 1.2rem;
       cursor: pointer;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
+      backdrop-filter: blur(8px);
       transition: background 0.2s;
-      backdrop-filter: blur(4px);
     }
 
-    .slider-btn:hover {
-      background-color: rgba(255,255,255,0.32);
-    }
-
-    /* ✏️ [수정] 이전 버튼 위치 */
+    .slider-btn:hover { background-color: rgba(255,255,255,0.3); }
     .slider-btn.prev { left: 16px; }
-
-    /* ✏️ [수정] 다음 버튼 위치 */
     .slider-btn.next { right: 16px; }
 
-    /* 하단 도트 인디케이터 */
     .slider-dots {
       position: absolute;
       bottom: 18px;
@@ -265,987 +388,220 @@ body::before {
       z-index: 10;
     }
 
-    /* ✏️ [수정] 도트 크기 & 색 */
     .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      width: 20px;
+      height: 3px;
+      border: none;
+      border-radius: 2px;
       background-color: rgba(255,255,255,0.4);
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      border: none;
+      transition: width 0.3s, background 0.3s;
     }
 
-    .dot.active {
-      background-color: #C8A97E;
-      transform: scale(1.3);
-    }
+    .dot.active { width: 32px; background-color: var(--color-gold); }
 
     /* =============================================
-       ✏️ [수정] 섹션 영역 - 스크롤 방식
+       홈 - 키워드 & 카피
        ============================================= */
-    .tab-content {
-      display: block;
-    }
-
-    /* ✏️ [수정] 섹션 사이 여백 */
-    .tab-content + .tab-content {
-      margin-top: 200px;
-    }
-
-    /* =============================================
-       탭4 - 기본은 숨김, 활성화시 오버레이로 표시
-       ============================================= */
-    #tab4 {
-      display: none;
-      position: fixed;
-      inset: 64px 0 60px 0; /* 헤더/푸터 제외한 전체 영역 */
-      background-color: #F7F3ED;
-      z-index: 50;
-      overflow-y: auto;
-      padding: 60px 24px;
-    }
-
-    #tab4.tab4-active {
-      display: block;
-    }
-
-    /* 탭4 열렸을 때 스크롤 페이지 고정 */
-    body.tab4-open {
-      overflow: hidden;
-    }
-
-    /* =============================================
-       제품 소개 2분할 박스
-       ============================================= */
-
-    /* ✏️ [수정] 좌우 분할 레이아웃 */
-    .intro-split {
-      display: flex;
-      gap: 40px;
-      align-items: center;
-    }
-    /* ✏️ [수정] 4개 한 줄 나열 */
-.intro-row {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.intro-row .intro-text {
-  flex: 1;
-}
-
-.intro-row .intro-img-wrap {
-  flex: 1;
-  height: 240px;
-}
-
-    /* ✏️ [수정] 글 영역 */
-    .intro-text {
-      flex: 1;
-    }
-
-    /* ✏️ [수정] 이미지 영역 높이 */
-    .intro-img-wrap {
-      flex: 1;
-      height: 280px;
-      border-radius: 12px;
-      overflow: hidden;
-      background-color: #f0e8d8;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .intro-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-
-    .intro-img-placeholder {
-      position: absolute;
-      inset: 0;
+    .home-keywords {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      color: #b0a090;
-      z-index: 0;
+      padding: 48px 0;
+      border-bottom: 1px solid rgba(200,169,126,0.15);
     }
 
-    /* =============================================
-       탭4 제품 페이지 스타일
-       ============================================= */
-    .shop-wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 48px 24px 120px;
-    }
+    .keyword-item { flex: 1; text-align: center; padding: 0 32px; }
+    .keyword-icon { display: block; font-size: 2rem; margin-bottom: 12px; }
 
-    .shop-title {
-      font-family: '궁서', 'Gungsuh', serif;
-      font-size: 2rem;
-      color: #4A2C17;
+    .keyword-label {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
       margin-bottom: 8px;
     }
 
-    .shop-divider {
-      width: 40px;
-      height: 3px;
-      background-color: #C8A97E;
-      margin-bottom: 40px;
-      border-radius: 2px;
+    .keyword-desc { font-size: 0.85rem; color: var(--color-mid); line-height: 1.7; }
+
+    .keyword-divider {
+      width: 1px;
+      height: 64px;
+      background: rgba(200,169,126,0.3);
+      flex-shrink: 0;
     }
 
-    /* ✏️ [수정] 2x2 상품 그리드 간격 */
-    .product-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin-bottom: 60px;
+    .home-copy-section {
+      padding: 80px 0 40px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    /* ✏️ [수정] 상품 카드 */
-    .product-card {
-      background: #FDFAF6;
-      border-radius: 12px;
-      border: 1px solid rgba(200,169,126,0.15);
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(42,31,23,0.1);
-      border-color: rgba(200,169,126,0.3);
-    }
-
-    /* ✏️ [수정] 상품 이미지 높이 */
-    .product-img-wrap {
-      width: 100%;
-      height: 240px;
-      background-color: #f0e8d8;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-img-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      color: #b0a090;
-      z-index: 0;
-    }
-
-    .product-info {
-      padding: 20px 24px 24px;
-    }
-
-    /* ✏️ [수정] 상품명 */
-    .product-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #2a1a0e;
-      margin-bottom: 6px;
-    }
-
-    /* ✏️ [수정] 상품 설명 */
-    .product-desc {
-      font-size: 0.88rem;
-      color: #888;
-      margin-bottom: 12px;
-      line-height: 1.5;
-    }
-
-    /* ✏️ [수정] 상품 가격 */
-    .product-price {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #4A2C17;
-      margin-bottom: 16px;
-    }
-
-    /* ✏️ [수정] 장바구니 담기 버튼 */
-    .add-cart-btn {
-      width: 100%;
-      padding: 10px 0;
-      background-color: #2A1F17;
-      color: #F7F3ED;
-      border: none;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .add-cart-btn:hover { background-color: #4A2C17; }
-    .add-cart-btn.added { background-color: #C8A97E; color: #4A2C17; }
-
-    /* 장바구니 영역 */
-    .cart-section {
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #e8ddd0;
-      padding: 32px;
-      margin-bottom: 32px;
-    }
-
-    .cart-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #4A2C17;
-      margin-bottom: 16px;
-    }
-
-    .cart-list {
-      list-style: none;
-      min-height: 48px;
-      margin-bottom: 16px;
-    }
-
-    .cart-empty {
-      color: #bbb;
-      font-size: 0.9rem;
-      padding: 8px 0;
-    }
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #f0e8d8;
-      font-size: 0.92rem;
-      color: #333;
-    }
-
-    .cart-item-name { flex: 1; }
-
-    .cart-item-price {
-      font-weight: 600;
-      color: #4A2C17;
-      margin-right: 12px;
-    }
-
-    .cart-item-del {
-      background: none;
-      border: none;
-      color: #ccc;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: color 0.15s;
-    }
-
-    .cart-item-del:hover { color: #e94560; }
-
-    /* ✏️ [수정] 합계 */
-    .cart-total {
-      text-align: right;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #2A1F17;
+    .home-copy-sub {
+      font-size: 0.8rem;
+      color: var(--color-gold);
+      letter-spacing: 0.2em;
       margin-bottom: 20px;
     }
 
-    /* ✏️ [수정] 결제하기 버튼 */
-    .checkout-btn {
-      width: 100%;
-      padding: 16px 0;
-      background-color: #2A1F17;
-      color: #F7F3ED;
-      border: none;
-      border-radius: 4px;
-      font-size: 0.95rem;
+    .home-copy-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 600;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .checkout-btn:hover {
-      background-color: #4A2C17;
-      transform: translateY(-2px);
-    }
-
-    /* =============================================
-       상품 상세 페이지 오버레이
-       ============================================= */
-    .detail-overlay-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 99997;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .detail-overlay-bg.show { display: flex; }
-
-    /* ✏️ [수정] 상세 페이지 박스 크기 */
-    .detail-overlay {
-      background: #fff;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 820px;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 40px;
-      position: relative;
-      animation: popupIn 0.3s cubic-bezier(0.23,1,0.32,1);
-    }
-
-    /* ✏️ [수정] 닫기 버튼 */
-    .detail-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      background: none;
-      border: 1.5px solid #4A2C17;
-      color: #4A2C17;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .detail-close:hover {
-      background-color: #4A2C17;
-      color: #fff;
-    }
-
-    /* 좌우 레이아웃 */
-    .detail-content {
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-      margin-top: 16px;
-    }
-
-    /* ✏️ [수정] 상세 이미지 크기 */
-    .detail-img-wrap {
-      width: 320px;
-      height: 320px;
-      border-radius: 16px;
-      overflow: hidden;
-      background-color: #f0e8d8;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .detail-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: relative;
-      z-index: 1;
-    }
-
-    .detail-img-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      z-index: 0;
-    }
-
-    .detail-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* ✏️ [수정] 상세 상품명 */
-    .detail-name {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #2a1a0e;
-      font-family: '궁서', 'Gungsuh', serif;
-    }
-
-    /* ✏️ [수정] 상세 설명 */
-    .detail-desc {
-      font-size: 1rem;
-      color: #666;
-      line-height: 1.8;
-    }
-
-    /* ✏️ [수정] 상세 가격 */
-    .detail-price {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #4A2C17;
-    }
-
-    .detail-cart-btn {
-      width: 100%;
-      padding: 14px 0;
-      font-size: 1rem;
-    }
-
-    /* ✏️ [수정] 상품 카드 커서 */
-    .product-card {
-      cursor: pointer;
-    }
-
-    /* 결제 완료 팝업 배경 */
-    .pay-popup-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 99998;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pay-popup-bg.show { display: flex; }
-
-    /* ✏️ [수정] 팝업 박스 */
-    .pay-popup {
-      background: #fff;
-      border-radius: 20px;
-      padding: 48px 40px;
-      text-align: center;
-      max-width: 360px;
-      width: 90%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      animation: popupIn 0.3s cubic-bezier(0.23,1,0.32,1);
-    }
-
-    @keyframes popupIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to   { transform: scale(1);    opacity: 1; }
-    }
-
-    .pay-popup-icon { font-size: 3rem; margin-bottom: 16px; }
-
-    /* ✏️ [수정] 팝업 제목 */
-    .pay-popup-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #4A2C17;
-      margin-bottom: 10px;
-    }
-
-    /* ✏️ [수정] 팝업 설명 */
-    .pay-popup-desc {
-      font-size: 0.95rem;
-      color: #888;
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-
-    /* ✏️ [수정] 팝업 확인 버튼 */
-    .pay-popup-close {
-      padding: 12px 40px;
-      background-color: #4A2C17;
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .pay-popup-close:hover { background-color: #6B3A2A; }
-
-    /* =============================================
-       이메일 팝업
-       ============================================= */
-    .email-popup-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 99998;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .email-popup-bg.show { display: flex; }
-
-    .email-popup {
-      background: #fff;
-      border-radius: 20px;
-      padding: 48px 40px;
-      text-align: center;
-      max-width: 360px;
-      width: 90%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      position: relative;
-      animation: popupIn 0.3s cubic-bezier(0.23,1,0.32,1);
-    }
-
-    .email-popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: 1.5px solid #4A2C17;
-      color: #4A2C17;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .email-popup-close:hover {
-      background-color: #4A2C17;
-      color: #fff;
-    }
-
-    .email-popup-icon { font-size: 2.5rem; margin-bottom: 12px; }
-
-    /* ✏️ [수정] 이메일 팝업 제목 */
-    .email-popup-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #4A2C17;
-      margin-bottom: 10px;
-    }
-
-    /* ✏️ [수정] 이메일 팝업 설명 */
-    .email-popup-desc {
-      font-size: 0.9rem;
-      color: #888;
-      line-height: 1.7;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
       margin-bottom: 24px;
     }
 
-    /* ✏️ [수정] 보내기 버튼 */
-    .email-send-btn {
-      display: inline-block;
-      padding: 12px 40px;
-      background-color: #4A2C17;
-      color: #fff;
-      border-radius: 50px;
+    .home-copy-desc {
       font-size: 0.95rem;
-      font-weight: 600;
+      color: var(--color-mid);
+      line-height: 1.9;
+      margin-bottom: 36px;
+      word-break: keep-all;
+    }
+
+    .home-copy-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      border: 1px solid var(--color-dark);
+      color: var(--color-dark);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.25s, color 0.25s;
     }
 
-    .email-send-btn:hover {
-      background-color: #6B3A2A;
-      transform: translateY(-2px);
-    }
-
-    /* 탭4 닫기 버튼 */
-    .tab4-close {
-      position: absolute;
-      top: 20px;
-      right: 28px;
-      background: none;
-      border: 1.5px solid #4A2C17;
-      color: #4A2C17;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .tab4-close:hover {
-      background-color: #4A2C17;
-      color: #fff;
-    }
-
-    /* 헤더 높이만큼 스크롤 위치 보정 */
-    .tab-content {
-      scroll-margin-top: 120px;
-    }
+    .home-copy-btn:hover { background: var(--color-dark); color: var(--color-cream); }
 
     /* =============================================
-       공정 과정 로드맵 스타일
+       탭1 - 우리의 이야기 (메달)
        ============================================= */
-    .roadmap-wrap {
-      max-width: 900px;
-      margin: 48px auto 0;
-      padding: 0 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
+    .story-card { padding: 48px 56px 56px; }
 
-    .roadmap-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .roadmap-curve-right {
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 60px;
-    }
-
-    .roadmap-curve-left {
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 60px;
-    }
-
-    /* ✏️ [수정] 개별 스텝 카드 너비 */
-    .roadmap-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      width: 220px;
-      flex-shrink: 0;
-    }
-
-    /* ✏️ [수정] 스텝 번호 크기/색 */
-    .step-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #4A2C17;
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ✏️ [수정] 사진 원형 크기 */
-    .step-img-wrap {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid #C8A97E;
-      background-color: #f0e8d8;
-      position: relative;
-      box-shadow: 0 4px 16px rgba(74,44,23,0.12);
-      transition: transform 0.2s;
-    }
-
-    .step-img-wrap:hover {
-      transform: scale(1.05);
-    }
-
-    .step-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: relative;
-      z-index: 1;
-    }
-
-    .step-img-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      z-index: 0;
-    }
-
-    /* ✏️ [수정] 스텝 설명 텍스트 */
-    .step-label {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #4A2C17;
-      text-align: center;
-      font-family: '궁서', 'Gungsuh', serif;
-    }
-
-    /* ✏️ [수정] 화살표 색/크기 */
-    .roadmap-arrow {
-      font-size: 1.8rem;
-      color: #C8A97E;
-      font-weight: 300;
-      flex-shrink: 0;
-    }
-
-    /* =============================================
-       브랜드 스토리 메달
-       ============================================= */
     .story-sub-txt {
       font-size: 0.88rem;
-      color: rgba(74,44,23,0.55);
+      color: rgba(74,44,23,0.6);
+      text-align: center;
       margin-bottom: 40px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
     }
 
-    /* ✏️ [수정] 메달 그리드 간격 */
     .medal-grid {
+      list-style: none;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 28px;
-      padding: 8px 0 16px;
+      gap: 32px;
     }
 
-    /* ✏️ [수정] 메달 크기 */
-    .medal-card {
+    .medal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      color: inherit;
+      width: 150px;
+    }
+
+    .medal-circle {
       width: 140px;
       height: 140px;
       border-radius: 50%;
-      cursor: pointer;
       position: relative;
       overflow: hidden;
       border: 2px solid rgba(200,169,126,0.5);
       box-shadow: 0 8px 28px rgba(42,31,23,0.12);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex-shrink: 0;
     }
 
-    .medal-card:hover {
-      transform: scale(1.08);
+    .medal:hover .medal-circle,
+    .medal:focus-visible .medal-circle {
+      transform: scale(1.06);
       box-shadow: 0 12px 36px rgba(74,44,23,0.28);
     }
 
-    .medal-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #4A2C17, #8B5E3C);
-      transition: filter 0.4s ease;
-    }
+    .medal:focus-visible { outline: none; }
+    .medal:focus-visible .medal-circle { outline: 2px solid var(--color-gold); outline-offset: 4px; }
 
-    .medal-card:hover .medal-bg { filter: brightness(0.45); }
+    .medal-bg { position: absolute; inset: 0; }
 
-    /* ✏️ [수정] 메달 번호 */
+    /* ✏️ [수정] 메달별 배경색 */
+    .medal-grid li:nth-child(1) .medal-bg { background: linear-gradient(135deg, #4A2C17, #7B4F2E); }
+    .medal-grid li:nth-child(2) .medal-bg { background: linear-gradient(135deg, #5C3317, #8B6914); }
+    .medal-grid li:nth-child(3) .medal-bg { background: linear-gradient(135deg, #3B1F0E, #6B3A2A); }
+    .medal-grid li:nth-child(4) .medal-bg { background: linear-gradient(135deg, #4A2C17, #2C5F2E); }
+    .medal-grid li:nth-child(5) .medal-bg { background: linear-gradient(135deg, #2C3E50, #4A2C17); }
+
     .medal-num {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--font-serif);
       font-size: 2rem;
-      color: rgba(255,255,255,0.9);
       font-weight: 700;
-      transition: opacity 0.3s ease;
-      z-index: 1;
+      color: rgba(255,255,255,0.92);
     }
 
-    .medal-card:hover .medal-num { opacity: 0; }
-
-    /* ✏️ [수정] hover시 소제목 */
-    .medal-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
+    /* 제목은 항상 보이도록 (모바일 대응) */
+    .medal-caption {
       text-align: center;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #fff;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 2;
+      font-size: 0.82rem;
       line-height: 1.5;
+      color: var(--color-mid);
+      word-break: keep-all;
     }
 
-    .medal-card:hover .medal-label { opacity: 1; }
-
-    /* ✏️ [수정] 메달별 배경색 */
-    .medal-card:nth-child(1) .medal-bg { background: linear-gradient(135deg, #4A2C17, #7B4F2E); }
-    .medal-card:nth-child(2) .medal-bg { background: linear-gradient(135deg, #5C3317, #8B6914); }
-    .medal-card:nth-child(3) .medal-bg { background: linear-gradient(135deg, #3B1F0E, #6B3A2A); }
-    .medal-card:nth-child(4) .medal-bg { background: linear-gradient(135deg, #4A2C17, #2C5F2E); }
-    .medal-card:nth-child(5) .medal-bg { background: linear-gradient(135deg, #2C3E50, #4A2C17); }
-
-    /* 브랜드 스토리 팝업 */
-    .story-popup-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .story-popup-bg.show { display: flex; }
-
-    /* ✏️ [수정] 팝업 박스 */
-    .story-popup-box {
-      background: #fff;
-      border-radius: 20px;
-      padding: 48px 44px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-      animation: popIn 0.3s cubic-bezier(0.23,1,0.32,1);
-      border-left: 5px solid #C8A97E;
-    }
-
-    .story-popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1.5px solid #4A2C17;
-      background: none;
-      color: #4A2C17;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .story-popup-close:hover { background: #4A2C17; color: #fff; }
-
-    /* ✏️ [수정] 에피소드 번호 */
-    .story-popup-episode {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #C8A97E;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
-    }
-
-    /* ✏️ [수정] 팝업 제목 */
-    .story-popup-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #4A2C17;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    /* ✏️ [수정] 팝업 본문 */
-    .story-popup-body {
+    .medal-caption strong {
+      display: block;
+      font-family: var(--font-serif);
       font-size: 0.95rem;
-      line-height: 1.9;
-      color: #555;
-      white-space: pre-line;
+      color: var(--color-dark);
+      margin-bottom: 2px;
     }
-
-    .story-popup-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 32px;
-      gap: 12px;
-    }
-
-    /* ✏️ [수정] 이전/다음 버튼 */
-    .story-popup-nav-btn {
-      flex: 1;
-      padding: 10px 0;
-      border: 1.5px solid #C8A97E;
-      background: none;
-      color: #4A2C17;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .story-popup-nav-btn:hover { background: #4A2C17; color: #fff; border-color: #4A2C17; }
-    .story-popup-nav-btn:disabled { opacity: 0.3; cursor: default; }
-    .story-popup-nav-btn:disabled:hover { background: none; color: #4A2C17; border-color: #C8A97E; }
 
     /* =============================================
-       ESG 카운터 스타일
+       탭2 - ESG 가치 (인트로 + 카운터 + 설명을 한 블록으로)
        ============================================= */
+    .esg-block {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-intro-dark {
+      background: var(--color-dark);
+      padding: 64px 24px 48px;
+      border-bottom: none;
+    }
+
+    .section-intro-dark .section-intro-title { color: var(--color-cream); }
+    .section-intro-dark .section-intro-desc  { color: rgba(247,243,237,0.65); }
+
     .esg-counter-wrap {
-      position: relative;
-      background: #1F2022;
-      padding: 48px 32px;
+      background: var(--color-dark);
+      padding: 0 32px 40px;
     }
 
-    /* 토스트 */
-    .esg-toast-wrap {
-      position: fixed;
-      bottom: 80px; /* 푸터 위 */
-      right: 32px;
-      z-index: 9000;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      pointer-events: none;
-    }
-
-    .esg-toast {
-      background: #262829;
-      border: 1px solid rgba(197,168,128,0.3);
-      border-left: 3px solid #C5A880;
-      padding: 10px 16px;
-      font-size: 0.8rem;
-      color: #F7F6F2;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      transform: translateX(20px);
-      transition: opacity 0.3s, transform 0.3s;
-      min-width: 220px;
-    }
-
-    .esg-toast.show { opacity: 1; transform: translateX(0); }
-    .esg-toast-badge {
-      background: #B83A2E;
-      color: #fff;
-      font-size: 0.6rem;
-      padding: 2px 6px;
-    }
-
-    /* 카드 그리드 */
     .esg-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1px;
-      background: rgba(197,168,128,0.2);
-      border: 1px solid rgba(197,168,128,0.2);
-      margin-bottom: 1px;
+      background: var(--color-line);
+      border: 1px solid var(--color-line);
+      margin-bottom: 16px;
     }
 
     .esg-card {
-      background: #1F2022;
+      background: var(--color-dark-2);
       padding: 36px 28px;
       position: relative;
       opacity: 0;
@@ -1256,63 +612,53 @@ body::before {
     }
 
     .esg-card.esg-visible { opacity: 1; transform: translateY(0); }
-    .esg-card:hover { background: #262829; }
+    .esg-card:hover { background: #2E2219; }
 
-    .esg-card.esg-highlight {
-      background: #1a1710;
-      border-bottom: 2px solid #C5A880;
-    }
-
-    .esg-card.esg-highlight:hover { background: #201e12; }
+    .esg-card.esg-highlight { border-bottom: 2px solid var(--color-gold); }
 
     .esg-card-icon { font-size: 1.3rem; margin-bottom: 16px; display: block; }
 
-    .esg-num-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      margin-bottom: 6px;
-    }
+    .esg-num-wrap { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
 
     .esg-num {
       font-size: clamp(2rem, 3vw, 2.6rem);
-      font-weight: 800;
-      color: #F7F6F2;
+      font-weight: 700;
+      color: var(--color-cream);
       font-variant-numeric: tabular-nums;
       letter-spacing: -0.03em;
       line-height: 1;
     }
 
-    .esg-highlight .esg-num {
-      font-size: clamp(2.4rem, 3.5vw, 3rem);
-      color: #C5A880;
-    }
+    .esg-highlight .esg-num { font-size: clamp(2.4rem, 3.5vw, 3rem); color: var(--color-gold); }
 
-    .esg-unit { font-size: 0.9rem; color: rgba(247,246,242,0.55); }
-    .esg-card-label { font-size: 0.9rem; font-weight: 600; color: #F7F6F2; margin-bottom: 6px; }
-    .esg-card-sub { font-size: 0.75rem; color: rgba(247,246,242,0.4); line-height: 1.6; }
+    .esg-unit { font-size: 0.9rem; color: rgba(247,243,237,0.55); }
+    .esg-card-label { font-size: 0.9rem; font-weight: 600; color: var(--color-cream); margin-bottom: 6px; }
+    .esg-card-sub { font-size: 0.78rem; color: rgba(247,243,237,0.5); line-height: 1.6; }
 
     .esg-tree-row {
       margin-top: 12px;
       padding-top: 12px;
-      border-top: 1px solid rgba(197,168,128,0.2);
-      font-size: 0.75rem;
-      color: rgba(197,168,128,0.7);
+      border-top: 1px solid var(--color-line);
+      font-size: 0.78rem;
+      color: rgba(200,169,126,0.8);
     }
+
+    .esg-tree-row strong { color: var(--color-gold); margin: 0 4px; }
 
     .esg-highlight-badge {
       position: absolute;
-      top: 14px; right: 14px;
-      background: #B83A2E;
+      top: 14px;
+      right: 14px;
+      background: var(--color-red);
       color: #fff;
-      font-size: 0.62rem;
+      font-size: 0.65rem;
       padding: 3px 8px;
     }
 
-    /* 내 한 그릇 위젯 */
+    /* 내 한 그릇의 가치 위젯 */
     .esg-bowl {
-      border: 1px solid rgba(197,168,128,0.2);
-      background: #262218;
+      border: 1px solid var(--color-line);
+      background: var(--color-dark-2);
       padding: 24px 32px;
       display: flex;
       align-items: center;
@@ -1325,1240 +671,1008 @@ body::before {
     }
 
     .esg-bowl.esg-visible { opacity: 1; transform: translateY(0); }
-
     .esg-stamp { flex-shrink: 0; }
-
     .esg-bowl-content { flex: 1; min-width: 180px; }
 
     .esg-bowl-title {
-      font-size: 0.7rem;
-      color: #C5A880;
+      font-size: 0.75rem;
+      color: var(--color-gold);
       letter-spacing: 0.15em;
       margin-bottom: 6px;
     }
 
-    .esg-bowl-text {
-      font-size: 0.88rem;
-      color: rgba(247,246,242,0.75);
-      line-height: 1.7;
-    }
+    .esg-bowl-text { font-size: 0.9rem; color: rgba(247,243,237,0.78); line-height: 1.7; }
+    .esg-bowl-text strong { color: var(--color-cream); }
+    .esg-bowl-text .esg-muted { color: rgba(247,243,237,0.5); font-size: 0.8rem; }
 
-    .esg-bowl-text strong { color: #F7F6F2; }
-
-    .esg-bowl-bars { display: flex; flex-direction: column; gap: 10px; min-width: 180px; }
+    .esg-bowl-bars { display: flex; flex-direction: column; gap: 10px; min-width: 200px; }
 
     .esg-bar-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.7rem;
-      color: rgba(247,246,242,0.4);
+      font-size: 0.72rem;
+      color: rgba(247,243,237,0.5);
       margin-bottom: 4px;
     }
 
-    .esg-bar-track {
-      height: 2px;
-      background: rgba(247,246,242,0.1);
-      position: relative;
-      overflow: hidden;
-    }
+    .esg-bar-track { height: 2px; background: rgba(247,243,237,0.1); position: relative; overflow: hidden; }
 
     .esg-bar-fill {
       position: absolute;
       left: 0; top: 0;
       height: 100%;
-      background: #C5A880;
       width: 0%;
+      background: var(--color-gold);
       transition: width 1.8s cubic-bezier(0.16,1,0.3,1);
     }
 
-    .esg-bar-red { background: #B83A2E; }
+    .esg-bar-red { background: var(--color-red); }
 
-    /* ESG 반응형 */
-    @media (max-width: 900px) {
-      .esg-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 520px) {
-      .esg-grid { grid-template-columns: 1fr; }
-      .esg-counter-wrap { padding: 32px 16px; }
-      .esg-toast-wrap { right: 16px; bottom: 72px; }
-    }
-
-    /* =============================================
-       모던 헤리티지 글로벌 디자인 토큰
-       ============================================= */
-    :root {
-      --color-bg:       #F7F3ED;
-      --color-surface:  #FDFAF6;
-      --color-dark:     #2A1F17;
-      --color-mid:      #6B5744;
-      --color-gold:     #C8A97E;
-      --color-gold-lt:  rgba(200,169,126,0.15);
-      --font-serif:     'Noto Serif KR', serif;
-      --font-sans:      'Noto Sans KR', sans-serif;
-      --radius-sm:      4px;
-      --radius-md:      12px;
-      --radius-lg:      20px;
-      --shadow-sm:      0 2px 12px rgba(42,31,23,0.06);
-      --shadow-md:      0 8px 32px rgba(42,31,23,0.10);
-      --shadow-lg:      0 20px 60px rgba(42,31,23,0.14);
-    }
-
-    body {
-      font-family: var(--font-sans);
-      background-color: var(--color-bg);
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='hanji'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='6' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.3'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23hanji)' opacity='0.04'/%3E%3C/svg%3E");
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* 배너 슬라이더 */
-    .banner-section {
-      border-radius: 20px;
-      height: 440px;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-    }
-
-    .slide-title {
-      font-family: var(--font-serif);
-      font-size: 2.6rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .slide-sub {
-      font-size: 1rem;
-      letter-spacing: 0.02em;
+    /* 수치 산출 근거 각주 */
+    .esg-note {
+      margin-top: 20px;
+      font-size: 0.72rem;
       line-height: 1.7;
+      color: rgba(247,243,237,0.45);
     }
 
-    /* 도트 */
-    .dot { background-color: rgba(255,255,255,0.35); border-radius: 2px; width: 20px; height: 3px; }
-    .dot.active { background-color: #C8A97E; width: 32px; }
-
-    /* 콘텐츠 카드 전체 */
-    .content-card {
+    /* ESG 설명 3열 */
+    .esg-desc {
       background: var(--color-surface);
-      border: 1px solid rgba(200,169,126,0.18);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.3s;
+      padding: 48px 64px 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
     }
 
-    .content-card:hover {
-      box-shadow: var(--shadow-md);
-    }
-
-    /* 섹션 구분선 */
-    .section-divider {
-      width: 32px;
-      height: 2px;
-      background: linear-gradient(90deg, #C8A97E, rgba(200,169,126,0.3));
-    }
-
-    /* 상품 가격 */
-    .product-price {
+    .esg-desc-title {
       font-family: var(--font-serif);
-      color: var(--color-dark);
-    }
-
-    /* 상품명 */
-    .product-name {
-      font-family: var(--font-serif);
-      letter-spacing: -0.01em;
-    }
-
-    /* 장바구니 타이틀 */
-    .cart-title {
-      font-family: var(--font-serif);
-    }
-
-    /* 팝업 박스 */
-    .pay-popup,
-    .email-popup,
-    .story-popup-box,
-    .detail-overlay {
-      background: var(--color-surface);
-      border: 1px solid rgba(200,169,126,0.2);
-    }
-
-    /* 팝업 제목 */
-    .pay-popup-title,
-    .email-popup-title,
-    .story-popup-title,
-    .detail-name {
-      font-family: var(--font-serif);
-    }
-
-    /* 로드맵 step label */
-    .step-label {
-      font-family: var(--font-serif);
-      letter-spacing: 0.02em;
-    }
-
-    /* step 번호 */
-    .step-num {
-      background: var(--color-dark);
-      font-family: var(--font-sans);
-      letter-spacing: 0.05em;
-    }
-
-    /* step img 테두리 */
-    .step-img-wrap {
-      border: 2px solid rgba(200,169,126,0.4);
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* 탭4 닫기 버튼 */
-    .tab4-close,
-    .detail-close,
-    .story-popup-close,
-    .email-popup-close,
-    .pay-popup-close {
-      border-color: var(--color-gold);
-      color: var(--color-gold);
-      border-radius: var(--radius-sm);
-    }
-
-    .tab4-close:hover,
-    .detail-close:hover,
-    .story-popup-close:hover,
-    .email-popup-close:hover,
-    .pay-popup-close:hover {
-      background: var(--color-dark);
-      color: #F7F3ED;
-      border-color: var(--color-dark);
-    }
-
-    /* 보내기/확인 버튼 */
-    .email-send-btn,
-    .pay-popup-close {
-      background: var(--color-dark);
-      border-radius: var(--radius-sm);
-      letter-spacing: 0.08em;
-    }
-
-    /* 이전/다음 버튼 */
-    .story-popup-nav-btn,
-    .popup-nav-btn {
-      border-radius: var(--radius-sm);
-      letter-spacing: 0.05em;
-    }
-
-    /* ESG 설명 아이콘 텍스트 */
-    #tab2 .content-card p[style*="font-size:1.2rem"] {
-      font-family: var(--font-serif);
-      font-size: 1rem !important;
+      font-size: 1.05rem;
       font-weight: 600;
-      color: var(--color-dark);
-      margin-bottom: 10px !important;
+      margin-bottom: 10px;
     }
 
-    /* 홈 콘텐츠 영역 */
-    #home .content-card .section-title {
-      font-size: 1.4rem;
+    .esg-desc .section-body { font-size: 0.88rem; line-height: 1.9; }
+
+    /* 토스트 */
+    .esg-toast-wrap {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
     }
 
-    /* 상품 상세 페이지 */
-    .detail-overlay {
-      border-radius: var(--radius-lg);
-    }
-
-    /* shop intro */
-    .shop-title {
-      font-family: var(--font-serif);
-      letter-spacing: 0.02em;
-    }
-
-    /* intro 박스 */
-    .product-intro-card {
-      overflow: hidden;
-    }
-
-    .intro-img {
-      transition: transform 0.5s ease;
-    }
-
-    .product-intro-card:hover .intro-img {
-      transform: scale(1.04);
-    }
-
-    /* 화살표 버튼 */
-    .slider-btn {
-      border-radius: var(--radius-sm);
-      backdrop-filter: blur(8px);
-    }
-
-    /* SNS 버튼 */
-    .sns-btn {
-      border-radius: var(--radius-sm);
-      border-color: rgba(200,169,126,0.3);
-    }
-
-    /* footer copy */
-    .footer-copy span {
-      color: #C8A97E;
-    }
-
-    /* =============================================
-       스크롤바 스타일 (웹킷)
-       ============================================= */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(200,169,126,0.3); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(200,169,126,0.5); }
-
-    /* =============================================
-       선택 영역 색
-       ============================================= */
-    ::selection {
-      background: rgba(200,169,126,0.25);
-      color: #2A1F17;
-    }
-
-    /* =============================================
-       홈 브랜드 키워드 3개
-       ============================================= */
-    .home-keywords {
+    .esg-toast {
+      background: var(--color-dark-2);
+      border: 1px solid rgba(200,169,126,0.3);
+      border-left: 3px solid var(--color-gold);
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      color: var(--color-cream);
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0;
-      padding: 48px 0;
-      border-bottom: 1px solid rgba(200,169,126,0.15);
+      gap: 10px;
+      min-width: 230px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.3s, transform 0.3s;
     }
 
-    .keyword-item {
-      flex: 1;
+    .esg-toast.show { opacity: 1; transform: translateX(0); }
+    .esg-toast-sub { color: rgba(247,243,237,0.55); font-size: 0.72rem; }
+
+    .esg-toast-badge {
+      background: rgba(200,169,126,0.2);
+      color: var(--color-gold);
+      font-size: 0.62rem;
+      padding: 2px 6px;
+    }
+
+    /* =============================================
+       탭3 - 공정 과정 (3×3 그리드)
+       ============================================= */
+    .roadmap {
+      list-style: none;
+      max-width: 960px;
+      margin: 56px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 56px 40px;
+    }
+
+    .roadmap-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      padding: 0 32px;
+      gap: 16px;
     }
 
-    .keyword-icon {
-      display: block;
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .keyword-label {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 600;
-      color: #2A1F17;
-      margin-bottom: 8px;
-    }
-
-    .keyword-desc {
-      font-size: 0.82rem;
-      color: #6B5744;
-      line-height: 1.7;
-    }
-
-    .keyword-divider {
-      width: 1px;
-      height: 64px;
-      background: rgba(200,169,126,0.3);
+    .step-img-wrap {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(200,169,126,0.45);
+      background-color: #f0e8d8;
+      position: relative;
+      box-shadow: var(--shadow-sm);
       flex-shrink: 0;
     }
 
-    /* =============================================
-       홈 브랜드 카피 섹션
-       ============================================= */
-    .home-copy-section {
-      padding: 80px 0 60px;
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .home-copy-sub {
-      font-size: 0.78rem;
-      color: #C8A97E;
-      letter-spacing: 0.2em;
-      margin-bottom: 20px;
-    }
-
-    .home-copy-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      font-weight: 600;
-      color: #2A1F17;
-      line-height: 1.4;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-
-    .home-copy-desc {
-      font-size: 0.95rem;
-      color: #6B5744;
-      line-height: 1.9;
-      margin-bottom: 36px;
-    }
-
-    .home-copy-btn {
-      display: inline-block;
-      padding: 13px 36px;
-      border: 1px solid #2A1F17;
-      color: #2A1F17;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    .home-copy-btn:hover {
-      background: #2A1F17;
-      color: #F7F3ED;
-    }
-
-    /* =============================================
-       섹션 인트로 (탭1, 탭2, 탭3 상단)
-       ============================================= */
-    .section-intro {
-      padding: 64px 0 48px;
-      text-align: center;
-      border-bottom: 1px solid rgba(200,169,126,0.15);
-      margin-bottom: 0;
-    }
-
-    .section-intro-dark {
-      background: #2A1F17;
-      padding: 64px 24px 48px;
-      margin-left: -24px;
-      margin-right: -24px;
-      border-bottom: none;
-    }
-
-    .section-intro-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: #C8A97E;
-      letter-spacing: 0.25em;
-      margin-bottom: 16px;
-    }
-
-    .section-intro-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 600;
-      color: #2A1F17;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      margin-bottom: 16px;
-    }
-
-    .section-intro-desc {
-      font-size: 0.92rem;
-      color: #6B5744;
-      line-height: 1.9;
-    }
-
-    /* =============================================
-       탭 간격 조정
-       ============================================= */
-    .tab-content + .tab-content {
-      margin-top: 120px;
-    }
-
-    /* =============================================
-       모바일 홈 키워드/카피
-       ============================================= */
-    @media (max-width: 768px) {
-      .home-keywords {
-        flex-direction: column;
-        padding: 32px 0;
-        gap: 24px;
-      }
-
-      .keyword-divider {
-        width: 40px;
-        height: 1px;
-      }
-
-      .keyword-item { padding: 0 16px; }
-
-      .home-copy-section {
-        padding: 48px 8px 40px;
-      }
-
-      .section-intro {
-        padding: 40px 0 32px;
-      }
-
-      .section-intro-dark {
-        padding: 40px 20px 32px;
-        margin-left: -14px;
-        margin-right: -14px;
-      }
-
-      .tab-content + .tab-content {
-        margin-top: 64px;
-      }
-    }
-
-    /* ✏️ [수정] 섹션 제목 */
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #2A1F17;
-      font-family: 'Noto Serif KR', serif;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .section-divider {
-      width: 40px;
-      height: 3px;
-      /* ✏️ [수정] 섹션 구분선 색 */
-      background-color: #C8A97E;
-      margin-bottom: 24px;
-      border-radius: 0;
-    }
-
-    /* ✏️ [수정] 섹션 본문 설명 텍스트 */
-    .section-body {
-      font-size: 0.95rem;
-      line-height: 2;
-      color: #6B5744;
-      max-width: 680px;
-    }
-
-    .content-card {
-  background: #FDFAF6;
-  border-radius: 16px;
-  padding: 56px 64px;
-  margin-top: 48px;
-  border: 1px solid rgba(200,169,126,0.2);
-  box-shadow: 0 2px 20px rgba(42,31,23,0.04);
-  /* ✏️ [수정] 최소 높이 설정 */
-  min-height: 400px;
-}
-
-    /* =============================================
-       ✏️ [수정] 하단 고정 푸터 (카피라이트)
-       ============================================= */
-       footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
+    .step-img {
       width: 100%;
-      height: 60px;
-      background-color: #2A1F17;
-      border-top: 1px solid rgba(200,169,126,0.2);
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .step-img-placeholder,
+    .intro-img-placeholder,
+    .product-img-placeholder,
+    .detail-img-placeholder {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 200;
+      font-size: 0.9rem;
+      color: #b0a090;
+      z-index: 0;
     }
 
-    /* ✏️ [수정] 카피라이트 텍스트 */
-    footer p {
+    .step-head { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--color-dark);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-label {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-brown);
+    }
+
+    .step-desc {
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.3px;
-    }
-
-    /* ✏️ [수정] 카피라이트 강조 텍스트 색 */
-    footer p span {
-      color: #C8A97E;
-      font-weight: 500;
+      line-height: 1.7;
+      color: var(--color-mid);
+      max-width: 240px;
+      word-break: keep-all;
     }
 
     /* =============================================
-       반응형 (태블릿 / 모바일)
+       탭4 - 구매 페이지 (오버레이)
+       ============================================= */
+    #tab4 {
+      display: none;
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-bg);
+      z-index: 90;
+      overflow-y: auto;
+    }
+
+    #tab4.tab4-active { display: block; }
+
+    .tab4-close {
+      position: fixed;
+      top: calc(var(--header-h) + 16px);
+      right: 24px;
+      z-index: 91;
+    }
+
+    .shop-wrap { max-width: 1000px; margin: 0 auto; padding: 56px 24px 120px; }
+
+    .shop-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--color-brown);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .shop-divider {
+      width: 40px;
+      height: 3px;
+      background-color: var(--color-gold);
+      margin-bottom: 40px;
+    }
+
+    /* 제품 소개 - 제품당 한 줄, 지그재그 */
+    .product-intro { padding: 48px 56px; margin: 0 0 48px; }
+
+    .intro-row { display: flex; align-items: center; gap: 48px; }
+    .intro-row + .intro-row { margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(200,169,126,0.15); }
+    .intro-row.reverse { flex-direction: row-reverse; }
+
+    .intro-text { flex: 1; }
+
+    .intro-img-wrap {
+      flex: 1;
+      height: 280px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background-color: #f0e8d8;
+      position: relative;
+    }
+
+    .intro-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 2×2 상품 그리드 */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .product-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(200,169,126,0.18);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(42,31,23,0.1);
+      border-color: rgba(200,169,126,0.35);
+    }
+
+    .product-img-wrap { width: 100%; height: 240px; background-color: #f0e8d8; position: relative; overflow: hidden; }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      background: var(--color-dark);
+      color: var(--color-gold);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .product-info { padding: 20px 24px 24px; }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .product-desc { font-size: 0.88rem; color: var(--color-mid); margin-bottom: 12px; line-height: 1.5; }
+
+    .product-price {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .add-cart-btn {
+      width: 100%;
+      padding: 11px 0;
+      background-color: var(--color-dark);
+      color: var(--color-cream);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-cart-btn:hover { background-color: var(--color-brown); }
+    .add-cart-btn.added { background-color: var(--color-gold); color: var(--color-brown); }
+    .add-cart-btn.outline { background: none; color: var(--color-dark); border: 1px solid var(--color-dark); }
+    .add-cart-btn.outline:hover { background: var(--color-dark); color: var(--color-cream); }
+
+    /* 장바구니 */
+    .cart-section {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid #e8ddd0;
+      padding: 32px;
+    }
+
+    .cart-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--color-brown); margin-bottom: 16px; }
+    .cart-list { list-style: none; min-height: 48px; margin-bottom: 16px; }
+    .cart-empty { color: #a99a8a; font-size: 0.9rem; padding: 8px 0; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0e8d8;
+      font-size: 0.92rem;
+    }
+
+    .cart-item-name { flex: 1; word-break: keep-all; }
+    .cart-item-opt { display: block; font-size: 0.78rem; color: var(--color-mid); margin-top: 2px; }
+    .cart-item-price { font-weight: 600; color: var(--color-brown); white-space: nowrap; min-width: 72px; text-align: right; }
+
+    /* 수량 조절 */
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #e8ddd0;
+      border-radius: var(--radius-sm);
+    }
+
+    .qty button {
+      width: 30px;
+      height: 30px;
+      background: none;
+      border: none;
+      color: var(--color-brown);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .qty button:hover { background: #f5ede2; }
+    .qty span { min-width: 26px; text-align: center; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+
+    /* 메뉴의 장바구니 개수 표시 */
+    .cart-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      margin-left: 6px;
+      border-radius: 9px;
+      background: var(--color-gold);
+      color: var(--color-dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      vertical-align: 1px;
+    }
+
+    .cart-badge[hidden] { display: none; }
+    .cart-badge.bump { animation: bump 0.35s ease; }
+
+    @keyframes bump {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    /* 결제 완료 주문 요약 */
+    .pay-summary {
+      list-style: none;
+      text-align: left;
+      border-top: 1px solid var(--color-line);
+      border-bottom: 1px solid var(--color-line);
+      padding: 12px 0;
+      margin: -8px 0 24px;
+      font-size: 0.85rem;
+      color: var(--color-mid);
+    }
+
+    .pay-summary li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+    .pay-summary li.pay-total { color: var(--color-dark); font-weight: 700; padding-top: 10px; margin-top: 6px; border-top: 1px dashed var(--color-line); }
+
+    .cart-item-del {
+      background: none;
+      border: none;
+      color: #b8aa9c;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      transition: color 0.15s;
+    }
+
+    .cart-item-del:hover { color: var(--color-red); }
+
+    .cart-total { text-align: right; font-size: 1rem; font-weight: 600; margin-bottom: 20px; }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 16px 0;
+      background-color: var(--color-dark);
+      color: var(--color-cream);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .checkout-btn:hover { background-color: var(--color-brown); }
+
+    .cart-msg { min-height: 1.4em; margin-top: 10px; font-size: 0.85rem; color: var(--color-red); text-align: center; }
+    .cart-note { margin-top: 4px; font-size: 0.75rem; color: #a99a8a; text-align: center; }
+
+    /* =============================================
+       공통 팝업 (상세 / 결제 / 이메일 / 스토리)
+       ============================================= */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-bg.show { display: flex; }
+    #payPopup { z-index: 1001; }
+
+    .modal-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: popupIn 0.3s cubic-bezier(0.23,1,0.32,1);
+    }
+
+    @keyframes popupIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--color-gold);
+      background: var(--color-surface);
+      color: var(--color-brown);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .close-btn:hover { background: var(--color-dark); color: var(--color-cream); border-color: var(--color-dark); }
+
+    .pill-btn {
+      display: inline-block;
+      padding: 12px 40px;
+      background: var(--color-dark);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .pill-btn:hover { background: var(--color-brown); }
+
+    /* 상품 상세 */
+    .detail-overlay { max-width: 820px; padding: 40px; }
+    .detail-content { display: flex; gap: 40px; align-items: flex-start; margin-top: 16px; }
+
+    .detail-img-wrap {
+      width: 320px;
+      height: 320px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background-color: #f0e8d8;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .detail-img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; display: block; }
+
+    .detail-info { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .detail-info .shop-divider { margin-bottom: 0; }
+    .detail-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; }
+    .detail-desc { font-size: 1rem; color: var(--color-mid); line-height: 1.8; word-break: keep-all; }
+    .detail-price { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--color-brown); }
+    .detail-cart-btn { padding: 14px 0; font-size: 1rem; }
+
+    /* 커스텀 옵션 선택 */
+    #detailOptions { display: flex; flex-direction: column; gap: 18px; }
+    #detailOptions:empty { display: none; }
+    .option-group { border: none; }
+    .option-group legend { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+    .option-group legend small { font-weight: 400; color: var(--color-mid); margin-left: 4px; }
+    .option-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .option-chip input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .option-chip span {
+      display: inline-block;
+      padding: 7px 14px;
+      border: 1px solid rgba(200,169,126,0.5);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .option-chip input:checked + span { background: var(--color-dark); color: var(--color-cream); border-color: var(--color-dark); }
+    .option-chip input:focus-visible + span { outline: 2px solid var(--color-gold); outline-offset: 2px; }
+    .option-chip input:disabled + span { opacity: 0.4; cursor: default; }
+
+    /* 결제 / 이메일 팝업 */
+    .small-popup { max-width: 380px; padding: 48px 40px; text-align: center; }
+    .small-popup-icon { font-size: 2.6rem; margin-bottom: 14px; }
+    .small-popup-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--color-brown); margin-bottom: 10px; }
+    .small-popup-desc { font-size: 0.92rem; color: var(--color-mid); line-height: 1.7; margin-bottom: 28px; }
+
+    /* 스토리 팝업 */
+    .story-popup-box { max-width: 600px; max-height: 80vh; padding: 48px 44px; border-left: 5px solid var(--color-gold); }
+    .story-popup-episode { font-size: 0.8rem; font-weight: 600; color: var(--color-gold); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .story-popup-title { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--color-brown); margin-bottom: 20px; line-height: 1.4; padding-right: 32px; word-break: keep-all; }
+    .story-popup-body { font-size: 0.95rem; line-height: 1.9; color: #555; white-space: pre-line; word-break: keep-all; }
+    .story-popup-nav { display: flex; justify-content: space-between; margin-top: 32px; gap: 12px; }
+
+    .story-popup-nav-btn {
+      flex: 1;
+      padding: 10px 0;
+      border: 1.5px solid var(--color-gold);
+      background: none;
+      color: var(--color-brown);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .story-popup-nav-btn:hover:not(:disabled) { background: var(--color-dark); color: #fff; border-color: var(--color-dark); }
+    .story-popup-nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+    /* =============================================
+       푸터 (일반 푸터 - 화면에 고정되지 않음)
+       ============================================= */
+    .site-footer {
+      background-color: var(--color-dark);
+      border-top: 1px solid var(--color-line);
+      color: rgba(247,243,237,0.6);
+      padding: 40px 40px 28px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(200,169,126,0.15);
+    }
+
+    .footer-logo { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: var(--color-cream); letter-spacing: 0.08em; margin-bottom: 6px; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.7; }
+
+    .footer-sns { display: flex; gap: 8px; }
+
+    .sns-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid rgba(200,169,126,0.3);
+      border-radius: var(--radius-sm);
+      color: rgba(247,243,237,0.75);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .sns-btn:hover { color: var(--color-gold); border-color: var(--color-gold); background: rgba(200,169,126,0.08); }
+
+    .footer-copy { max-width: 1200px; margin: 20px auto 0; font-size: 0.78rem; letter-spacing: 0.3px; }
+    .footer-copy span { color: var(--color-gold); font-weight: 500; }
+
+    /* =============================================
+       반응형 - 태블릿
+       ============================================= */
+    @media (max-width: 900px) {
+      .esg-grid { grid-template-columns: repeat(2, 1fr); }
+      .esg-desc { grid-template-columns: 1fr; gap: 28px; padding: 40px; }
+      .roadmap { gap: 48px 20px; }
+      .step-img-wrap { width: 140px; height: 140px; }
+    }
+
+    /* =============================================
+       반응형 - 모바일
        ============================================= */
     @media (max-width: 768px) {
-      /* =============================================
-         헤더 & 네비게이션
-         ============================================= */
-      header {
-        padding: 0 12px;
-        height: auto;
-        min-height: 56px;
-        flex-wrap: wrap;
-        gap: 0;
-        position: sticky;
-        top: 0;
-      }
+      :root { --header-h: 56px; }
 
-      .logo {
-        font-size: 1.1rem;
-        padding: 12px 0;
-      }
+      header { padding: 0 14px; }
+      .logo { font-size: 1.1rem; }
 
-      /* 햄버거 버튼 */
       .nav-toggle {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
+        gap: 5px;
+        width: 40px;
+        height: 40px;
         background: none;
         border: none;
         cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-        padding: 4px;
       }
 
       .nav-toggle span {
         display: block;
         width: 22px;
         height: 2px;
-        background: #C8A97E;
-        transition: all 0.3s;
+        background: var(--color-gold);
         border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
       }
 
-      .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
       .nav-toggle.open span:nth-child(2) { opacity: 0; }
-      .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-      /* 모바일 nav 드롭다운 */
+      /* 드롭다운은 헤더 아래로 펼쳐짐 (헤더 높이는 그대로) */
       nav {
-        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         max-height: 0;
         overflow: hidden;
+        background: var(--color-brown);
         transition: max-height 0.35s ease;
-        background: #4A2C17;
       }
 
-      nav.open {
-        max-height: 400px;
-        border-top: 1px solid rgba(200,169,126,0.3);
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 0;
-        padding: 8px 0;
-      }
+      nav.open { max-height: 400px; border-top: 1px solid rgba(200,169,126,0.3); }
+      nav ul { flex-direction: column; gap: 0; padding: 8px 0; }
 
       nav ul li a {
         display: block;
-        padding: 12px 16px;
-        font-size: 0.9rem;
+        padding: 14px 18px;
+        font-size: 0.95rem;
         border-radius: 0;
         border-bottom: 1px solid rgba(200,169,126,0.1);
       }
 
-      nav ul li:last-child a {
-        border-bottom: none;
-      }
+      nav ul li:last-child a { border-bottom: none; }
 
-      /* =============================================
-         메인 콘텐츠
-         ============================================= */
-      main {
-        padding: 0 14px;
-      }
+      main { padding: 0 14px 80px; }
+      .tab-content + .tab-content { margin-top: 64px; }
 
-      body {
-        padding-bottom: 60px;
-      }
+      .banner-section { height: 320px; margin: 16px 0 24px; border-radius: 12px; }
+      .slide { padding: 0 24px; }
+      .slide-title { font-size: 1.5rem; }
+      .slide-sub { font-size: 0.85rem; }
+      .slide-btn { padding: 10px 22px; margin-top: 20px; }
+      .slider-btn { display: none; }  /* 모바일은 스와이프로 넘김 */
 
-      /* =============================================
-         배너 슬라이더
-         ============================================= */
-      .banner-section {
-        height: 220px;
-        margin: 16px 0 24px;
-        border-radius: 10px;
-      }
+      .home-keywords { flex-direction: column; padding: 32px 0; gap: 24px; }
+      .keyword-divider { width: 40px; height: 1px; }
+      .keyword-item { padding: 0 16px; }
+      .home-copy-section { padding: 48px 8px 24px; }
 
-      .slide-title {
-        font-size: 1.3rem;
-        padding: 0 16px;
-      }
+      .section-intro { padding: 40px 0 32px; }
+      .section-intro-dark { padding: 40px 20px 32px; }
 
-      .slide-sub {
-        font-size: 0.82rem;
-        padding: 0 20px;
-      }
+      .content-card { padding: 28px 20px; margin-top: 24px; border-radius: 12px; }
+      .story-card { padding: 28px 12px 32px; }
+      .section-title { font-size: 1.3rem; }
+      .section-body { font-size: 0.9rem; }
 
-      .slide-btn {
-        padding: 8px 20px;
-        font-size: 0.82rem;
-        margin-top: 16px;
-      }
+      .medal-grid { gap: 20px 12px; }
+      .medal { width: 104px; }
+      .medal-circle { width: 96px; height: 96px; }
+      .medal-num { font-size: 1.5rem; }
+      .medal-caption { font-size: 0.75rem; }
+      .medal-caption strong { font-size: 0.85rem; }
 
-      .slider-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-      }
+      .esg-counter-wrap { padding: 0 14px 28px; }
+      .esg-card { padding: 22px 16px; }
+      .esg-num { font-size: 1.8rem; }
+      .esg-highlight .esg-num { font-size: 2.2rem; }
+      .esg-bowl { padding: 20px 16px; gap: 16px; }
+      .esg-bowl-bars { min-width: 0; width: 100%; }
+      .esg-desc { padding: 28px 20px 32px; }
+      .esg-toast-wrap { right: 12px; left: 12px; bottom: 16px; }
+      .esg-toast { min-width: 0; }
 
-      /* =============================================
-         콘텐츠 카드
-         ============================================= */
-      .content-card {
-        padding: 24px 20px;
-        margin-top: 24px;
-        border-radius: 10px;
-      }
+      /* 공정 과정: 세로 타임라인 (사진 왼쪽, 글 오른쪽) */
+      .roadmap { grid-template-columns: 1fr; gap: 20px; margin-top: 32px; }
+      .roadmap-step { flex-direction: row; text-align: left; gap: 18px; }
+      .step-img-wrap { width: 92px; height: 92px; }
+      .step-head { justify-content: flex-start; }
+      .step-desc { max-width: none; }
 
-      .section-title {
-        font-size: 1.3rem;
-      }
+      .shop-wrap { padding: 32px 14px 80px; }
+      .shop-title { padding-right: 56px; font-size: 1.7rem; }  /* 닫기 버튼과 겹치지 않게 */
+      .tab4-close { right: 14px; top: calc(var(--header-h) + 12px); }
+      .product-intro { padding: 28px 20px; }
+      .intro-row, .intro-row.reverse { flex-direction: column; align-items: stretch; gap: 20px; }
+      .intro-row + .intro-row { margin-top: 32px; padding-top: 32px; }
+      .intro-img-wrap { flex: none; width: 100%; height: 220px; }  /* 세로 배치에서 높이가 사라지는 문제 해결 */
 
-      .section-body {
-        font-size: 0.88rem;
-      }
+      .product-grid { grid-template-columns: 1fr; gap: 16px; }
+      .product-img-wrap { height: 200px; }
+      .product-info { padding: 16px 18px 18px; }
+      .cart-section { padding: 22px 16px; }
 
-      /* =============================================
-         탭 간격
-         ============================================= */
-      .tab-content + .tab-content {
-        margin-top: 48px;
-      }
+      .modal-bg { padding: 14px; }
+      .detail-overlay { padding: 28px 20px; max-height: 90vh; }
+      .detail-content { flex-direction: column; gap: 20px; margin-top: 40px; }  /* 닫기 버튼 아래로 */
+      .detail-img-wrap { width: 100%; height: 220px; }
+      .detail-name { font-size: 1.4rem; padding-right: 40px; }
+      .small-popup { padding: 40px 24px; }
+      .story-popup-box { padding: 40px 22px 28px; max-height: 90vh; }
+      .story-popup-title { font-size: 1.1rem; }
+      .cart-item { flex-wrap: wrap; }
+      .cart-item-name { flex-basis: 100%; }
+      .cart-item .qty { margin-right: auto; }
 
-      /* =============================================
-         메달 그리드 (브랜드 스토리)
-         ============================================= */
-      .medal-grid {
-        gap: 16px;
-        padding: 4px 0 12px;
-      }
-
-      .medal-card {
-        width: 110px;
-        height: 110px;
-      }
-
-      .medal-num {
-        font-size: 1.5rem;
-      }
-
-      .medal-label {
-        font-size: 0.7rem;
-        padding: 10px;
-      }
-
-      /* =============================================
-         ESG 카운터
-         ============================================= */
-      .esg-counter-wrap {
-        padding: 24px 14px;
-      }
-
-      .esg-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-
-      .esg-card {
-        padding: 20px 16px;
-      }
-
-      .esg-num {
-        font-size: 1.8rem !important;
-      }
-
-      .esg-highlight .esg-num {
-        font-size: 2.2rem !important;
-      }
-
-      .esg-bowl {
-        padding: 20px 16px;
-        gap: 16px;
-      }
-
-      .esg-bowl-bars {
-        min-width: unset;
-        width: 100%;
-      }
-
-      .esg-toast-wrap {
-        right: 12px;
-        bottom: 70px;
-        left: 12px;
-      }
-
-      .esg-toast {
-        min-width: unset;
-      }
-
-      /* ESG 설명 3열 → 1열 */
-      #tab2 .content-card > div[style*="grid-template-columns"] {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-      }
-
-      /* =============================================
-         제품 소개 2분할 (intro-row/split)
-         ============================================= */
-      .intro-row,
-      .intro-split {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .intro-img-wrap {
-        width: 100% !important;
-        height: 200px !important;
-      }
-
-      /* =============================================
-         공정 과정 로드맵
-         ============================================= */
-      .roadmap-wrap {
-        padding: 0 8px;
-      }
-
-      .roadmap-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
-
-      .roadmap-arrow {
-        transform: rotate(90deg);
-        font-size: 1.4rem;
-      }
-
-      .roadmap-step {
-        width: 160px;
-      }
-
-      .step-img-wrap {
-        width: 140px !important;
-        height: 140px !important;
-      }
-
-      .roadmap-curve-right,
-      .roadmap-curve-left {
-        display: none;
-      }
-
-      /* =============================================
-         탭4 제품 페이지
-         ============================================= */
-      #tab4 {
-        padding: 48px 14px 80px;
-      }
-
-      .shop-wrap {
-        padding: 24px 0 60px;
-      }
-
-      /* 제품 그리드 2열 → 1열 */
-      .product-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px;
-      }
-
-      .product-img-wrap {
-        height: 200px;
-      }
-
-      .product-info {
-        padding: 16px 18px 18px;
-      }
-
-      /* 상세 페이지 */
-      .detail-overlay {
-        padding: 28px 20px;
-      }
-
-      .detail-content {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .detail-img-wrap {
-        width: 100% !important;
-        height: 220px !important;
-      }
-
-      /* 장바구니 */
-      .cart-section {
-        padding: 20px 16px;
-      }
-
-      /* =============================================
-         푸터
-         ============================================= */
-      footer {
-        padding: 0 16px;
-        gap: 12px;
-        height: 56px;
-      }
-
-      .footer-copy {
-        font-size: 0.72rem;
-      }
-
-      .sns-btn {
-        width: 32px;
-        height: 32px;
-      }
-
-      /* =============================================
-         이메일 팝업
-         ============================================= */
-      .email-popup {
-        padding: 36px 24px;
-      }
-
-      /* =============================================
-         결제 팝업
-         ============================================= */
-      .pay-popup {
-        padding: 36px 24px;
-      }
-
-      /* =============================================
-         스토리 팝업
-         ============================================= */
-      .story-popup-box {
-        padding: 36px 24px;
-        max-height: 90vh;
-      }
-
-      .story-popup-title {
-        font-size: 1.1rem;
-      }
+      .site-footer { padding: 32px 20px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
 
-    /* 아주 작은 화면 (320px~) */
     @media (max-width: 380px) {
-      .medal-card {
-        width: 90px;
-        height: 90px;
-      }
+      .banner-section { height: 280px; }
+      .slide-title { font-size: 1.3rem; }
+      .medal { width: 92px; }
+      .medal-circle { width: 84px; height: 84px; }
+      .esg-grid { grid-template-columns: 1fr; }
+    }
 
-      .medal-num { font-size: 1.3rem; }
-
-      .esg-grid {
-        grid-template-columns: 1fr !important;
-      }
-
-      .slide-title { font-size: 1.1rem; }
-
-      .banner-section { height: 180px; }
+    /* 움직임 줄이기 설정을 켠 사용자 배려 */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  <noscript><style>.esg-card, .esg-bowl { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
+
 <!-- =============================================
-     로딩 화면 - 붓글씨 스타일
-     ✏️ [수정] 배경색: #f5edd8 부분
-     ✏️ [수정] 로딩 텍스트: 영월 폰트
+     로딩 화면
      ============================================= -->
-<div id="loader">
+<div id="loader" aria-hidden="true">
   <div class="loader-inner">
-    <!-- ✏️ [수정] 브랜드명 텍스트 -->
     <div class="loader-text-wrap">
       <span class="loader-char lc-1">빚</span>
       <span class="loader-char lc-2">음</span>
       <span class="loader-char lc-space"> </span>
       <span class="loader-char lc-3">쌀</span>
     </div>
-    <!-- ✏️ [수정] 서브텍스트 -->
     <p class="loader-sub">전통의 가치를 담은 업사이클링 푸드</p>
   </div>
 </div>
 
-<style>
-  /* 영월 폰트 불러오기 - 파일이 같은 폴더에 있어야 함 */
-  @font-face {
-    font-family: 'Yeongwol';
-    src: url('YeongwolTTF.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap; /* 폰트 로딩 중 fallback 폰트 먼저 표시 */
-  }
-
-  /* ✏️ [수정] 로딩 배경색 */
-  #loader {
-    position: fixed;
-    inset: 0;
-    background-color: #F7F3ED;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
-  }
-
-  #loader.fade-out {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .loader-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .loader-text-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-
-  /* ✏️ [수정] 브랜드명 글자 스타일 */
-  .loader-char {
-    font-family: 'Yeongwol', serif;
-    /* ✏️ [수정] 글자 크기 */
-    font-size: 5rem;
-    /* ✏️ [수정] 글자색 */
-    color: #4A2C17;
-    opacity: 0;
-    display: inline-block;
-    transform: translateY(-10px);
-    animation: charAppear 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    text-shadow: 1px 2px 8px rgba(74,44,23,0.15);
-  }
-
-  /* ✏️ [수정] 글자별 등장 딜레이 (0.3s 간격) */
-  .lc-1 { animation-delay: 0.2s; }  /* 빚 */
-  .lc-2 { animation-delay: 0.5s; }  /* 음 */
-  .lc-space { opacity: 1; transform: none; animation: none; font-size: 2rem; }
-  .lc-3 { animation-delay: 0.8s; }  /* 쌀 */
-
-  @keyframes charAppear {
-    0%   { opacity: 0; transform: translateY(-10px); filter: blur(4px); }
-    60%  { opacity: 1; filter: blur(0); }
-    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-  }
-
-  /* ✏️ [수정] 서브텍스트 */
-  .loader-sub {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(74,44,23,0.55);
-    letter-spacing: 0.2em;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: subRise 0.6s ease forwards 1.3s;
-  }
-
-  @keyframes subRise {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-</style>
-
 <script>
-  /* =============================================
-     로딩 화면 제거
-     - DOMContentLoaded 기준으로 빠르게 숨김
-     - 최대 1500ms 안전장치 (이미지/폰트 실패해도 무한 대기 없음)
-     ============================================= */
+  /* 로딩 화면은 방문(탭) 당 처음 한 번만 보여줌 */
+  try {
+    if (sessionStorage.getItem('bieumsal-loader')) document.getElementById('loader').remove();
+    else sessionStorage.setItem('bieumsal-loader', '1');
+  } catch (e) {}
+
+  /* 로딩 화면 제거: DOM 준비 0.8초 후, 최대 1.5초 안전장치 */
   function hideLoader() {
     const loader = document.getElementById('loader');
     if (!loader || loader._removed) return;
     loader._removed = true;
     loader.classList.add('fade-out');
-    setTimeout(() => {
-      if (loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 600);
+    setTimeout(() => loader.remove(), 600);
   }
-
-  /* DOM 준비되면 바로 숨기기 시작 (0.8초 후) */
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(hideLoader, 800);
-  });
-
-  /* 안전장치: 최대 1.5초 후 강제 제거 */
+  document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 800));
   setTimeout(hideLoader, 1500);
 </script>
+
+<!-- =============================================
+     상단 헤더 & 네비게이션
+     ✏️ [수정] 로고명, 메뉴 이름
+     ============================================= -->
+<header>
+  <a class="logo" href="#home" data-goto="home">빚음 쌀</a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mainNav">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav id="mainNav" aria-label="주요 메뉴">
+    <ul>
+      <li><a href="#home" class="tab-link active" data-target="home">홈</a></li>
+      <li><a href="#tab1" class="tab-link" data-target="tab1">우리의 이야기</a></li>
+      <li><a href="#tab2" class="tab-link" data-target="tab2">ESG 가치</a></li>
+      <li><a href="#tab3" class="tab-link" data-target="tab3">공정 과정 · 레시피</a></li>
+      <li><a href="#tab4" class="tab-link" data-target="tab4">구매 페이지<span class="cart-badge" id="cartBadge" hidden></span></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
   <!-- =============================================
-       상단 헤더  <!-- =============================================
-       상단 헤더 & 탭 네비게이션
-       ✏️ [수정] 로고명, 탭 이름은 아래에서 변경
+       홈
        ============================================= -->
-  <header>
-    <!-- ✏️ [수정] 로고 텍스트 -->
-    <a class="logo" href="#home">빚음 쌀</a>
+  <div id="home" class="tab-content">
 
-    <!-- 모바일 햄버거 버튼 -->
-    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
-      <span></span><span></span><span></span>
-    </button>
+    <!-- 배너 슬라이더
+         ✏️ [수정] 슬라이드 사진: 각 .slide의 style="background-image:url('파일명')"
+         ✏️ [수정] 버튼의 data-goto: 누르면 이동할 섹션 (home / tab1 / tab2 / tab3 / tab4) -->
+    <section class="banner-section" id="banner" tabindex="0" aria-roledescription="carousel" aria-label="빚음 쌀 소개 배너 (좌우 방향키로 넘기기)">
+      <div class="slider-track" id="sliderTrack">
 
-    <nav id="mainNav">
-      <ul>
-        <!-- ✏️ [수정] 탭 이름 변경: 텍스트 부분만 수정 -->
-        <li><a href="#home"  class="tab-link active" data-target="home">홈</a></li>
-        <li><a href="#tab1" class="tab-link" data-target="tab1">우리의 이야기</a></li>
-        <li><a href="#tab2" class="tab-link" data-target="tab2">ESG적 가치</a></li>
-        <li><a href="#tab3" class="tab-link" data-target="tab3">공정 과정 "레시피"</a></li>
-        <li><a href="#tab4" class="tab-link" data-target="tab4">구매 페이지</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- =============================================
-       메인 콘텐츠
-       ============================================= -->
-  <main>
-
-    <!-- =============================================
-         홈 탭 콘텐츠
-         ============================================= -->
-    <div id="home" class="tab-content active">
-
-      <!-- 배너 슬라이더 -->
-      <section class="banner-section">
-        <div class="slider-track" id="sliderTrack">
-
-          <div class="slide">
-            <h2 class="slide-title">슬라이드 제목 1</h2>
-            <p class="slide-sub">여기에 슬라이드 1의 설명 텍스트를 입력하세요.<br>두 줄로 나눌 수도 있습니다.</p>
-            <button class="slide-btn">자세히 보기</button>
-          </div>
-
-          <div class="slide">
-            <h2 class="slide-title">슬라이드 제목 2</h2>
-            <p class="slide-sub">여기에 슬라이드 2의 설명 텍스트를 입력하세요.<br>프로모션이나 이벤트 내용을 넣어보세요.</p>
-            <button class="slide-btn">이벤트 보기</button>
-          </div>
-
-          <div class="slide">
-            <h2 class="slide-title">슬라이드 제목 3</h2>
-            <p class="slide-sub">여기에 슬라이드 3의 설명 텍스트를 입력하세요.<br>신규 소식이나 공지를 알릴 수 있어요.</p>
-            <button class="slide-btn">공지 확인</button>
-          </div>
-
+        <div class="slide" style="background-image:url('그래놀라.jpeg')">
+          <h2 class="slide-title">버려지는 쌀에서,<br>가장 건강한 한 그릇</h2>
+          <p class="slide-sub">전통주를 빚고 남은 쌀발효박으로 만든 업사이클링 그래놀라</p>
+          <button class="slide-btn" data-goto="tab4">제품 보기</button>
         </div>
 
-        <button class="slider-btn prev" id="prevBtn" aria-label="이전 슬라이드">&#8592;</button>
-        <button class="slider-btn next" id="nextBtn" aria-label="다음 슬라이드">&#8594;</button>
-        <div class="slider-dots" id="sliderDots"></div>
-      </section>
+        <div class="slide" style="background-image:url('술지게미.jpg')">
+          <h2 class="slide-title">맑은 술 뒤에 남겨진<br>귀한 숨결</h2>
+          <p class="slide-sub">누룩과 시간이 빚어낸 발효의 영양을 다시 식탁 위로 되돌립니다</p>
+          <button class="slide-btn" data-goto="tab1">우리의 이야기</button>
+        </div>
 
-      <!-- 브랜드 키워드 3개 -->
-      <div class="home-keywords">
-        <div class="keyword-item">
-          <span class="keyword-icon">♻️</span>
-          <p class="keyword-label">푸드 업사이클링</p>
-          <p class="keyword-desc">버려지는 쌀발효박을<br>그래놀라로 재탄생</p>
+        <div class="slide" style="background-image:url('업사이클링.jpg')">
+          <h2 class="slide-title">한 봉지가 남기는<br>작은 변화</h2>
+          <p class="slide-sub">쌀발효박 순환부터 탄소 감축까지, 숫자로 확인해 보세요</p>
+          <button class="slide-btn" data-goto="tab2">ESG 가치 보기</button>
         </div>
-        <div class="keyword-divider"></div>
-        <div class="keyword-item">
-          <span class="keyword-icon">🌾</span>
-          <p class="keyword-label">전통 발효 과학</p>
-          <p class="keyword-desc">수백년 전통 발효의<br>영양을 그대로</p>
-        </div>
-        <div class="keyword-divider"></div>
-        <div class="keyword-item">
-          <span class="keyword-icon">🌍</span>
-          <p class="keyword-label">지속 가능한 식탁</p>
-          <p class="keyword-desc">한 그릇이 만드는<br>작은 지구의 변화</p>
-        </div>
+
       </div>
 
-      <!-- 브랜드 한 줄 카피 -->
-      <div class="home-copy-section">
-        <p class="home-copy-sub">빚음 쌀이 묻습니다</p>
-        <h2 class="home-copy-title">버려지는 것들에서<br>가장 건강한 한 그릇을</h2>
-        <p class="home-copy-desc">
-          전통주 양조 후 매일 수 톤씩 버려지는 쌀발효박.<br>
-          빚음 쌀은 이 귀한 발효의 결정체를 그래놀라의 핵심 원료로 되살립니다.
-        </p>
-        <a href="#tab1" class="home-copy-btn" onclick="event.preventDefault(); document.getElementById('tab1').scrollIntoView({behavior:'smooth'})">우리의 이야기 →</a>
+      <button class="slider-btn prev" id="sliderPrev" aria-label="이전 슬라이드">&#8592;</button>
+      <button class="slider-btn next" id="sliderNext" aria-label="다음 슬라이드">&#8594;</button>
+      <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <!-- 브랜드 키워드 3개 -->
+    <div class="home-keywords">
+      <div class="keyword-item">
+        <span class="keyword-icon" aria-hidden="true">♻️</span>
+        <p class="keyword-label">푸드 업사이클링</p>
+        <p class="keyword-desc">버려지는 쌀발효박을<br>그래놀라로 재탄생</p>
       </div>
-
-    </div><!-- /home -->
-
-
-    <!-- =============================================
-         탭1 콘텐츠
-         ✏️ [수정] 탭1 내용 이곳에 작성
-         ============================================= -->
-    <div id="tab1" class="tab-content">
-
-      <!-- 섹션 인트로 -->
-      <div class="section-intro">
-        <p class="section-intro-tag">OUR STORY</p>
-        <h2 class="section-intro-title">우리의 이야기</h2>
-        <p class="section-intro-desc">
-          버려지는 것들을 다시 바라보며 시작된 브랜드.<br>
-          다섯 개의 장(章)으로 빚음 쌀의 탄생을 만나보세요.
-        </p>
+      <div class="keyword-divider"></div>
+      <div class="keyword-item">
+        <span class="keyword-icon" aria-hidden="true">🌾</span>
+        <p class="keyword-label">전통 발효 과학</p>
+        <p class="keyword-desc">수백 년 전통 발효의<br>영양을 그대로</p>
       </div>
-
-      <!-- 메달 그리드 -->
-      <div class="content-card" style="padding: 48px 56px;">
-        <p class="story-sub-txt">메달을 클릭해 이야기를 펼쳐보세요</p>
-        <div class="medal-grid">
-          <div class="medal-card" onclick="openPopup(0)">
-            <div class="medal-bg"></div>
-            <div class="medal-num">01</div>
-            <div class="medal-label">프롤로그<br>탄생 스토리</div>
-          </div>
-          <div class="medal-card" onclick="openPopup(1)">
-            <div class="medal-bg"></div>
-            <div class="medal-num">02</div>
-            <div class="medal-label">발견<br>발효의 정수</div>
-          </div>
-          <div class="medal-card" onclick="openPopup(2)">
-            <div class="medal-bg"></div>
-            <div class="medal-num">03</div>
-            <div class="medal-label">의문<br>왜 없을까?</div>
-          </div>
-          <div class="medal-card" onclick="openPopup(3)">
-            <div class="medal-bg"></div>
-            <div class="medal-num">04</div>
-            <div class="medal-label">도전<br>식탁을 바꾸다</div>
-          </div>
-          <div class="medal-card" onclick="openPopup(4)">
-            <div class="medal-bg"></div>
-            <div class="medal-num">05</div>
-            <div class="medal-label">에필로그<br>새로운 가치</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /tab1 -->
-
-    <!-- 브랜드 스토리 팝업 -->
-    <div class="story-popup-bg" id="popupBg" onclick="handleBgClick(event)">
-      <div class="story-popup-box">
-        <button class="story-popup-close" onclick="closePopup()">✕</button>
-        <p class="story-popup-episode" id="popupEpisode"></p>
-        <h2 class="story-popup-title" id="popupTitle"></h2>
-        <p class="story-popup-body" id="popupBody"></p>
-        <div class="story-popup-nav">
-          <button class="story-popup-nav-btn" id="prevBtn" onclick="movePopup(-1)">← 이전</button>
-          <button class="story-popup-nav-btn" id="nextBtn" onclick="movePopup(1)">다음 →</button>
-        </div>
+      <div class="keyword-divider"></div>
+      <div class="keyword-item">
+        <span class="keyword-icon" aria-hidden="true">🌍</span>
+        <p class="keyword-label">지속 가능한 식탁</p>
+        <p class="keyword-desc">한 그릇이 만드는<br>작은 지구의 변화</p>
       </div>
     </div>
 
+    <!-- 브랜드 카피 -->
+    <div class="home-copy-section">
+      <p class="home-copy-sub">빚음 쌀이 묻습니다</p>
+      <h2 class="home-copy-title">버려지는 것들에서<br>가장 건강한 한 그릇을</h2>
+      <p class="home-copy-desc">
+        전통주 양조 후 매일 수 톤씩 버려지는 쌀발효박.<br>
+        빚음 쌀은 이 귀한 발효의 결정체를 그래놀라의 핵심 원료로 되살립니다.
+      </p>
+      <a href="#tab1" class="home-copy-btn" data-goto="tab1">우리의 이야기 보기</a>
+    </div>
 
-    <!-- =============================================
-         탭2 콘텐츠
-         ✏️ [수정] 탭2 내용 이곳에 작성
-         ============================================= -->
-    <div id="tab2" class="tab-content">
+  </div><!-- /home -->
 
-      <!-- 섹션 인트로 -->
+
+  <!-- =============================================
+       탭1 - 우리의 이야기
+       ✏️ [수정] 에피소드 본문은 아래 JS의 stories 배열에서 수정
+       ============================================= -->
+  <div id="tab1" class="tab-content">
+
+    <div class="section-intro">
+      <p class="section-intro-tag">OUR STORY</p>
+      <h2 class="section-intro-title">우리의 이야기</h2>
+      <p class="section-intro-desc">
+        버려지는 것들을 다시 바라보며 시작된 브랜드.<br>
+        다섯 개의 장(章)으로 빚음 쌀의 탄생을 만나보세요.
+      </p>
+    </div>
+
+    <div class="content-card story-card">
+      <p class="story-sub-txt">메달을 눌러 이야기를 펼쳐보세요</p>
+      <ul class="medal-grid">
+        <li><button class="medal" onclick="openPopup(0)"><span class="medal-circle"><span class="medal-bg"></span><span class="medal-num">01</span></span><span class="medal-caption"><strong>프롤로그</strong>탄생 스토리</span></button></li>
+        <li><button class="medal" onclick="openPopup(1)"><span class="medal-circle"><span class="medal-bg"></span><span class="medal-num">02</span></span><span class="medal-caption"><strong>발견</strong>발효의 정수</span></button></li>
+        <li><button class="medal" onclick="openPopup(2)"><span class="medal-circle"><span class="medal-bg"></span><span class="medal-num">03</span></span><span class="medal-caption"><strong>의문</strong>왜 없을까?</span></button></li>
+        <li><button class="medal" onclick="openPopup(3)"><span class="medal-circle"><span class="medal-bg"></span><span class="medal-num">04</span></span><span class="medal-caption"><strong>도전</strong>식탁을 바꾸다</span></button></li>
+        <li><button class="medal" onclick="openPopup(4)"><span class="medal-circle"><span class="medal-bg"></span><span class="medal-num">05</span></span><span class="medal-caption"><strong>에필로그</strong>새로운 가치</span></button></li>
+      </ul>
+    </div>
+
+  </div><!-- /tab1 -->
+
+
+  <!-- =============================================
+       탭2 - ESG 가치
+       ✏️ [수정] 숫자: 각 .esg-num의 data-target (data-increment는 몇 초마다 늘어나는 양, 0이면 고정)
+       ============================================= -->
+  <div id="tab2" class="tab-content">
+    <div class="esg-block">
+
       <div class="section-intro section-intro-dark">
         <p class="section-intro-tag">ESG VALUE</p>
-        <h2 class="section-intro-title" style="color:#F7F3ED;">ESG적 가치</h2>
-        <p class="section-intro-desc" style="color:rgba(247,243,237,0.6);">
+        <h2 class="section-intro-title">ESG 가치</h2>
+        <p class="section-intro-desc">
           빚음 쌀이 만들어내는 숫자들.<br>
           한 그릇의 선택이 지구에 남기는 진짜 발자국입니다.
         </p>
       </div>
 
-      <!-- ESG 카운터 섹션 -->
       <div class="esg-counter-wrap" id="esgSection">
 
-        <!-- ① 토스트 알림 -->
-        <div class="esg-toast-wrap" id="toastWrap"></div>
-
-        <!-- 4개 카드 그리드 -->
         <div class="esg-grid">
 
           <div class="esg-card" style="transition-delay:0s">
-            <span class="esg-card-icon">🌾</span>
+            <span class="esg-card-icon" aria-hidden="true">🌾</span>
             <div class="esg-num-wrap">
               <span class="esg-num" data-target="14280" data-decimal="0" data-increment="0.8">0</span>
               <span class="esg-unit">kg</span>
@@ -2569,20 +1683,18 @@ body::before {
 
           <div class="esg-card esg-highlight" style="transition-delay:0.1s">
             <span class="esg-highlight-badge">핵심 지표</span>
-            <span class="esg-card-icon">🌳</span>
+            <span class="esg-card-icon" aria-hidden="true">🌳</span>
             <div class="esg-num-wrap">
               <span class="esg-num" data-target="18.6" data-decimal="1" data-increment="0.02">0</span>
               <span class="esg-unit">t CO₂eq</span>
             </div>
             <p class="esg-card-label">저감한 탄소 배출량</p>
             <p class="esg-card-sub">30년생 소나무 식재 효과</p>
-            <div class="esg-tree-row">
-              🌲 소나무 약 <strong style="color:#C5A880; margin:0 4px;">2,818</strong> 그루에 해당
-            </div>
+            <div class="esg-tree-row">🌲 소나무 약<strong>2,818</strong>그루에 해당</div>
           </div>
 
           <div class="esg-card" style="transition-delay:0.2s">
-            <span class="esg-card-icon">🍶</span>
+            <span class="esg-card-icon" aria-hidden="true">🍶</span>
             <div class="esg-num-wrap">
               <span class="esg-num" data-target="12" data-decimal="0" data-increment="0">0</span>
               <span class="esg-unit">곳</span>
@@ -2592,7 +1704,7 @@ body::before {
           </div>
 
           <div class="esg-card" style="transition-delay:0.3s">
-            <span class="esg-card-icon">🥕</span>
+            <span class="esg-card-icon" aria-hidden="true">🥕</span>
             <div class="esg-num-wrap">
               <span class="esg-num" data-target="3450" data-decimal="0" data-increment="0.5">0</span>
               <span class="esg-unit">kg</span>
@@ -2603,11 +1715,9 @@ body::before {
 
         </div><!-- /esg-grid -->
 
-        <!-- 내 한 그릇의 가치 위젯 -->
+        <!-- 내 한 그릇의 가치 -->
         <div class="esg-bowl" id="esgBowl">
-
-          <!-- 낙관 도장 SVG -->
-          <div class="esg-stamp">
+          <div class="esg-stamp" aria-hidden="true">
             <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
               <rect x="3" y="3" width="58" height="58" fill="none" stroke="#B83A2E" stroke-width="2"/>
               <rect x="7" y="7" width="50" height="50" fill="none" stroke="#B83A2E" stroke-width="0.8" stroke-dasharray="3 2"/>
@@ -2625,9 +1735,9 @@ body::before {
           <div class="esg-bowl-content">
             <p class="esg-bowl-title">내 한 그릇의 가치</p>
             <p class="esg-bowl-text">
-              오늘 그래놀라 1봉(300g)을 선택하면?<br>
-              <strong>쌀 450g 순환</strong> + <strong>탄소 1.2kg 감축</strong>
-              <span style="color:rgba(74,44,23,0.45); font-size:0.8rem;"> (소나무 0.2그루)</span>
+              그래놀라 1봉(300g)을 선택하면?<br>
+              <strong>쌀발효박 450g 순환</strong> + <strong>탄소 1.2kg 감축</strong>
+              <span class="esg-muted">(소나무 약 0.2그루)</span>
             </p>
           </div>
 
@@ -2641,1014 +1751,959 @@ body::before {
               <div class="esg-bar-track"><div class="esg-bar-fill esg-bar-red" data-width="48"></div></div>
             </div>
           </div>
-
         </div><!-- /esg-bowl -->
+
+        <!-- ✏️ [수정] 수치 산출 근거 - 실제 기준에 맞게 꼭 확인/수정하세요 -->
+        <p class="esg-note">
+          ※ 위 수치는 사업 계획을 바탕으로 한 연간 목표 시뮬레이션입니다.
+          탄소 환산은 30년생 소나무 1그루의 연간 CO₂ 흡수량 6.6kg(국립산림과학원) 기준이며,
+          쌀발효박 순환량은 건조 전 중량 기준입니다.
+        </p>
 
       </div><!-- /esg-counter-wrap -->
 
-      <!-- ESG 설명 텍스트 -->
-      <div class="content-card" style="border-radius: 0 0 16px 16px; border-top: none; margin-top: 0;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;">
-
-          <div>
-            <p style="font-size:1.2rem; margin-bottom:8px;">♻️ 푸드 업사이클링</p>
-            <p class="section-body" style="font-size:0.88rem;">
-              전통주 양조 후 버려지는 쌀발효박을 그래놀라의 핵심 원료로 재탄생시킵니다.
-              단순한 토핑이 아닌, 제품의 주원료로 활용해 더 많은 폐기물을 줄입니다.
-            </p>
-          </div>
-
-          <div>
-            <p style="font-size:1.2rem; margin-bottom:8px;">🤝 상생 협약</p>
-            <p class="section-body" style="font-size:0.88rem;">
-              전국 12개 로컬 양조장과 폐기물 감축 협약을 맺고, 버려질 주박을
-              정기적으로 수거해 순환 경제의 선순환 구조를 만들어갑니다.
-            </p>
-          </div>
-
-          <div>
-            <p style="font-size:1.2rem; margin-bottom:8px;">🌍 탄소 저감</p>
-            <p class="section-body" style="font-size:0.88rem;">
-              주박의 매립·소각을 줄임으로써 메탄 발생을 억제하고,
-              못난이 농산물 활용으로 푸드마일리지까지 낮춥니다.
-            </p>
-          </div>
-
+      <div class="esg-desc">
+        <div>
+          <p class="esg-desc-title">♻️ 푸드 업사이클링</p>
+          <p class="section-body">
+            전통주 양조 후 버려지는 쌀발효박을 그래놀라의 핵심 원료로 재탄생시킵니다.
+            단순한 토핑이 아닌 제품의 주원료로 활용해 더 많은 폐기물을 줄입니다.
+          </p>
+        </div>
+        <div>
+          <p class="esg-desc-title">🤝 상생 협약</p>
+          <p class="section-body">
+            전국 12개 로컬 양조장과 폐기물 감축 협약을 맺고, 버려질 주박을
+            정기적으로 수거해 순환 경제의 선순환 구조를 만들어갑니다.
+          </p>
+        </div>
+        <div>
+          <p class="esg-desc-title">🌍 탄소 저감</p>
+          <p class="section-body">
+            주박의 매립·소각을 줄여 메탄 발생을 억제하고,
+            못난이 농산물 활용으로 푸드 마일리지까지 낮춥니다.
+          </p>
         </div>
       </div>
 
-    </div><!-- /tab2 -->
-
-
-    <!-- =============================================
-         탭3 콘텐츠
-         ✏️ [수정] 탭3 내용 이곳에 작성
-         ============================================= -->
-    <!-- =============================================
-         탭3 - 공정 과정 로드맵
-         ✏️ [수정] 각 스텝 사진/설명 아래에서 수정
-         ============================================= -->
-    <div id="tab3" class="tab-content">
-
-      <!-- 섹션 인트로 -->
-      <div class="section-intro">
-        <p class="section-intro-tag">PROCESS</p>
-        <h2 class="section-intro-title">공정 과정 · 레시피</h2>
-        <p class="section-intro-desc">
-          버려진 쌀발효박이 바삭한 그래놀라가 되기까지.<br>
-          9단계의 정성스러운 여정을 담았습니다.
-        </p>
-      </div>
-
-      <div class="content-card">
-        <h2 class="section-title">공정 과정 · 레시피</h2>
-        <div class="section-divider"></div>
-        <p class="section-body">빚음 쌀의 제품이 완성되기까지의 과정을 소개합니다.</p>
-      </div>
-
-      <div class="roadmap-wrap">
-
-        <!-- 홀수 행: 왼→오 / 짝수 행: 오→왼 (지그재그) -->
-
-        <!-- ===== 1열 (1~3단계) ===== -->
-        <div class="roadmap-row roadmap-ltr">
-
-          <!-- ✏️ [수정] 스텝 1 -->
-          <div class="roadmap-step">
-            <div class="step-num">01</div>
-            <div class="step-img-wrap">
-              <img src="공정1.png" loading="lazy" decoding="async" alt="계량" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">계량</p>
-          </div>
-
-          <div class="roadmap-arrow">→</div>
-
-          <!-- ✏️ [수정] 스텝 2 -->
-          <div class="roadmap-step">
-            <div class="step-num">02</div>
-            <div class="step-img-wrap">
-              <img src="공정2.png" loading="lazy" decoding="async" alt="건조" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">건조</p>
-          </div>
-
-          <div class="roadmap-arrow">→</div>
-
-          <!-- ✏️ [수정] 스텝 3 -->
-          <div class="roadmap-step">
-            <div class="step-num">03</div>
-            <div class="step-img-wrap">
-              <img src="공정3.png" loading="lazy" decoding="async" alt="분쇄" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">분쇄</p>
-          </div>
-
-        </div>
-
-        <!-- 커브 연결 (우측 하단으로) -->
-        <div class="roadmap-curve roadmap-curve-right">
-          <svg viewBox="0 0 120 60" width="120" height="60">
-            <path d="M 0 10 Q 120 10 120 50" fill="none" stroke="#C8A97E" stroke-width="3" stroke-dasharray="6 4"/>
-          </svg>
-        </div>
-
-        <!-- ===== 2열 (4~6단계, 역방향) ===== -->
-        <div class="roadmap-row roadmap-rtl">
-
-          <!-- ✏️ [수정] 스텝 6 -->
-          <div class="roadmap-step">
-            <div class="step-num">06</div>
-            <div class="step-img-wrap">
-              <img src="공정6.png" loading="lazy" decoding="async" alt="코팅" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">코팅</p>
-          </div>
-
-          <div class="roadmap-arrow">←</div>
-
-          <!-- ✏️ [수정] 스텝 5 -->
-          <div class="roadmap-step">
-            <div class="step-num">05</div>
-            <div class="step-img-wrap">
-              <img src="공정5.png" loading="lazy" decoding="async" alt="시럽" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">시럽</p>
-          </div>
-
-          <div class="roadmap-arrow">←</div>
-
-          <!-- ✏️ [수정] 스텝 4 -->
-          <div class="roadmap-step">
-            <div class="step-num">04</div>
-            <div class="step-img-wrap">
-              <img src="공정4.png" loading="lazy" decoding="async" alt="혼합" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">혼합</p>
-          </div>
-
-        </div>
-
-        <!-- 커브 연결 (좌측 하단으로) -->
-        <div class="roadmap-curve roadmap-curve-left">
-          <svg viewBox="0 0 120 60" width="120" height="60">
-            <path d="M 120 10 Q 0 10 0 50" fill="none" stroke="#C8A97E" stroke-width="3" stroke-dasharray="6 4"/>
-          </svg>
-        </div>
-
-        <!-- ===== 3열 (7~9단계) ===== -->
-        <div class="roadmap-row roadmap-ltr">
-
-          <!-- ✏️ [수정] 스텝 7 -->
-          <div class="roadmap-step">
-            <div class="step-num">07</div>
-            <div class="step-img-wrap">
-              <img src="공정7.png" loading="lazy" decoding="async" alt="굽기" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">굽기</p>
-          </div>
-
-          <div class="roadmap-arrow">→</div>
-
-          <!-- ✏️ [수정] 스텝 8 -->
-          <div class="roadmap-step">
-            <div class="step-num">08</div>
-            <div class="step-img-wrap">
-              <img src="공정8.png" loading="lazy" decoding="async" alt="토핑" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">토핑</p>
-          </div>
-
-          <div class="roadmap-arrow">→</div>
-
-          <!-- ✏️ [수정] 스텝 9 -->
-          <div class="roadmap-step">
-            <div class="step-num">09</div>
-            <div class="step-img-wrap">
-              <img src="공정9.png" loading="lazy" decoding="async" alt="완성" class="step-img"/>
-              <div class="step-img-placeholder">📷</div>
-            </div>
-            <p class="step-label">🎉 완성</p>
-          </div>
-
-        </div>
-
-      </div><!-- /roadmap-wrap -->
-    </div><!-- /tab3 -->
-
-
-    <!-- =============================================
-         탭4 - 제품 페이지 (오버레이 전환 방식)
-         ✏️ [수정] 상품명, 가격, 설명, 이미지 아래에서 수정
-         ============================================= -->
-    <div id="tab4">
-      <!-- ✏️ [수정] 닫기 버튼 -->
-      <button class="tab4-close" id="tab4Close" aria-label="닫기">✕</button>
-
-      <div class="shop-wrap">
-
-        <!-- ✏️ [수정] 제품 페이지 제목 -->
-        <h2 class="shop-title">빚음 쌀 · 제품</h2>
-        <div class="shop-divider"></div>
-
-                <!-- =============================================
-             제품 소개 - 그래놀라(글+사진) + 에너지바(사진+글) 한 줄
-             ✏️ [수정] 글 내용, 이미지 파일명 변경
-             ============================================= -->
-        <div class="content-card" style="margin-bottom: 48px;">
-          <div class="intro-row">
-
-            <!-- ✏️ [수정] 글 1 - 그래놀라 -->
-            <div class="intro-text">
-              <h2 class="section-title">그래놀라 오리지널</h2>
-              <div class="section-divider"></div>
-              <p class="section-body">
-                술지게미로 만든 건강한 그래놀라입니다.<br>
-                전통주 발효 과정에서 나온 곡물 부산물을<br>
-                업사이클링하여 탄생했습니다.
-              </p>
-            </div>
-
-            <!-- ✏️ [수정] 사진 1 - 그래놀라 이미지 파일명 -->
-            <div class="intro-img-wrap">
-              <img src="그래놀라.jpeg" alt="그래놀라" class="intro-img" loading="lazy" decoding="async" />
-              <div class="intro-img-placeholder">📷 이미지</div>
-            </div>
-
-            <!-- ✏️ [수정] 사진 2 - 에너지바 이미지 파일명 -->
-            <div class="intro-img-wrap">
-              <img src="에너지바.jpg" alt="에너지바" class="intro-img" loading="lazy" decoding="async" />
-              <div class="intro-img-placeholder">📷 이미지</div>
-            </div>
-
-            <!-- ✏️ [수정] 글 2 - 에너지바 -->
-            <div class="intro-text">
-              <h2 class="section-title">에너지바 2종 세트</h2>
-              <div class="section-divider"></div>
-              <p class="section-body">
-                곡물 업사이클링으로 탄생한 에너지바입니다.<br>
-                간편하게 즐기는 건강한 한 끼,<br>
-                자연의 맛을 그대로 담았습니다.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 2x2 상품 그리드 -->
-        <div class="product-grid">
-
-          <!-- =============================================
-               ✏️ [수정] 상품 1 - 그래놀라
-               ============================================= -->
-          <div class="product-card" data-id="1" data-name="그래놀라" data-price="12000" data-img="그래놀라.jpeg" data-desc="술지게미로 만든 건강한 그래놀라입니다. 전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다." onclick="openDetail(this)">
-            <div class="product-img-wrap">
-              <img src="그래놀라.jpeg" alt="그래놀라" class="product-img" loading="lazy" decoding="async" />
-              <div class="product-img-placeholder">📷 상품 이미지</div>
-            </div>
-            <div class="product-info">
-              <h3 class="product-name">그래놀라</h3>
-              <p class="product-desc">술지게미로 만든 건강한 그래놀라</p>
-              <p class="product-price">12,000원</p>
-              <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(this)">장바구니 담기</button>
-            </div>
-          </div>
-
-          <!-- =============================================
-               ✏️ [수정] 상품 2 - 커스텀 그래놀라
-               ============================================= -->
-          <div class="product-card" data-id="2" data-name="커스텀 그래놀라" data-price="15000" data-img="그래놀라.jpeg" data-desc="나만의 재료로 만드는 커스텀 그래놀라입니다. 원하는 토핑과 시럽을 선택해 특별한 그래놀라를 완성해보세요." onclick="openDetail(this)">
-            <div class="product-img-wrap">
-              <img src="그래놀라.jpeg" alt="커스텀 그래놀라" class="product-img" loading="lazy" decoding="async" />
-              <div class="product-img-placeholder">📷 상품 이미지</div>
-            </div>
-            <div class="product-info">
-              <h3 class="product-name">커스텀 그래놀라</h3>
-              <p class="product-desc">나만의 재료로 만드는 커스텀 그래놀라</p>
-              <p class="product-price">15,000원</p>
-              <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(this)">장바구니 담기</button>
-            </div>
-          </div>
-
-          <!-- =============================================
-               ✏️ [수정] 상품 3 - 에너지바
-               ============================================= -->
-          <div class="product-card" data-id="3" data-name="에너지바" data-price="9000" data-img="에너지바.png" data-desc="곡물 업사이클링으로 탄생한 에너지바입니다. 간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다." onclick="openDetail(this)">
-            <div class="product-img-wrap">
-              <img src="에너지바.png" alt="에너지바" class="product-img" loading="lazy" decoding="async" />
-              <div class="product-img-placeholder">📷 상품 이미지</div>
-            </div>
-            <div class="product-info">
-              <h3 class="product-name">에너지바</h3>
-              <p class="product-desc">곡물 업사이클링으로 탄생한 에너지바</p>
-              <p class="product-price">9,000원</p>
-              <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(this)">장바구니 담기</button>
-            </div>
-          </div>
-
-          <!-- =============================================
-               ✏️ [수정] 상품 4 - 커스텀 에너지바
-               ============================================= -->
-          <div class="product-card" data-id="4" data-name="커스텀 에너지바" data-price="13000" data-img="에너지바.png" data-desc="나만의 재료로 만드는 커스텀 에너지바입니다. 원하는 견과류와 시럽을 선택해 특별한 에너지바를 완성해보세요." onclick="openDetail(this)">
-            <div class="product-img-wrap">
-              <img src="에너지바.png" alt="커스텀 에너지바" class="product-img" loading="lazy" decoding="async" />
-              <div class="product-img-placeholder">📷 상품 이미지</div>
-            </div>
-            <div class="product-info">
-              <h3 class="product-name">커스텀 에너지바</h3>
-              <p class="product-desc">나만의 재료로 만드는 커스텀 에너지바</p>
-              <p class="product-price">13,000원</p>
-              <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(this)">장바구니 담기</button>
-            </div>
-          </div>
-
-        </div><!-- /product-grid -->
-
-        <!-- 장바구니 영역 -->
-        <div class="cart-section">
-          <h3 class="cart-title">🛒 장바구니</h3>
-          <ul class="cart-list" id="cartList">
-            <li class="cart-empty">아직 담긴 상품이 없어요.</li>
-          </ul>
-          <div class="cart-total">
-            합계: <span id="cartTotal">0</span>원
-          </div>
-          <!-- ✏️ [수정] 결제 버튼 텍스트 -->
-          <button class="checkout-btn" id="checkoutBtn">결제하기</button>
-        </div>
-
-      </div><!-- /shop-wrap -->
-    </div><!-- /tab4 -->
-
-    <!-- =============================================
-         상품 상세 페이지 오버레이
-         ✏️ [수정] JS의 openDetail()에서 내용 자동 주입
-         ============================================= -->
-    <div id="detailOverlay" class="detail-overlay-bg">
-      <div class="detail-overlay">
-        <button class="detail-close" id="detailClose">✕</button>
-        <div class="detail-content">
-          <!-- 왼쪽: 이미지 -->
-          <div class="detail-img-wrap">
-            <img id="detailImg" src="" alt="" class="detail-img" />
-            <div class="detail-img-placeholder">📷</div>
-          </div>
-          <!-- 오른쪽: 정보 -->
-          <div class="detail-info">
-            <h2 class="detail-name" id="detailName"></h2>
-            <div class="shop-divider"></div>
-            <p class="detail-desc" id="detailDesc"></p>
-            <p class="detail-price" id="detailPrice"></p>
-            <button class="add-cart-btn detail-cart-btn" id="detailCartBtn">장바구니 담기</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- =============================================
-         결제 완료 팝업
-         ✏️ [수정] 팝업 제목/설명 텍스트 아래에서 수정
-         ============================================= -->
-    <div id="payPopup" class="pay-popup-bg">
-      <div class="pay-popup">
-        <!-- ✏️ [수정] 팝업 이모지 -->
-        <div class="pay-popup-icon">🎉</div>
-        <!-- ✏️ [수정] 팝업 제목 -->
-        <h2 class="pay-popup-title">구매가 완료되었습니다!</h2>
-        <!-- ✏️ [수정] 팝업 설명 -->
-        <p class="pay-popup-desc">구매 해주셔서 감사합니다</p>
-        <button class="pay-popup-close" id="payPopupClose">확인</button>
-      </div>
-    </div>
-    <!-- ✏️ [수정] 하단 여백 빈 공간 (높이 조절: height 값 변경) -->
-    <div style="height: 1000px;"></div>
-
-  </main><!-- /main -->
+    </div><!-- /esg-block -->
+  </div><!-- /tab2 -->
 
 
   <!-- =============================================
-       하단 고정 푸터 (스크롤해도 항상 화면 하단에 고정)
-       ✏️ [수정] 회사명, 연도, 문구 아래에서 수정
+       탭3 - 공정 과정 · 레시피
+       ✏️ [수정] 각 단계의 사진(src), 이름(step-label), 설명(step-desc)
        ============================================= -->
-    <footer>
-    <!-- ✏️ [수정] 좌측 SNS 버튼 영역 -->
-    <div class="footer-sns">
+  <div id="tab3" class="tab-content">
 
+    <div class="section-intro">
+      <p class="section-intro-tag">PROCESS</p>
+      <h2 class="section-intro-title">공정 과정 · 레시피</h2>
+      <p class="section-intro-desc">
+        버려진 쌀발효박이 바삭한 그래놀라가 되기까지.<br>
+        9단계의 정성스러운 여정을 담았습니다.
+      </p>
+    </div>
+
+    <ol class="roadmap">
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정1.png" alt="계량" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">01</span><p class="step-label">계량</p></div>
+          <p class="step-desc">수거한 쌀발효박과 곡물을 배합비에 맞춰 계량합니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정2.png" alt="건조" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">02</span><p class="step-label">건조</p></div>
+          <p class="step-desc">수분을 날려 보관성과 바삭한 식감의 바탕을 만듭니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정3.png" alt="분쇄" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">03</span><p class="step-label">분쇄</p></div>
+          <p class="step-desc">건조한 쌀발효박을 그래놀라에 맞는 입자 크기로 분쇄합니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정4.png" alt="혼합" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">04</span><p class="step-label">혼합</p></div>
+          <p class="step-desc">귀리, 견과류 등 다른 곡물과 고르게 섞어 줍니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정5.png" alt="시럽" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">05</span><p class="step-label">시럽</p></div>
+          <p class="step-desc">재료를 한데 뭉쳐 줄 시럽을 준비합니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정6.png" alt="코팅" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">06</span><p class="step-label">코팅</p></div>
+          <p class="step-desc">혼합한 재료 표면에 시럽을 고르게 입힙니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정7.png" alt="굽기" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">07</span><p class="step-label">굽기</p></div>
+          <p class="step-desc">오븐에서 천천히 구워 노릇하고 바삭하게 만듭니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정8.png" alt="토핑" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">08</span><p class="step-label">토핑</p></div>
+          <p class="step-desc">못난이 과채류로 만든 토핑을 더합니다.</p>
+        </div>
+      </li>
+      <li class="roadmap-step">
+        <div class="step-img-wrap"><img src="공정9.png" alt="완성" class="step-img" loading="lazy" decoding="async" onerror="this.remove()"><div class="step-img-placeholder">📷</div></div>
+        <div class="step-text">
+          <div class="step-head"><span class="step-num">09</span><p class="step-label">완성</p></div>
+          <p class="step-desc">충분히 식힌 뒤 소분해 포장하면 완성입니다.</p>
+        </div>
+      </li>
+    </ol>
+
+  </div><!-- /tab3 -->
+
+</main>
+
+
+<!-- =============================================
+     탭4 - 구매 페이지 (오버레이)
+     ✏️ [수정] 상품명, 가격, 설명, 이미지
+     ============================================= -->
+<div id="tab4" role="region" aria-label="구매 페이지">
+  <button class="close-btn tab4-close" id="tab4Close" aria-label="구매 페이지 닫기">✕</button>
+
+  <div class="shop-wrap">
+    <h2 class="shop-title">빚음 쌀 제품</h2>
+    <div class="shop-divider"></div>
+
+    <!-- 제품 소개 (제품당 한 줄, 지그재그) -->
+    <div class="content-card product-intro">
+      <div class="intro-row">
+        <div class="intro-text">
+          <h3 class="section-title">그래놀라 오리지널</h3>
+          <div class="section-divider"></div>
+          <p class="section-body">
+            술지게미로 만든 건강한 그래놀라입니다.
+            전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다.
+          </p>
+        </div>
+        <div class="intro-img-wrap">
+          <img src="그래놀라.jpeg" alt="그래놀라 오리지널" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="intro-img-placeholder">📷 이미지</div>
+        </div>
+      </div>
+
+      <div class="intro-row reverse">
+        <div class="intro-text">
+          <h3 class="section-title">에너지바 2종 세트</h3>
+          <div class="section-divider"></div>
+          <p class="section-body">
+            곡물 업사이클링으로 탄생한 에너지바입니다.
+            간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다.
+          </p>
+        </div>
+        <div class="intro-img-wrap">
+          <!-- ✏️ 에너지바 이미지 파일명을 .png 하나로 통일했습니다. 실제 파일 확장자에 맞춰주세요 -->
+          <img src="에너지바.png" alt="에너지바 2종 세트" class="intro-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="intro-img-placeholder">📷 이미지</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2×2 상품 그리드
+         ✏️ data-custom="granola" 또는 "bar"가 있으면 상세 창에서 옵션을 고를 수 있어요 (옵션 목록은 JS의 CUSTOM_OPTIONS) -->
+    <div class="product-grid">
+
+      <div class="product-card" tabindex="0" data-id="1" data-name="그래놀라" data-price="12000" data-img="그래놀라.jpeg"
+           data-desc="술지게미로 만든 건강한 그래놀라입니다. 전통주 발효 과정에서 나온 곡물 부산물을 업사이클링하여 탄생했습니다.">
+        <div class="product-img-wrap">
+          <img src="그래놀라.jpeg" alt="그래놀라" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="product-img-placeholder">📷 상품 이미지</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">그래놀라</h3>
+          <p class="product-desc">술지게미로 만든 건강한 그래놀라</p>
+          <p class="product-price">12,000원</p>
+          <button class="add-cart-btn" data-action="add">장바구니 담기</button>
+        </div>
+      </div>
+
+      <div class="product-card" tabindex="0" data-id="2" data-name="커스텀 그래놀라" data-price="15000" data-img="그래놀라.jpeg" data-custom="granola"
+           data-desc="원하는 토핑과 시럽을 골라 나만의 그래놀라를 완성해 보세요. 버려질 뻔한 못난이 과채류로 만든 토핑을 담았습니다.">
+        <div class="product-img-wrap">
+          <span class="product-tag">옵션 선택</span>
+          <img src="그래놀라.jpeg" alt="커스텀 그래놀라" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="product-img-placeholder">📷 상품 이미지</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">커스텀 그래놀라</h3>
+          <p class="product-desc">토핑과 시럽을 골라 만드는 나만의 그래놀라</p>
+          <p class="product-price">15,000원</p>
+          <button class="add-cart-btn outline" data-action="detail">옵션 고르기</button>
+        </div>
+      </div>
+
+      <div class="product-card" tabindex="0" data-id="3" data-name="에너지바" data-price="9000" data-img="에너지바.png"
+           data-desc="곡물 업사이클링으로 탄생한 에너지바입니다. 간편하게 즐기는 건강한 한 끼, 자연의 맛을 그대로 담았습니다.">
+        <div class="product-img-wrap">
+          <img src="에너지바.png" alt="에너지바" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="product-img-placeholder">📷 상품 이미지</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">에너지바</h3>
+          <p class="product-desc">곡물 업사이클링으로 탄생한 에너지바</p>
+          <p class="product-price">9,000원</p>
+          <button class="add-cart-btn" data-action="add">장바구니 담기</button>
+        </div>
+      </div>
+
+      <div class="product-card" tabindex="0" data-id="4" data-name="커스텀 에너지바" data-price="13000" data-img="에너지바.png" data-custom="bar"
+           data-desc="원하는 견과류와 시럽을 골라 나만의 에너지바를 완성해 보세요.">
+        <div class="product-img-wrap">
+          <span class="product-tag">옵션 선택</span>
+          <img src="에너지바.png" alt="커스텀 에너지바" class="product-img" loading="lazy" decoding="async" onerror="this.remove()">
+          <div class="product-img-placeholder">📷 상품 이미지</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">커스텀 에너지바</h3>
+          <p class="product-desc">견과류와 시럽을 골라 만드는 나만의 에너지바</p>
+          <p class="product-price">13,000원</p>
+          <button class="add-cart-btn outline" data-action="detail">옵션 고르기</button>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+
+    <!-- 장바구니 -->
+    <div class="cart-section">
+      <h3 class="cart-title">🛒 장바구니</h3>
+      <ul class="cart-list" id="cartList">
+        <li class="cart-empty">아직 담긴 상품이 없어요. 마음에 드는 제품을 담아보세요.</li>
+      </ul>
+      <div class="cart-total">합계: <span id="cartTotal">0</span>원</div>
+      <button class="checkout-btn" id="checkoutBtn">결제하기</button>
+      <p class="cart-msg" id="cartMsg" role="status"></p>
+      <p class="cart-note">※ 시연용 모의 결제로, 실제 결제는 이루어지지 않습니다.</p>
+    </div>
+
+  </div><!-- /shop-wrap -->
+</div><!-- /tab4 -->
+
+
+<!-- 상품 상세 -->
+<div id="detailOverlay" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="detailName">
+  <div class="modal-box detail-overlay">
+    <button class="close-btn" data-close="detailOverlay" aria-label="닫기">✕</button>
+    <div class="detail-content">
+      <div class="detail-img-wrap">
+        <img id="detailImg" src="" alt="" class="detail-img">
+        <div class="detail-img-placeholder">📷</div>
+      </div>
+      <div class="detail-info">
+        <h2 class="detail-name" id="detailName"></h2>
+        <div class="shop-divider"></div>
+        <p class="detail-desc" id="detailDesc"></p>
+        <div id="detailOptions"></div>
+        <p class="detail-price" id="detailPrice"></p>
+        <button class="add-cart-btn detail-cart-btn" id="detailCartBtn">장바구니 담기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 결제 완료 -->
+<div id="payPopup" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="payTitle">
+  <div class="modal-box small-popup">
+    <div class="small-popup-icon" aria-hidden="true">🎉</div>
+    <h2 class="small-popup-title" id="payTitle">주문이 완료되었습니다</h2>
+    <p class="small-popup-desc">빚음 쌀을 선택해 주셔서 감사합니다.<br>오늘의 한 그릇이 작은 순환이 됩니다.</p>
+    <ul class="pay-summary" id="paySummary"></ul>
+    <button class="pill-btn" data-close="payPopup">확인</button>
+  </div>
+</div>
+
+<!-- 이메일 문의 -->
+<div id="emailPopup" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
+  <div class="modal-box small-popup">
+    <button class="close-btn" data-close="emailPopup" aria-label="닫기">✕</button>
+    <div class="small-popup-icon" aria-hidden="true">✉️</div>
+    <h2 class="small-popup-title" id="emailTitle">이메일 문의</h2>
+    <p class="small-popup-desc">빚음 쌀에 궁금한 점이 있으신가요?<br>bizumesal@gmail.com 으로 보내주세요.</p>
+    <!-- ✏️ [수정] 수신 이메일 주소 -->
+    <a href="mailto:bizumesal@gmail.com" class="pill-btn">메일 쓰기</a>
+  </div>
+</div>
+
+<!-- 브랜드 스토리 -->
+<div id="popupBg" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div class="modal-box story-popup-box">
+    <button class="close-btn" data-close="popupBg" aria-label="닫기">✕</button>
+    <p class="story-popup-episode" id="popupEpisode"></p>
+    <h2 class="story-popup-title" id="popupTitle"></h2>
+    <p class="story-popup-body" id="popupBody"></p>
+    <div class="story-popup-nav">
+      <button class="story-popup-nav-btn" id="storyPrev" onclick="movePopup(-1)">← 이전 이야기</button>
+      <button class="story-popup-nav-btn" id="storyNext" onclick="movePopup(1)">다음 이야기 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ESG 알림 (ESG 섹션이 화면에 보일 때만 표시) -->
+<div class="esg-toast-wrap" id="toastWrap" aria-hidden="true"></div>
+
+
+<!-- =============================================
+     푸터
+     ✏️ [수정] 팀명/과목명 등을 footer-tagline에 추가하세요
+     ============================================= -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo">빚음 쌀</p>
+      <p class="footer-tagline">전통의 가치를 담은 업사이클링 푸드<br>캡스톤디자인 프로젝트</p>
+    </div>
+
+    <div class="footer-sns">
       <!-- ✏️ [수정] 인스타그램 링크 -->
-      <a href="https://www.instagram.com/_ssuyy?stkn=ZmQ1YnNnZXAxZGxk&utm_source=qr" class="sns-btn" target="_blank" aria-label="인스타그램">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="https://www.instagram.com/bijeum_ssal/" class="sns-btn" target="_blank" rel="noopener" aria-label="인스타그램">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
         </svg>
       </a>
-
       <!-- ✏️ [수정] 유튜브 링크 -->
-      <a href="https://youtube.com/channel/UCwW2ToMdEMfHeH4Qc8YTQKg?si=C-C5Ye847jHo9rNs" class="sns-btn" target="_blank" aria-label="유튜브">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <a href="https://youtube.com/channel/UCwW2ToMdEMfHeH4Qc8YTQKg?si=C-C5Ye847jHo9rNs" class="sns-btn" target="_blank" rel="noopener" aria-label="유튜브">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.6 2.8 12 2.8 12 2.8s-4.6 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.8 9.2.8 11.4v2.1C.8 15.7 1 18 1 18s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.6 22.1 12 22.1 12 22.1s4.6 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.2-2.2.2-4.5v-2.1C23.2 9.2 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/>
         </svg>
       </a>
-
-      <!-- ✏️ [수정] 이메일 버튼 - 클릭하면 팝업 -->
-      <button class="sns-btn" onclick="openEmailPopup()" aria-label="이메일">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button class="sns-btn" onclick="openModal('emailPopup')" aria-label="이메일 문의">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
           <polyline points="2,4 12,13 22,4"/>
         </svg>
       </button>
-
-    </div>
-
-    <!-- ✏️ [수정] 카피라이트 텍스트 -->
-    <p class="footer-copy">&copy; 2025 <span>빚음 쌀</span>. All rights reserved.</p>
-
-  </footer>
-
-  <!-- =============================================
-       이메일 팝업
-       ✏️ [수정] 수신 이메일 주소: emailTo 변수
-       ============================================= -->
-  <div id="emailPopup" class="email-popup-bg">
-    <div class="email-popup">
-      <button class="email-popup-close" onclick="closeEmailPopup()">✕</button>
-      <div class="email-popup-icon">✉️</div>
-      <h2 class="email-popup-title">이메일 보내기</h2>
-      <p class="email-popup-desc">빚음 쌀에 문의사항이 있으신가요?<br>아래 버튼을 눌러 메일을 보내주세요.</p>
-      <!-- ✏️ [수정] 수신 이메일 주소 -->
-      <a href="mailto:bizumesal@gmail.com" class="email-send-btn">보내기</a>
     </div>
   </div>
 
+  <p class="footer-copy">&copy; 2026 <span>빚음 쌀</span>. All rights reserved.</p>
+</footer>
 
-  <!-- =============================================
-       JavaScript
-       ============================================= -->
-  <script>
-      /* =============================================
-        ✏️ [수정] 배너 자동 슬라이드 간격 (ms 단위, 1000 = 1초)
-        ============================================= */
-      const AUTO_PLAY_INTERVAL = 3000;
 
-      const track       = document.getElementById('sliderTrack');
-      const slides      = Array.from(track.querySelectorAll('.slide'));
-      const dotsWrapper = document.getElementById('sliderDots');
-      const prevBtn     = document.getElementById('prevBtn');
-      const nextBtn     = document.getElementById('nextBtn');
+<!-- =============================================
+     JavaScript
+     ============================================= -->
+<script>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const total = slides.length;
-      let currentIndex = 1; /* 복제 포함 시작 인덱스 */
-      let autoTimer = null;
-      let isTransitioning = false;
+  /* =============================================
+     공통 팝업 열기/닫기 + 스크롤 잠금
+     ============================================= */
+  const tab4El = document.getElementById('tab4');
+  let lastFocus = null;
 
-      /* 앞뒤에 복제 슬라이드 추가 (무한루프 트릭) */
-      const firstClone = slides[0].cloneNode(true);
-      const lastClone  = slides[total - 1].cloneNode(true);
-      track.appendChild(firstClone);   /* 맨 뒤에 첫번째 복제 */
-      track.insertBefore(lastClone, track.firstChild); /* 맨 앞에 마지막 복제 */
+  function syncScrollLock() {
+    const anyOpen = document.querySelector('.modal-bg.show') || tab4El.classList.contains('tab4-active');
+    document.body.classList.toggle('no-scroll', !!anyOpen);
+  }
 
-      const allSlides = track.querySelectorAll('.slide');
+  function openModal(id) {
+    const el = document.getElementById(id);
+    lastFocus = document.activeElement;
+    el.classList.add('show');
+    syncScrollLock();
+    const focusTarget = el.querySelector('.close-btn, .pill-btn');
+    if (focusTarget) focusTarget.focus();
+  }
 
-      /* 트랜지션 없이 위치 이동 */
-      function setPositionSilent(index) {
-        track.style.transition = 'none';
-        track.style.transform  = `translateX(-${index * 100}%)`;
-      }
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el.classList.contains('show')) return;
+    el.classList.remove('show');
+    if (id === 'payPopup') { cart = []; renderCart(); }  /* 결제 완료 후 장바구니 비우기 */
+    syncScrollLock();
+    if (lastFocus) lastFocus.focus();
+  }
 
-      /* 트랜지션과 함께 위치 이동 */
-      function goToSlide(index) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        currentIndex = index;
-        /* ✏️ [수정] 슬라이드 전환 속도 (0.5s 등) */
-        track.style.transition = 'transform 0.5s cubic-bezier(0.77, 0, 0.175, 1)';
-        track.style.transform  = `translateX(-${currentIndex * 100}%)`;
-        updateDots();
-      }
+  /* 닫기 버튼 */
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => closeModal(btn.dataset.close));
+  });
 
-      /* 트랜지션 끝난 후 무한루프 점프 처리 */
-      track.addEventListener('transitionend', () => {
-        isTransitioning = false;
-        /* 마지막 복제(index 0)에 도달했으면 → 진짜 마지막으로 점프 */
-        if (currentIndex === 0) {
-          setPositionSilent(total);
-          currentIndex = total;
-        }
-        /* 첫번째 복제(index total+1)에 도달했으면 → 진짜 첫번째로 점프 */
-        if (currentIndex === total + 1) {
-          setPositionSilent(1);
-          currentIndex = 1;
-        }
+  /* 배경 클릭 시 닫기 */
+  document.querySelectorAll('.modal-bg').forEach(bg => {
+    bg.addEventListener('click', (e) => { if (e.target === bg) closeModal(bg.id); });
+  });
+
+  /* ESC: 가장 위에 있는 창부터 닫기 */
+  const MODAL_ORDER = ['payPopup', 'detailOverlay', 'emailPopup', 'popupBg'];
+
+  /* 지금 맨 위에 열려 있는 창 */
+  function topDialog() {
+    for (const id of MODAL_ORDER) {
+      const el = document.getElementById(id);
+      if (el.classList.contains('show')) return el;
+    }
+    return tab4El.classList.contains('tab4-active') ? tab4El : null;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const dialog = topDialog();
+    if (!dialog) return;
+
+    if (e.key === 'Escape') {
+      dialog === tab4El ? closeTab4() : closeModal(dialog.id);
+      return;
+    }
+
+    /* 스토리 팝업: 좌우 방향키로 이전/다음 이야기 */
+    if (dialog.id === 'popupBg') {
+      if (e.key === 'ArrowLeft')  movePopup(-1);
+      if (e.key === 'ArrowRight') movePopup(1);
+    }
+
+    /* Tab 키 포커스가 열린 창 밖으로 나가지 않게 */
+    if (e.key === 'Tab' && dialog !== tab4El) {  /* 구매 페이지는 헤더 메뉴를 쓸 수 있게 제외 */
+      const focusables = Array.from(dialog.querySelectorAll(
+        'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(el => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last  = focusables[focusables.length - 1];
+      if (!dialog.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+      else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* =============================================
+     배너 슬라이더
+     ✏️ [수정] 자동 넘김 간격 (ms, 1000 = 1초)
+     ============================================= */
+  const AUTO_PLAY_INTERVAL = 5000;
+
+  const banner      = document.getElementById('banner');
+  const track       = document.getElementById('sliderTrack');
+  const slides      = Array.from(track.querySelectorAll('.slide'));
+  const dotsWrapper = document.getElementById('sliderDots');
+  const total       = slides.length;
+
+  let currentIndex = 1;
+  let autoTimer = null;
+  let isTransitioning = false;
+
+  /* 무한 루프용 복제 (배경은 style 속성이라 복제본에도 그대로 따라감) */
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone  = slides[total - 1].cloneNode(true);
+  [firstClone, lastClone].forEach(c => {
+    c.setAttribute('aria-hidden', 'true');
+    c.querySelectorAll('button').forEach(b => b.tabIndex = -1);
+  });
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, track.firstChild);
+
+  function setPositionSilent(index) {
+    track.style.transition = 'none';
+    track.style.transform  = `translateX(-${index * 100}%)`;
+  }
+
+  function goToSlide(index) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    currentIndex = index;
+    track.style.transition = 'transform 0.6s cubic-bezier(0.77, 0, 0.175, 1)';
+    track.style.transform  = `translateX(-${currentIndex * 100}%)`;
+    updateDots();
+    if (prefersReducedMotion) track.dispatchEvent(new Event('transitionend'));
+  }
+
+  track.addEventListener('transitionend', (e) => {
+    if (e.target !== track) return;  /* 버튼 hover 등 자식 요소의 transition은 무시 */
+    isTransitioning = false;
+    if (currentIndex === 0)         { setPositionSilent(total); currentIndex = total; }
+    if (currentIndex === total + 1) { setPositionSilent(1);     currentIndex = 1; }
+  });
+
+  function updateDots() {
+    const realIndex = (currentIndex - 1 + total) % total;
+    dotsWrapper.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === realIndex);
+      d.setAttribute('aria-current', i === realIndex ? 'true' : 'false');
+    });
+  }
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `${i + 1}번 슬라이드`);
+    dot.addEventListener('click', () => { goToSlide(i + 1); resetAutoPlay(); });
+    dotsWrapper.appendChild(dot);
+  });
+
+  setPositionSilent(1);
+
+  document.getElementById('sliderPrev').addEventListener('click', () => { goToSlide(currentIndex - 1); resetAutoPlay(); });
+  document.getElementById('sliderNext').addEventListener('click', () => { goToSlide(currentIndex + 1); resetAutoPlay(); });
+
+  function startAutoPlay() {
+    if (prefersReducedMotion) return;
+    stopAutoPlay();
+    autoTimer = setInterval(() => goToSlide(currentIndex + 1), AUTO_PLAY_INTERVAL);
+  }
+  function stopAutoPlay() { clearInterval(autoTimer); }
+  function resetAutoPlay() { startAutoPlay(); }
+
+  /* 마우스를 올리거나 포커스가 있으면 일시정지 */
+  banner.addEventListener('mouseenter', stopAutoPlay);
+  banner.addEventListener('mouseleave', startAutoPlay);
+  banner.addEventListener('focusin', stopAutoPlay);
+  banner.addEventListener('focusout', startAutoPlay);
+  document.addEventListener('visibilitychange', () => document.hidden ? stopAutoPlay() : startAutoPlay());
+
+  /* 방향키: 배너에 포커스가 있을 때만 */
+  banner.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  { goToSlide(currentIndex - 1); }
+    if (e.key === 'ArrowRight') { goToSlide(currentIndex + 1); }
+  });
+
+  /* 터치 스와이프 */
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; stopAutoPlay(); }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goToSlide(currentIndex + (diff > 0 ? 1 : -1));
+    startAutoPlay();
+  });
+
+  startAutoPlay();
+
+  /* =============================================
+     브랜드 스토리 팝업
+     ✏️ [수정] 각 에피소드 내용
+     ============================================= */
+  const stories = [
+    {
+      episode: "EPISODE 01 · 프롤로그",
+      title: "맑은 술 뒤에 남겨진 귀한 숨결",
+      body: `전 세계가 K-컬처에 열광하며 우리의 맛과 멋을 주목할 때, 우리의 시선은 한국의 가장 깊은 발효 문화인 '전통주(막걸리)'에 닿았습니다.\n\n한 방울의 맑은 술을 빚기 위해 장인은 백일 정성을 다하고, 쌀은 오랜 발효를 거치며 영양을 응축합니다.\n\n하지만 술이 걸러지고 난 뒤 남겨지는 수많은 '술지게미(주박)'는 어디로 가고 있을까요?\n\n화려한 축배의 뒷자리에서, 정작 쌀의 본래 영양을 고스란히 품은 부산물은 단순한 폐기물로 취급받으며 매일 수 톤씩 버려지고 있었습니다.`
+    },
+    {
+      episode: "EPISODE 02 · 발견",
+      title: "찌꺼기가 아닌, 시간과 발효가 빚어낸 정수",
+      body: `버려지는 주박을 들여다보았을 때 마주한 것은 쓸모없는 잔여물이 아니었습니다.\n\n미생물과 누룩이 쌀을 품어내며 피워낸 풍부한 단백질, 장을 건강하게 채워줄 발효 식이섬유, 그리고 필수 아미노산의 보고였습니다.\n\n"이렇게 귀한 영양의 결정체가 왜 단지 '술을 빚고 남았다'는 이유로 버려져야만 할까?"\n\n오랜 시간 자연과 사람의 손길로 빚어낸 곡물을 남김없이 온전히 쓰던 우리 선조들의 지혜처럼, 이 발효의 결을 다시 식탁 위로 되돌려놓고 싶었습니다.`
+    },
+    {
+      episode: "EPISODE 03 · 의문",
+      title: "해외엔 있는데, 왜 우리 전통주에는 없을까?",
+      body: `세계를 둘러보니 맥주를 만들고 남은 맥아박은 이미 훌륭한 대체 식품과 그래놀라로 거듭나 지구를 구하고 있었습니다.\n\n하지만 정작 수천 년 발효 역사를 지닌 대한민국의 전통주 부산물은 철저히 사각지대에 놓여 있었습니다.\n\n가장 한국적이면서도 영양학적으로 뛰어난 우리 고유의 자원이 외면받고 있는 현실 속에서 확신이 섰습니다.\n\n맥주박이 해냈다면, 깊은 발효 과학이 깃든 우리의 쌀발효박은 더 건강하고 지속 가능한 대안이 될 수 있다는 것을요.`
+    },
+    {
+      episode: "EPISODE 04 · 도전",
+      title: "가장 넉넉한 한 그릇으로 식탁과 지구를 바꾸다",
+      body: `우리는 제품의 본질을 바꿀 핵심 베이스로 '그래놀라'를 선택했습니다.\n\n향신료나 토핑처럼 조금 섞는 것이 아니라, 제품의 가장 묵직한 베이스를 쌀발효박으로 채웠습니다.\n\n주원료가 되는 만큼 더 많은 양조장 폐기물을 획기적으로 줄여낼 수 있었고, 원재료비의 거품을 걷어내 '착한 가격의 지속 가능한 식단'을 완성할 수 있었습니다.\n\n여기에 버려질 위기에 놓인 못난이 과채류를 내 입맛대로 골라 담는 한 그릇.\n\n우리가 제안하는 그래놀라는 거창한 환경 운동이 아니라, 누구나 아침마다 부담 없이 즐기는 가장 정갈하고 맛있는 순환의 식탁입니다.`
+    },
+    {
+      episode: "EPISODE 05 · 에필로그",
+      title: "버려짐의 편견을 넘어, 식탁 위의 새로운 가치로",
+      body: `'술찌꺼기'라는 낡은 편견을 지우고, 푸드 업사이클링이 결코 낯설거나 비싼 것이 아님을 증명하려 합니다.\n\n지구를 위하는 소비가 특별한 누군가의 결심에 머무르지 않고, 모두의 일상적인 선택이 되도록 만드는 것.\n\n버려지던 쌀의 두 번째 숨결로 빚어낸 바삭한 한 그릇이 오늘 당신의 아침을 가볍게 채우고, 식탁 위의 탄소 발자국을 지워냅니다.`
+    }
+  ];
+
+  let storyIndex = 0;
+
+  function openPopup(index) {
+    storyIndex = index;
+    renderPopup();
+    openModal('popupBg');
+  }
+
+  function renderPopup() {
+    const data = stories[storyIndex];
+    document.getElementById('popupEpisode').textContent = data.episode;
+    document.getElementById('popupTitle').textContent   = data.title;
+    document.getElementById('popupBody').textContent    = data.body;
+    document.getElementById('storyPrev').disabled = storyIndex === 0;
+    document.getElementById('storyNext').disabled = storyIndex === stories.length - 1;
+    document.querySelector('.story-popup-box').scrollTop = 0;
+  }
+
+  function movePopup(dir) {
+    storyIndex = Math.max(0, Math.min(stories.length - 1, storyIndex + dir));
+    renderPopup();
+  }
+
+  /* =============================================
+     ESG 카운터
+     ============================================= */
+  (function () {
+    const esgSection = document.getElementById('esgSection');
+    const esgNums = document.querySelectorAll('.esg-num');
+    const targets    = Array.from(esgNums).map(el => parseFloat(el.dataset.target));
+    const decimals   = Array.from(esgNums).map(el => parseInt(el.dataset.decimal));
+    const increments = Array.from(esgNums).map(el => parseFloat(el.dataset.increment));
+
+    const format = (v, d) => d > 0 ? v.toFixed(d) : Math.floor(v).toLocaleString('ko-KR');
+
+    function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+
+    function countUp(el, target, decimal) {
+      if (prefersReducedMotion) { el.textContent = format(target, decimal); return; }
+      const duration = 2200;
+      const start = performance.now();
+      (function update(now) {
+        const p = Math.min((now - start) / duration, 1);
+        el.textContent = format(easeOutExpo(p) * target, decimal);
+        if (p < 1) requestAnimationFrame(update);
+      })(start);
+    }
+
+    /* ✏️ [수정] 알림 문구 (시뮬레이션임을 표시) */
+    const toastMsgs = [
+      { icon: '🌾', text: '그래놀라 1봉을 고르면', sub: '쌀발효박 450g이 순환돼요' },
+      { icon: '🌳', text: '1봉당 탄소 1.2kg 감축', sub: '소나무 약 0.2그루의 1년 흡수량' },
+      { icon: '🥕', text: '못난이 농산물 토핑', sub: '버려질 과채류가 한 그릇으로' },
+      { icon: '🍶', text: '12곳의 로컬 양조장', sub: '주박을 정기적으로 수거해요' },
+    ];
+
+    let inView = false;
+    let started = false;
+    let toastTimer = null;
+    let liveTimer = null;
+
+    function showToast() {
+      if (!inView) return;
+      /* 구매 페이지가 열려 있으면 알림은 건너뛰고 다음 차례를 기다림 */
+      if (tab4El.classList.contains('tab4-active')) { toastTimer = setTimeout(showToast, 4000); return; }
+      const wrap = document.getElementById('toastWrap');
+      const msg = toastMsgs[Math.floor(Math.random() * toastMsgs.length)];
+      const toast = document.createElement('div');
+      toast.className = 'esg-toast';
+      toast.innerHTML = `
+        <span>${msg.icon}</span>
+        <div style="flex:1">
+          <div style="font-weight:600;margin-bottom:2px">${msg.text}</div>
+          <div class="esg-toast-sub">${msg.sub}</div>
+        </div>
+        <span class="esg-toast-badge">시뮬레이션</span>`;
+      wrap.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add('show'));
+      setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 350); }, 2800);
+      toastTimer = setTimeout(showToast, 4500 + Math.random() * 3000);
+    }
+
+    function liveUpdate() {
+      if (!inView) return;
+      esgNums.forEach((el, i) => {
+        if (!increments[i]) return;
+        targets[i] += increments[i];
+        el.textContent = format(targets[i], decimals[i]);
       });
+      liveTimer = setTimeout(liveUpdate, 3000 + Math.random() * 2000);
+    }
 
-      /* 도트 업데이트 (복제 제외한 실제 인덱스 기준) */
-      function updateDots() {
-        const realIndex = (currentIndex - 1 + total) % total;
-        dotsWrapper.querySelectorAll('.dot').forEach((d, i) => {
-          d.classList.toggle('active', i === realIndex);
-        });
-      }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        inView = entry.isIntersecting && !tab4El.classList.contains('tab4-active');
 
-      /* 도트 생성 */
-      slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.classList.add('dot');
-        dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          goToSlide(i + 1);
-          resetAutoPlay();
-        });
-        dotsWrapper.appendChild(dot);
-      });
-
-      /* 시작 위치 설정 (복제 고려해서 index 1부터) */
-      setPositionSilent(1);
-
-      /* 이전 / 다음 버튼 */
-      prevBtn.addEventListener('click', () => {
-        goToSlide(currentIndex - 1);
-        resetAutoPlay();
-      });
-
-      nextBtn.addEventListener('click', () => {
-        goToSlide(currentIndex + 1);
-        resetAutoPlay();
-      });
-
-      /* 자동 재생 */
-      function startAutoPlay() {
-        autoTimer = setInterval(() => goToSlide(currentIndex + 1), AUTO_PLAY_INTERVAL);
-      }
-
-      function resetAutoPlay() {
-        clearInterval(autoTimer);
-        startAutoPlay();
-      }
-
-      startAutoPlay();
-
-      /* 키보드 접근성 */
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft')  { goToSlide(currentIndex - 1); resetAutoPlay(); }
-        if (e.key === 'ArrowRight') { goToSlide(currentIndex + 1); resetAutoPlay(); }
-      });
-
-      /* 터치 스와이프 */
-      let touchStartX = 0;
-      track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-      track.addEventListener('touchend',   (e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          diff > 0 ? goToSlide(currentIndex + 1) : goToSlide(currentIndex - 1);
-          resetAutoPlay();
-        }
-      });
-
-      /* =============================================
-         상품 상세 페이지 오버레이
-         ============================================= */
-      const detailOverlay = document.getElementById('detailOverlay');
-      const detailClose   = document.getElementById('detailClose');
-
-      /* 상세 페이지 열기 */
-      function openDetail(card) {
-        const name  = card.dataset.name;
-        const price = parseInt(card.dataset.price);
-        const img   = card.dataset.img;
-        const desc  = card.dataset.desc;
-
-        document.getElementById('detailName').textContent  = name;
-        document.getElementById('detailDesc').textContent  = desc;
-        document.getElementById('detailPrice').textContent = price.toLocaleString() + '원';
-        document.getElementById('detailImg').src           = img;
-        document.getElementById('detailImg').alt           = name;
-
-        /* 장바구니 담기 버튼에 현재 상품 정보 연결 */
-        const cartBtn = document.getElementById('detailCartBtn');
-        cartBtn.textContent = '장바구니 담기';
-        cartBtn.classList.remove('added');
-        cartBtn.onclick = () => {
-          const existing = cart.find(i => i.id === card.dataset.id);
-          if (existing) {
-            existing.qty += 1;
-          } else {
-            cart.push({ id: card.dataset.id, name, price, qty: 1 });
-          }
-          cartBtn.textContent = '✓ 담겼어요';
-          cartBtn.classList.add('added');
-          setTimeout(() => {
-            cartBtn.textContent = '장바구니 담기';
-            cartBtn.classList.remove('added');
-          }, 1200);
-          renderCart();
-        };
-
-        detailOverlay.classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }
-
-      /* 상세 페이지 닫기 */
-      detailClose.addEventListener('click', () => {
-        detailOverlay.classList.remove('show');
-        document.body.style.overflow = '';
-      });
-
-      /* 배경 클릭시 닫기 */
-      detailOverlay.addEventListener('click', (e) => {
-        if (e.target === detailOverlay) {
-          detailOverlay.classList.remove('show');
-          document.body.style.overflow = '';
-        }
-      });
-
-      /* =============================================
-         ESG 카운터 JS
-         ============================================= */
-      (function() {
-        function easeOutExpo(t) {
-          return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-        }
-
-        function countUp(el, target, decimal, duration) {
-          duration = duration || 2200;
-          const start = performance.now();
-          function update(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const current = easeOutExpo(progress) * target;
-            el.textContent = decimal > 0
-              ? current.toFixed(decimal)
-              : Math.floor(current).toLocaleString('ko-KR');
-            if (progress < 1) requestAnimationFrame(update);
-            else el.textContent = decimal > 0
-              ? target.toFixed(decimal)
-              : target.toLocaleString('ko-KR');
-          }
-          requestAnimationFrame(update);
-        }
-
-        /* 토스트 */
-        const toastMsgs = [
-          { icon: '🌾', text: '새 구매 발생!', sub: '쌀발효박 450g 순환됨' },
-          { icon: '🌳', text: '탄소 감축 중!', sub: '소나무 0.2그루 효과' },
-          { icon: '🥕', text: '못난이 농산물 구출!', sub: '새 주문이 들어왔어요' },
-          { icon: '🍶', text: '양조장 파트너십', sub: '오늘도 함께합니다' },
-        ];
-
-        function showToast() {
-          const wrap = document.getElementById('toastWrap');
-          if (!wrap) return;
-          const msg = toastMsgs[Math.floor(Math.random() * toastMsgs.length)];
-          const toast = document.createElement('div');
-          toast.className = 'esg-toast';
-          toast.innerHTML = `
-            <span>${msg.icon}</span>
-            <div style="flex:1">
-              <div style="font-weight:600;margin-bottom:2px">${msg.text}</div>
-              <div style="color:rgba(247,246,242,0.5);font-size:0.72rem">${msg.sub}</div>
-            </div>
-            <span class="esg-toast-badge">LIVE</span>
-          `;
-          wrap.appendChild(toast);
-          requestAnimationFrame(() => toast.classList.add('show'));
-          setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 350);
-          }, 2500);
-          setTimeout(showToast, 3000 + Math.random() * 3000);
-        }
-
-        /* 실시간 수치 증가 */
-        const esgNums = document.querySelectorAll('.esg-num');
-        const esgTargets = Array.from(esgNums).map(el => parseFloat(el.dataset.target));
-        const esgDecimals = Array.from(esgNums).map(el => parseInt(el.dataset.decimal));
-        const esgIncrements = Array.from(esgNums).map(el => parseFloat(el.dataset.increment));
-
-        function esgLiveUpdate() {
-          esgNums.forEach((el, i) => {
-            if (!esgIncrements[i]) return;
-            esgTargets[i] += esgIncrements[i];
-            el.textContent = esgDecimals[i] > 0
-              ? esgTargets[i].toFixed(esgDecimals[i])
-              : Math.floor(esgTargets[i]).toLocaleString('ko-KR');
+        if (inView && !started) {
+          started = true;
+          document.querySelectorAll('.esg-card').forEach(c => c.classList.add('esg-visible'));
+          document.getElementById('esgBowl').classList.add('esg-visible');
+          esgNums.forEach((el, i) => setTimeout(() => countUp(el, targets[i], decimals[i]), i * 180));
+          document.querySelectorAll('.esg-bar-fill').forEach(bar => {
+            setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 600);
           });
-          setTimeout(esgLiveUpdate, 3000 + Math.random() * 2000);
-        }
-
-        /* Intersection Observer */
-        let esgTriggered = false;
-        const esgObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && !esgTriggered) {
-              esgTriggered = true;
-
-              /* 카드 슬라이드인 */
-              document.querySelectorAll('.esg-card').forEach(c => c.classList.add('esg-visible'));
-              const bowl = document.getElementById('esgBowl');
-              if (bowl) bowl.classList.add('esg-visible');
-
-              /* 카운트업 */
-              esgNums.forEach((el, i) => {
-                setTimeout(() => countUp(el, esgTargets[i], esgDecimals[i]), i * 180);
-              });
-
-              /* 바 채우기 */
-              document.querySelectorAll('.esg-bar-fill').forEach(bar => {
-                setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 600);
-              });
-
-              /* 실시간 업데이트 + 토스트 */
-              setTimeout(() => { esgLiveUpdate(); showToast(); }, 2800);
-            }
-          });
-        }, { threshold: 0.2 });
-
-        const esgSection = document.getElementById('esgSection');
-        if (esgSection) esgObserver.observe(esgSection);
-      })();
-
-      /* =============================================
-         브랜드 스토리 팝업 JS
-         ✏️ [수정] 각 에피소드 내용은 stories 배열에서 수정
-         ============================================= */
-      const stories = [
-        {
-          episode: "EPISODE 01 · 프롤로그",
-          title: "맑은 술 뒤에 남겨진 귀한 숨결",
-          body: `전 세계가 K-컬처에 열광하며 우리의 맛과 멋을 주목할 때, 우리의 시선은 한국의 가장 깊은 발효 문화인 '전통주(막걸리)'에 닿았습니다.\n\n한 방울의 맑은 술을 빚기 위해 장인은 백일 정성을 다하고, 쌀은 오랜 발효를 거치며 영양을 응축합니다.\n\n하지만 술이 걸러지고 난 뒤 남겨지는 수많은 '술지개미(주박)'는 어디로 가고 있을까요?\n\n화려한 축배의 뒷자리에서, 정작 쌀의 본래 영양을 고스란히 품은 부산물은 단순한 폐기물로 취급받으며 매일 수 톤씩 버려지고 있었습니다.`
-        },
-        {
-          episode: "EPISODE 02 · 발견",
-          title: "찌꺼기가 아닌, 시간과 발효가 빚어낸 정수",
-          body: `버려지는 주박을 들여다보았을 때 마주한 것은 쓸모없는 잔여물이 아니었습니다.\n\n미생물과 누룩이 쌀을 품어내며 피워낸 풍부한 단백질, 장을 건강하게 채워줄 발효 식이섬유, 그리고 필수 아미노산의 보고였습니다.\n\n"이렇게 귀한 영양의 결정체가 왜 단지 '술을 빚고 남았다'는 이유로 버려져야만 할까?"\n\n오랜 시간 자연과 사람의 손길로 빚어낸 곡물을 남김없이 온전히 쓰던 우리 선조들의 지혜처럼, 이 발효의 결을 다시 식탁 위로 되돌려놓고 싶었습니다.`
-        },
-        {
-          episode: "EPISODE 03 · 의문",
-          title: "해외엔 있는데, 왜 우리 전통주에는 없을까?",
-          body: `세계를 둘러보니 맥주를 만들고 남은 맥아박은 이미 훌륭한 대체 식품과 그래놀라로 거듭나 지구를 구하고 있었습니다.\n\n하지만 정작 수천 년 발효 역사를 지닌 대한민국의 전통주 부산물은 철저히 사각지대에 놓여 있었습니다.\n\n가장 한국적이면서도 영양학적으로 뛰어난 우리 고유의 자원이 외면받고 있는 현실 속에서 확신이 섰습니다.\n\n맥주박이 해냈다면, 깊은 발효 과학이 깃든 우리의 쌀발효박은 더 건강하고 지속 가능한 대안이 될 수 있다는 것을요.`
-        },
-        {
-          episode: "EPISODE 04 · 도전",
-          title: "가장 넉넉한 한 그릇으로 식탁과 지구를 바꾸다",
-          body: `우리는 제품의 본질을 바꿀 핵심 베이스로 '그래놀라'를 선택했습니다.\n\n향신료나 토핑처럼 조금 섞는 것이 아니라, 제품의 가장 묵직한 베이스를 쌀발효박으로 채웠습니다.\n\n주원료가 되는 만큼 더 많은 양조장 폐기물을 획기적으로 줄여낼 수 있었고, 원재료비의 거품을 걷어내 '착한 가격의 지속 가능한 식단'을 완성할 수 있었습니다.\n\n여기에 버려질 위기에 놓인 못난이 과채류를 내 입맛대로 골라 담는 한 그릇.\n\n우리가 제안하는 그래놀라는 거창한 환경 운동이 아니라, 누구나 아침마다 부담 없이 즐기는 가장 정갈하고 맛있는 순환의 식탁입니다.`
-        },
-        {
-          episode: "EPISODE 05 · 에필로그",
-          title: "버려짐의 편견을 넘어, 식탁 위의 새로운 가치로",
-          body: `'술찌꺼기'라는 낡은 편견을 지우고, 푸드 업사이클링이 결코 낯설거나 비싼 것이 아님을 증명하려 합니다.\n\n지구를 위하는 소비가 특별한 누군가의 결심에 머무르지 않고, 모두의 일상적인 선택이 되도록 만드는 것.\n\n버려지던 쌀의 두 번째 숨결로 빚어낸 바삭한 한 그릇이 오늘 당신의 아침을 가볍게 채우고, 식탁 위의 탄소 발자국을 지워냅니다.`
-        }
-      ];
-
-      let storyIndex = 0;
-
-      function openPopup(index) {
-        storyIndex = index;
-        renderPopup();
-        document.getElementById('popupBg').classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closePopup() {
-        document.getElementById('popupBg').classList.remove('show');
-        document.body.style.overflow = '';
-      }
-
-      function handleBgClick(e) {
-        if (e.target === document.getElementById('popupBg')) closePopup();
-      }
-
-      function renderPopup() {
-        const data = stories[storyIndex];
-        document.getElementById('popupEpisode').textContent = data.episode;
-        document.getElementById('popupTitle').textContent   = data.title;
-        document.getElementById('popupBody').textContent    = data.body;
-        document.getElementById('prevBtn').disabled = storyIndex === 0;
-        document.getElementById('nextBtn').disabled = storyIndex === stories.length - 1;
-      }
-
-      function movePopup(dir) {
-        storyIndex = Math.max(0, Math.min(stories.length - 1, storyIndex + dir));
-        renderPopup();
-      }
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closePopup();
-      });
-
-      /* =============================================
-         장바구니 기능
-         ============================================= */
-      let cart = []; /* 장바구니 배열 */
-
-      /* 장바구니 담기 */
-      function addToCart(btn) {
-        const card  = btn.closest('.product-card');
-        const id    = card.dataset.id;
-        const name  = card.dataset.name;
-        const price = parseInt(card.dataset.price);
-
-        /* 이미 담긴 상품이면 수량 증가 */
-        const existing = cart.find(i => i.id === id);
-        if (existing) {
-          existing.qty += 1;
-        } else {
-          cart.push({ id, name, price, qty: 1 });
-        }
-
-        /* 버튼 상태 변경 */
-        btn.textContent = '✓ 담겼어요';
-        btn.classList.add('added');
-        setTimeout(() => {
-          btn.textContent = '장바구니 담기';
-          btn.classList.remove('added');
-        }, 1200);
-
-        renderCart();
-      }
-
-      /* 장바구니 렌더링 */
-      function renderCart() {
-        const list  = document.getElementById('cartList');
-        const total = document.getElementById('cartTotal');
-
-        if (cart.length === 0) {
-          list.innerHTML = '<li class="cart-empty">아직 담긴 상품이 없어요.</li>';
-          total.textContent = '0';
+          setTimeout(() => { liveUpdate(); showToast(); }, 2800);
           return;
         }
 
-        list.innerHTML = cart.map(item => `
-          <li class="cart-item">
-            <span class="cart-item-name">${item.name} × ${item.qty}</span>
-            <span class="cart-item-price">${(item.price * item.qty).toLocaleString()}원</span>
-            <button class="cart-item-del" onclick="removeFromCart('${item.id}')">✕</button>
-          </li>
-        `).join('');
-
-        const sum = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
-        total.textContent = sum.toLocaleString();
-      }
-
-      /* 장바구니 삭제 */
-      function removeFromCart(id) {
-        cart = cart.filter(i => i.id !== id);
-        renderCart();
-      }
-
-      /* 결제 팝업 열기 */
-      document.getElementById('checkoutBtn').addEventListener('click', () => {
-        if (cart.length === 0) {
-          alert('장바구니에 상품을 먼저 담아주세요!');
-          return;
-        }
-        document.getElementById('payPopup').classList.add('show');
+        /* 섹션을 벗어나면 멈추고, 다시 보이면 재개 */
+        clearTimeout(toastTimer);
+        clearTimeout(liveTimer);
+        if (inView && started) { liveTimer = setTimeout(liveUpdate, 2000); toastTimer = setTimeout(showToast, 2000); }
       });
+    }, { threshold: 0.2 });
 
-      /* 결제 팝업 닫기 */
-      document.getElementById('payPopupClose').addEventListener('click', () => {
-        document.getElementById('payPopup').classList.remove('show');
-        /* ✏️ [수정] 결제 완료 후 장바구니 초기화 여부 (지우려면 아래 주석 해제) */
-        cart = [];
-        renderCart();
-      });
+    observer.observe(esgSection);
+  })();
 
-      /* 팝업 배경 클릭시 닫기 */
-      document.getElementById('payPopup').addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) {
-          e.currentTarget.classList.remove('show');
-        }
-      });
+  /* =============================================
+     장바구니 & 상품 상세
+     ✏️ [수정] 커스텀 상품 옵션 목록 (max: 최대 선택 개수)
+     ============================================= */
+  const CUSTOM_OPTIONS = {
+    granola: [
+      { key: 'topping', title: '토핑', max: 3, required: false, items: ['못난이 사과칩', '단호박 칩', '블루베리', '아몬드', '호두', '코코넛 칩'] },
+      { key: 'syrup',   title: '시럽', max: 1, required: true,  items: ['조청', '꿀', '메이플 시럽'] },
+    ],
+    bar: [
+      { key: 'nut',   title: '견과류', max: 3, required: false, items: ['아몬드', '호두', '캐슈넛', '피칸', '해바라기씨'] },
+      { key: 'syrup', title: '시럽',   max: 1, required: true,  items: ['조청', '꿀', '현미 시럽'] },
+    ],
+  };
 
-      /* =============================================
-         이메일 팝업 JS
-         ============================================= */
-      function openEmailPopup() {
-        document.getElementById('emailPopup').classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }
+  /* 장바구니는 브라우저에 저장되어 새로고침해도 유지됨 */
+  const CART_KEY = 'bieumsal-cart';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
 
-      function closeEmailPopup() {
-        document.getElementById('emailPopup').classList.remove('show');
-        document.body.style.overflow = '';
-      }
+  function saveCart() {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+  }
 
-      /* 배경 클릭시 닫기 */
-      document.getElementById('emailPopup').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('emailPopup')) closeEmailPopup();
-      });
+  function addItemToCart(card, options) {
+    const optText = options && options.length ? options.join(', ') : '';
+    const key = card.dataset.id + '|' + optText;
+    const existing = cart.find(i => i.key === key);
+    if (existing) existing.qty += 1;
+    else cart.push({ key, name: card.dataset.name, opt: optText, price: parseInt(card.dataset.price), qty: 1 });
+    document.getElementById('cartMsg').textContent = '';
+    renderCart();
+    const badge = document.getElementById('cartBadge');
+    badge.classList.remove('bump');
+    void badge.offsetWidth;  /* 애니메이션 다시 시작 */
+    badge.classList.add('bump');
+  }
 
-      /* =============================================
-         모바일 햄버거 메뉴
-         ============================================= */
-      const navToggle = document.getElementById('navToggle');
-      const mainNav   = document.getElementById('mainNav');
+  function flashAdded(btn, label) {
+    btn.textContent = '✓ 담겼어요';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = label; btn.classList.remove('added'); }, 1200);
+  }
 
-      if (navToggle && mainNav) {
-        navToggle.addEventListener('click', () => {
-          navToggle.classList.toggle('open');
-          mainNav.classList.toggle('open');
+  function renderOptions(type) {
+    const wrap = document.getElementById('detailOptions');
+    wrap.innerHTML = '';
+    if (!type || !CUSTOM_OPTIONS[type]) return;
+
+    CUSTOM_OPTIONS[type].forEach(group => {
+      const fs = document.createElement('fieldset');
+      fs.className = 'option-group';
+      fs.dataset.max = group.max;
+      const inputType = group.max === 1 ? 'radio' : 'checkbox';
+      const hint = group.max === 1 ? '1개 선택' : `최대 ${group.max}개`;
+      fs.innerHTML = `<legend>${group.title}<small>${hint}</small></legend>
+        <div class="option-list">
+          ${group.items.map((item, i) => `
+            <label class="option-chip">
+              <input type="${inputType}" name="opt-${group.key}" value="${item}" ${group.required && i === 0 ? 'checked' : ''}>
+              <span>${item}</span>
+            </label>`).join('')}
+        </div>`;
+
+      /* 최대 개수에 도달하면 나머지 비활성화 */
+      if (inputType === 'checkbox') {
+        fs.addEventListener('change', () => {
+          const boxes = fs.querySelectorAll('input');
+          const checked = fs.querySelectorAll('input:checked').length;
+          boxes.forEach(b => { b.disabled = !b.checked && checked >= group.max; });
         });
-
-        /* 탭 클릭시 메뉴 닫기 */
-        mainNav.querySelectorAll('a').forEach(a => {
-          a.addEventListener('click', () => {
-            navToggle.classList.remove('open');
-            mainNav.classList.remove('open');
-          });
-        });
       }
+      wrap.appendChild(fs);
+    });
+  }
 
-      /* =============================================
-         네비게이션 - 스크롤 이동 방식 (탭4는 오버레이 전환)
-         ============================================= */
-      const tabLinks    = document.querySelectorAll('.tab-link');
-      const tab4El      = document.getElementById('tab4');
-      const tab4CloseBtn = document.getElementById('tab4Close');
+  function getSelectedOptions() {
+    return Array.from(document.querySelectorAll('#detailOptions input:checked')).map(i => i.value);
+  }
 
-      /* 탭4 열기 */
-      function openTab4() {
-        tab4El.classList.add('tab4-active');
-        document.body.classList.add('tab4-open');
-        tabLinks.forEach(l => l.classList.remove('active'));
-        document.querySelector('[data-target="tab4"]').classList.add('active');
+  function openDetail(card) {
+    const name = card.dataset.name;
+    const img  = document.getElementById('detailImg');
+
+    document.getElementById('detailName').textContent  = name;
+    document.getElementById('detailDesc').textContent  = card.dataset.desc;
+    document.getElementById('detailPrice').textContent = parseInt(card.dataset.price).toLocaleString() + '원';
+    img.style.display = '';
+    img.onerror = () => { img.style.display = 'none'; };
+    img.src = card.dataset.img;
+    img.alt = name;
+
+    renderOptions(card.dataset.custom);
+
+    const cartBtn = document.getElementById('detailCartBtn');
+    cartBtn.textContent = '장바구니 담기';
+    cartBtn.classList.remove('added');
+    cartBtn.onclick = () => {
+      addItemToCart(card, card.dataset.custom ? getSelectedOptions() : null);
+      flashAdded(cartBtn, '장바구니 담기');
+    };
+
+    openModal('detailOverlay');
+  }
+
+  /* 상품 카드 클릭 / 엔터 */
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (btn && btn.dataset.action === 'add') {
+        addItemToCart(card, null);
+        flashAdded(btn, '장바구니 담기');
+        return;
       }
+      openDetail(card);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target === card) openDetail(card);
+    });
+  });
 
-      /* 탭4 닫기 */
-      function closeTab4() {
-        tab4El.classList.remove('tab4-active');
-        document.body.classList.remove('tab4-open');
-        tabLinks.forEach(l => l.classList.remove('active'));
-      }
+  const cartSum   = () => cart.reduce((acc, i) => acc + i.price * i.qty, 0);
+  const cartCount = () => cart.reduce((acc, i) => acc + i.qty, 0);
 
-      /* 닫기 버튼 */
-      tab4CloseBtn.addEventListener('click', closeTab4);
+  function renderCart() {
+    const list  = document.getElementById('cartList');
+    const total = document.getElementById('cartTotal');
+    const badge = document.getElementById('cartBadge');
 
-      /* 탭 클릭 이벤트 */
-      tabLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetId = link.getAttribute('data-target');
+    saveCart();
 
-          /* 탭4면 오버레이로 열기 */
-          if (targetId === 'tab4') {
-            openTab4();
-            return;
-          }
+    const count = cartCount();
+    badge.hidden = count === 0;
+    badge.textContent = count;
+    badge.setAttribute('aria-label', `장바구니 ${count}개`);
 
-          /* 탭4 열려있으면 닫기 */
-          closeTab4();
+    if (cart.length === 0) {
+      list.innerHTML = '<li class="cart-empty">아직 담긴 상품이 없어요. 마음에 드는 제품을 담아보세요.</li>';
+      total.textContent = '0';
+      return;
+    }
 
-          /* 나머지 탭은 스크롤 이동 */
-          const target = document.getElementById(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-          tabLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        });
+    list.innerHTML = cart.map((item, idx) => `
+      <li class="cart-item">
+        <span class="cart-item-name">${item.name}${item.opt ? `<span class="cart-item-opt">${item.opt}</span>` : ''}</span>
+        <span class="qty">
+          <button onclick="changeQty(${idx}, -1)" aria-label="${item.name} 수량 줄이기">−</button>
+          <span aria-live="polite">${item.qty}</span>
+          <button onclick="changeQty(${idx}, 1)" aria-label="${item.name} 수량 늘리기">+</button>
+        </span>
+        <span class="cart-item-price">${(item.price * item.qty).toLocaleString()}원</span>
+        <button class="cart-item-del" onclick="removeFromCart(${idx})" aria-label="${item.name} 삭제">✕</button>
+      </li>`).join('');
+
+    total.textContent = cartSum().toLocaleString();
+  }
+
+  function changeQty(idx, diff) {
+    cart[idx].qty += diff;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+  }
+
+  renderCart();  /* 저장된 장바구니 불러오기 */
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (cart.length === 0) {
+      document.getElementById('cartMsg').textContent = '장바구니가 비어 있어요. 상품을 먼저 담아주세요.';
+      return;
+    }
+    /* 주문 요약 채우기 */
+    document.getElementById('paySummary').innerHTML =
+      cart.map(i => `<li><span>${i.name} × ${i.qty}</span><span>${(i.price * i.qty).toLocaleString()}원</span></li>`).join('') +
+      `<li class="pay-total"><span>합계</span><span>${cartSum().toLocaleString()}원</span></li>`;
+    openModal('payPopup');
+  });
+
+  /* =============================================
+     모바일 햄버거 메뉴
+     ============================================= */
+  const navToggle = document.getElementById('navToggle');
+  const mainNav   = document.getElementById('mainNav');
+
+  function setNav(open) {
+    navToggle.classList.toggle('open', open);
+    mainNav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+    navToggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  }
+
+  navToggle.addEventListener('click', () => setNav(!mainNav.classList.contains('open')));
+
+  /* =============================================
+     네비게이션 (탭4는 오버레이, 나머지는 스크롤 이동)
+     ============================================= */
+  const tabLinks = document.querySelectorAll('.tab-link');
+
+  function setActiveLink(id) {
+    tabLinks.forEach(l => {
+      const on = l.dataset.target === id;
+      l.classList.toggle('active', on);
+      if (on) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current');
+    });
+  }
+
+  function openTab4() {
+    tab4El.classList.add('tab4-active');
+    document.getElementById('toastWrap').innerHTML = '';
+    tab4El.scrollTop = 0;
+    syncScrollLock();
+    setActiveLink('tab4');
+    document.getElementById('tab4Close').focus();
+  }
+
+  function closeTab4() {
+    if (!tab4El.classList.contains('tab4-active')) return;
+    tab4El.classList.remove('tab4-active');
+    syncScrollLock();
+    updateActiveOnScroll();
+  }
+
+  document.getElementById('tab4Close').addEventListener('click', closeTab4);
+
+  function goTo(targetId) {
+    setNav(false);
+    if (targetId === 'tab4') { openTab4(); return; }
+    closeTab4();
+    const target = document.getElementById(targetId);
+    if (target) target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    setActiveLink(targetId);
+  }
+
+  /* 메뉴 + 배너 버튼 + 로고 + 홈 버튼 모두 같은 방식으로 이동 */
+  document.querySelectorAll('.tab-link, [data-goto]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      goTo(el.dataset.target || el.dataset.goto);
+    });
+  });
+
+  /* 스크롤 위치에 따라 현재 메뉴 표시 */
+  const sections = document.querySelectorAll('main .tab-content');
+
+  function updateActiveOnScroll() {
+    if (tab4El.classList.contains('tab4-active')) return;
+    const headerH = document.querySelector('header').offsetHeight;
+    const scrollY = window.scrollY;
+    let current = sections[0].id;
+
+    if (scrollY + window.innerHeight >= document.documentElement.scrollHeight - 10) {
+      current = sections[sections.length - 1].id;
+    } else {
+      sections.forEach(sec => {
+        if (scrollY >= sec.offsetTop - headerH - 120) current = sec.id;
       });
+    }
+    setActiveLink(current);
+  }
 
-      /* 스크롤 위치에 따라 현재 섹션 탭 자동 활성화 (탭4 제외) */
-      const sections    = document.querySelectorAll('.tab-content:not(#tab4)');
-      const headerHeight = document.querySelector('header').offsetHeight;
-
-      window.addEventListener('scroll', () => {
-        /* 탭4 오버레이 열려있으면 스크롤 감지 무시 */
-        if (tab4El.classList.contains('tab4-active')) return;
-
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight;
-
-        let current = '';
-
-        /* 페이지 맨 아래에 도달하면 마지막 섹션 활성화 */
-        if (scrollY + windowHeight >= docHeight - 10) {
-          current = sections[sections.length - 1].getAttribute('id');
-        } else {
-          sections.forEach(sec => {
-            const top = sec.offsetTop - headerHeight - 80;
-            if (scrollY >= top) {
-              current = sec.getAttribute('id');
-            }
-          });
-        }
-
-        tabLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('data-target') === current) {
-            link.classList.add('active');
-          }
-        });
-      });
-    </script>   
+  window.addEventListener('scroll', updateActiveOnScroll, { passive: true });
+</script>
 </body>
 </html>
