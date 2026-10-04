@@ -8,34 +8,43 @@
   <meta name="description" content="전통주를 빚고 남은 쌀발효곡물을 그래놀라로 되살리는 업사이클링 푸드 브랜드, 빚음 쌀." />
   <meta property="og:title" content="빚음 쌀 | 쌀발효곡물 업사이클링 그래놀라" />
   <meta property="og:description" content="버려지는 것들에게 새로운 가치를 더하다." />
+  <!-- 카카오톡·인스타 등 링크 공유 시 미리보기 이미지 (주소는 반드시 https://로 시작하는 전체 주소) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lee-tae-in.github.io/Capstone_2-A/" />
+  <meta property="og:image" content="https://lee-tae-in.github.io/Capstone_2-A/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="빚음 쌀 - 버려지는 것들에게 새로운 가치를 더하다" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E" />
 
 
   <style>
     /* =============================================
-       ✏️ [수정] 페이퍼로지 폰트 (img 폴더의 ttf 파일 사용)
+       ✏️ [수정] 페이퍼로지 폰트
+       자주 쓰는 한글 2,350자 + 영문·숫자만 남긴 경량 woff2 (원본 TTF 대비 약 1/6 크기)
        ============================================= */
     @font-face {
       font-family: 'Paperlogy';
-      src: url('img/Paperlogy-4Regular.ttf') format('truetype');
+      src: url('img/paperlogy-400.woff2') format('woff2');
       font-weight: 400;
       font-display: swap;
     }
     @font-face {
       font-family: 'Paperlogy';
-      src: url('img/Paperlogy-5Medium.ttf') format('truetype');
+      src: url('img/paperlogy-500.woff2') format('woff2');
       font-weight: 500;
       font-display: swap;
     }
     @font-face {
       font-family: 'Paperlogy';
-      src: url('img/Paperlogy-6SemiBold.ttf') format('truetype');
+      src: url('img/paperlogy-600.woff2') format('woff2');
       font-weight: 600;
       font-display: swap;
     }
     @font-face {
       font-family: 'Paperlogy';
-      src: url('img/Paperlogy-7Bold.ttf') format('truetype');
+      src: url('img/paperlogy-700.woff2') format('woff2');
       font-weight: 700;
       font-display: swap;
     }
@@ -1395,6 +1404,47 @@
     /* =============================================
        푸터 (일반 푸터 - 화면에 고정되지 않음)
        ============================================= */
+    /* =============================================
+       만든 사람들
+       ============================================= */
+    .team {
+      margin-top: 120px;
+      padding-top: 64px;
+      border-top: 1px solid rgba(200,169,126,0.15);
+      text-align: center;
+    }
+
+    .team-title {
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+
+    .team-sub { font-size: 0.9rem; color: var(--color-mid); margin-bottom: 40px; }
+
+    .team-grid {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .team-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      padding: 24px 16px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .team-name { font-size: 1.15rem; color: var(--color-dark); }
+    .team-role { font-size: 0.8rem; line-height: 1.6; color: var(--color-mid); word-break: keep-all; }
+
     .site-footer {
       background-color: var(--color-dark);
       border-top: 1px solid var(--color-line);
@@ -1441,6 +1491,7 @@
        반응형 - 태블릿
        ============================================= */
     @media (max-width: 900px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
       .esg-grid { grid-template-columns: repeat(2, 1fr); }
       .esg-desc { grid-template-columns: 1fr; gap: 28px; padding: 40px; }
       .roadmap { gap: 40px 16px; }
@@ -1578,6 +1629,9 @@
       .cart-item .qty { margin-right: auto; }
 
       .site-footer { padding: 32px 20px 24px; }
+      .team { margin-top: 64px; padding-top: 40px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .team-card { min-height: 96px; padding: 18px 12px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
 
@@ -2031,6 +2085,25 @@
     </ol>
 
   </div><!-- /tab3 -->
+
+
+  <!-- =============================================
+       만든 사람들
+       ✏️ [수정] 이름과 역할. 종선·다은 님 역할은 정해지면 team-role에 적어주세요
+       ============================================= -->
+  <section class="team" aria-labelledby="teamTitle">
+    <p class="section-intro-tag">TEAM</p>
+    <h2 class="team-title" id="teamTitle">만든 사람들</h2>
+    <p class="team-sub">졸업이조 · 캡스톤디자인</p>
+    <ul class="team-grid">
+      <li class="team-card"><p class="team-name">태인</p><p class="team-role">발표 · 홈페이지 개발 · PPT 구성</p></li>
+      <li class="team-card"><p class="team-name">진호</p><p class="team-role">레시피 · 시제품 제작</p></li>
+      <li class="team-card"><p class="team-name">수진</p><p class="team-role">홈페이지 UI·UX 디자인 · 설문 설계</p></li>
+      <li class="team-card"><p class="team-name">지훈</p><p class="team-role">사례·시장 조사 · 양조장 인터뷰</p></li>
+      <li class="team-card"><p class="team-name">종선</p></li>
+      <li class="team-card"><p class="team-name">다은</p></li>
+    </ul>
+  </section>
 
 </main>
 
